@@ -1,4 +1,4 @@
-//'user strict'
+'user strict'
 
 //Messages - output numbers
 let result = document.getElementById("result");
