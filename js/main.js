@@ -1,61 +1,38 @@
 'user strict';
 let btn = document.getElementById("play");
 
-function newDate(date){
-    /*var tmpDate = new Date(date);
-    return tmpDate.getFullYear() + "/" +
-        tmpDate.getMonth() + "/" +
-        tmpDate.getDate() + " " +
-        tmpDate.getHours() + ":" +
-        tmpDate.getMinutes();*/
-    return moment(date).format('hh:mm DD/MM/YYYY');
-}
+const getFormattedDate = date => moment(date).format('YYYY/MM/DD hh:mm');
 
-function transformName(name) {
-    return name[0].toUpperCase() + name.slice(1).toLowerCase();
-}
+const transformName = name => `${name[0].toUpperCase()}${name.slice(1).toLowerCase()}`;
 
-function transformDescription(str){
-    if(str.length > 15){
-        return str.substring(0,15)+ '...';
-    }
-    return str;
-}
+const transformUrl = str => `http://'${str}`;
 
-function filterAllVisible(arr){
-    return arr.filter(function(item){
-        return item.isVisible;
-    })
-}
-function modifyArr(arr){
-    return arr.map(function (item){
+const transformDescription = str => (str.length > 15) ? `${str.substring(0, 15)}...` : str;
+
+const transformStr = (param1, param2) => `${param1}=>${param2}`;
+
+const filterAllVisible = arr => arr.filter(item => item.isVisible);
+
+const cutElement = (arr, element) => arr.filter((item, i) => i !== element);
+
+const makeNewArr = arr => arr.map(item => ({url, name, params, description, date} = item));
+
+const printResult = result => console.log(result);
+
+function modifiedArr(arr) {
+    return arr.map(item => {
+        const {url, name, params, description, date} = item;
         return {
-            url: 'http://' + item.url,
-            name: transformName(item.name),
-            params: item.params.status + '=>' + item.params.progress,
-            description: transformDescription(item.description),
-            date: newDate(item.date),
-            isVisible: item.params.status
+            url: transformUrl(url),
+            name: transformName(name),
+            params: transformStr(params.status, params.progress),
+            description: transformDescription(description),
+            date: getFormattedDate(date),
+            isVisible: params.status
         }
     });
 }
 
-function transform() {
-    let newArrData = [];
-    data.splice(6,1);
-    data.forEach(function(item, index){
-        newArrData.push({
-            url: item.url,
-            name: item.name,
-            params: item.params,
-            description : item.description,
-            date : item.date
-        })
-    });
-
-    newArrData = modifyArr(newArrData);
-    console.log(filterAllVisible(newArrData));
-}
-
+let transform = () => printResult(filterAllVisible(modifiedArr(makeNewArr(cutElement(data, 5))))); //let newArrData = makeNewArr(cutElement(data, 5));
 
 btn.addEventListener("click", transform);
