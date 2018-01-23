@@ -39,7 +39,7 @@
         return result;
     };
 
-    let selectNumberOfImages = (count, arr, numberOfBlock) => {
+    const selectNumberOfImages = (count, arr, numberOfBlock) => {
         switch (count) {
             case '1':
                 numberOfBlock.innerHTML = iteration(3, arr);
@@ -60,24 +60,34 @@
 
         switch (value) {
             case '1':
+                document.querySelector('.second-group').classList.remove("show");
+                document.querySelector('.third-group').classList.remove("show");
                 document.querySelector('.first-group').classList.add("show");
                 break;
             case '2':
+                document.querySelector('.first-group').classList.remove("show");
+                document.querySelector('.third-group').classList.remove("show");
                 document.querySelector('.second-group').classList.add("show");
                 break;
             case '3':
+                document.querySelector('.first-group').classList.remove("show");
+                document.querySelector('.second-group').classList.remove("show");
                 document.querySelector('.third-group').classList.add("show");
                 break;
         }
     };
 
+    const clearCurrentBlock = value => {
+
+    };
+
     function buildGalleryByReplace(count, arr) {
         let replaceItemTemplate = '<div class="col-sm-3 col-xs-6">\
                                         <img src="$url" alt="$name" class="img-thumbnail">\
-                                        <div class="info-wrapper">\
-                                        <div class="text-muted">$name</div>\
-                                        <div class="text-muted top-padding">$description</div>\
-                                        <div class="text-muted">$date</div>\
+                                            <div class="info-wrapper">\
+                                            <div class="text-muted">$name</div>\
+                                            <div class="text-muted top-padding">$description</div>\
+                                            <div class="text-muted">$date</div>\
                                         </div>\
                                     </div>';
 
@@ -121,13 +131,13 @@
             let result = '';
             for (let i = 0; i < count; i++) {
                 let secondItemTemplate = `<div class="col-sm-3 col-xs-6">\
-                                    <img src="${arr[i].url}" alt="${arr[i].name}" class="img-thumbnail">\
-                                    <div class="info-wrapper">\
-                                        <div class="text-muted">${arr[i].name}</div>\
-                                        <div class="text-muted top-padding">${arr[i].description}</div>\
-                                        <div class="text-muted">${arr[i].date}</div>\
-                                    </div>\
-                                    </div>`;
+                                            <img src="${arr[i].url}" alt="${arr[i].name}" class="img-thumbnail">\
+                                                <div class="info-wrapper">\
+                                                <div class="text-muted">${arr[i].name}</div>\
+                                                <div class="text-muted top-padding">${arr[i].description}</div>\
+                                                <div class="text-muted">${arr[i].date}</div>\
+                                            </div>\
+                                        </div>`;
                 result += secondItemTemplate;
             }
             return result;
