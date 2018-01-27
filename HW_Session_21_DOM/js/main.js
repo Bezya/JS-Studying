@@ -23,7 +23,7 @@
 
     const getFormattedDate = date => moment(date).format('YYYY/MM/DD hh:mm');
 
-    let templateForReplace = item => {
+    const templateForReplace = item => {
         let template = '<div class="col-sm-3 col-xs-6">\
                                     <img src="$url" alt="$name" class="img-thumbnail">\
                                             <div class="info-wrapper">\
@@ -39,7 +39,7 @@
             .replace("$date", getFormattedDate(item.date));
     };
 
-    let templateForES6 = function(item) {
+    const templateForES6 = function(item) {
         return `<div class="col-sm-3 col-xs-6">\
                     <img src="${transformUrl(item.url)}" alt="${transformName(item.name)}" class="img-thumbnail">\
                     <div class="info-wrapper">\
@@ -50,7 +50,7 @@
                 </div>`;
     };
 
-    let templateForCreateElements = function(item) {
+    const templateForCreateElements = function(item) {
         let div = document.createElement('div'),
             img = document.createElement('img'),
             wrapper = document.createElement('div'),
@@ -63,6 +63,7 @@
         img.setAttribute('src', transformUrl(item.url));
         img.setAttribute('alt', transformName(item.name));
         wrapper.classList.add('info-wrapper');
+
         divWithName.classList.add('text-muted');
         divWithName.innerHTML = transformName(item.name);
         divWithDescription.classList.add('text-muted', 'top-padding');
@@ -81,7 +82,7 @@
 
     const templateMap = [templateForReplace, templateForES6, templateForCreateElements];
 
-    const iteration = (count, arr, template) => {
+    const iterationWithResult = (count, arr, template) => {
         let result = '';
         let resultObj = document.createElement('div');
         for (let i = 0; i < count; i++) {
@@ -105,7 +106,12 @@
         }
     };
 
-    const displayCurrentBlock = value => {
+    function buildGalleryByTmp(count, value, arr) {
+        let numberOfImages = getNumberOfImages(arr);
+        return iterationWithResult(numberOfImages, arr, templateMap[value]);
+    }
+
+    function displayCurrentBlock(value) {
         let section = ['.first-group', '.second-group', '.third-group'];
 
         for (let i = 0; i < section.length; i++) {
@@ -117,12 +123,7 @@
                 document.querySelector(section[i]).classList.remove('show');
             }
         }
-    };
-
-    function buildGalleryByTmp(count, value, arr) {
-        let numberOfImages = getNumberOfImages(arr);
-        return iteration(numberOfImages, arr, templateMap[value]);
-    };
+    }
 
     function insertHtmlToDOM(html, value) {
         if (typeof html === 'string') {
@@ -133,13 +134,13 @@
         }
     }
 
-    function showGallery() {
+    function init() {
         let value = domElements.typeGallerySelector.value - 1;
         let count = domElements.countGallerySelector.value;
 
         let htmlData = buildGalleryByTmp(count, value, data);
         insertHtmlToDOM(htmlData, value);
         displayCurrentBlock(value);
-    };
-    domElements.btn.addEventListener("click", showGallery);
+    }
+    domElements.btn.addEventListener("click", init);
 })();
