@@ -39,7 +39,7 @@
             .replace("$date", getFormattedDate(item.date));
     };
 
-    const templateForES6 = function(item) {
+    const templateForES6 = item => {
         return `<div class="col-sm-3 col-xs-6">\
                     <img src="${transformUrl(item.url)}" alt="${transformName(item.name)}" class="img-thumbnail">\
                     <div class="info-wrapper">\
@@ -50,13 +50,13 @@
                 </div>`;
     };
 
-    const templateForCreateElements = function(item) {
+    const templateForCreateElements = item => {
         let div = document.createElement('div'),
             img = document.createElement('img'),
             wrapper = document.createElement('div'),
-            divWithName = document.createElement('div'),
-            divWithDescription = document.createElement('div'),
-            divWithDate = document.createElement('div');
+            divName = document.createElement('div'),
+            divDescription = document.createElement('div'),
+            divDate = document.createElement('div');
 
         div.classList.add('col-sm-3', 'col-xs-6');
         img.classList.add('img-thumbnail');
@@ -64,54 +64,56 @@
         img.setAttribute('alt', transformName(item.name));
         wrapper.classList.add('info-wrapper');
 
-        divWithName.classList.add('text-muted');
-        divWithName.innerHTML = transformName(item.name);
-        divWithDescription.classList.add('text-muted', 'top-padding');
-        divWithDescription.innerHTML = transformDescription(item.description);
-        divWithDate.classList.add('text-muted');
-        divWithDate.innerHTML = getFormattedDate(item.date);
+        divName.classList.add('text-muted');
+        divName.innerHTML = transformName(item.name);
+        divDescription.classList.add('text-muted', 'top-padding');
+        divDescription.innerHTML = transformDescription(item.description);
+        divDate.classList.add('text-muted');
+        divDate.innerHTML = getFormattedDate(item.date);
 
         div.appendChild(img);
         div.appendChild(wrapper);
-        wrapper.appendChild(divWithName);
-        wrapper.appendChild(divWithDescription);
-        wrapper.appendChild(divWithDate);
+        wrapper.appendChild(divName);
+        wrapper.appendChild(divDescription);
+        wrapper.appendChild(divDate);
 
         return div;
     };
 
     const templateMap = [templateForReplace, templateForES6, templateForCreateElements];
 
-    const iterationWithResult = (count, arr, template) => {
+    const getIterationWithResult = (count, arr, template) => {
         let result = '';
         let resultObj = document.createElement('div');
+
         for (let i = 0; i < count; i++) {
             let res = template(arr[i]);
-
             if (typeof res === 'string') {result += res;}
             else resultObj.appendChild(res);
         }
         return result || resultObj;
     };
 
-    const getNumberOfImages = (arr) => {
+    const getNumberOfImages = arr => {
         let count = domElements.countGallerySelector.value;
-        switch (count) {
-            case '1':
-                return 3;
-            case '2':
-                return 6;
-            default :
-                return arr.length;
+        return (count === '1') ? 3 : (count === '2') ? 6 : arr.length;
+    };
+
+    const buildGalleryByTmp = (count, value, arr) => {
+        let numberOfImages = getNumberOfImages(arr);
+        return getIterationWithResult(numberOfImages, arr, templateMap[value]);
+    };
+
+    const insertHtmlToDOM = (html, value) => {
+        if (typeof html === 'string') {
+            domElementsArr[value].innerHTML = html;
+        } else {
+            domElementsArr[value].innerHTML = '';
+            domElementsArr[value].appendChild(html);
         }
     };
 
-    function buildGalleryByTmp(count, value, arr) {
-        let numberOfImages = getNumberOfImages(arr);
-        return iterationWithResult(numberOfImages, arr, templateMap[value]);
-    }
-
-    function displayCurrentBlock(value) {
+    const displayCurrentBlock = value => {
         let section = ['.first-group', '.second-group', '.third-group'];
 
         for (let i = 0; i < section.length; i++) {
@@ -123,16 +125,7 @@
                 document.querySelector(section[i]).classList.remove('show');
             }
         }
-    }
-
-    function insertHtmlToDOM(html, value) {
-        if (typeof html === 'string') {
-            domElementsArr[value].innerHTML = html;
-        } else {
-            domElementsArr[value].innerHTML = '';
-            domElementsArr[value].appendChild(html);
-        }
-    }
+    };
 
     function init() {
         let value = domElements.typeGallerySelector.value - 1;
