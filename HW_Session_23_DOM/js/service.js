@@ -1,4 +1,4 @@
-var galleryService = (function(){
+var galleryService = (function() {
     const transformUrl = str => (str.indexOf('http://') !== 0) ? `http://${str}` : `${str}`;
 
     const transformName = name => `${name[0].toUpperCase()}${name.slice(1).toLowerCase()}`;
@@ -7,10 +7,8 @@ var galleryService = (function(){
 
     const getFormattedDate = date => moment(date).format('YYYY/MM/DD hh:mm');
 
-    function hideElements(elementArray){
-        elementArray.forEach(function(element){
-            document.querySelector(element).classList.add("hide");
-        })
+    function addShowAttribute(arr) {
+        return arr.map((item) => ({...item, isShow: false }));
     }
 
     function sortDateDesc(a, b) {
@@ -21,8 +19,8 @@ var galleryService = (function(){
         return a.date < b.date ? 1 : -1;
     }
 
-    function templateES6 (item) {
-        return 	`<div class="col-md-4">
+    function templateES6(item) {
+        return `<div class="col-md-4">
                     <div class="card mb-4 box-shadow">
                         <img class="card-img-top" 
                             data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" 
@@ -47,6 +45,7 @@ var galleryService = (function(){
     }
 
     return {
+        addShowAttribute: addShowAttribute,
         sortDateAsc: sortDateAsc,
         sortDateDesc: sortDateDesc,
         getGalleryItemHTML: templateES6

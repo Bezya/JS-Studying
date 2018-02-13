@@ -1,5 +1,5 @@
 :root {
-    --jumbotron-padding-y: 1px;
+    --jumbotron-padding-y: 0px;
 }
 
 .jumbotron {
@@ -8,7 +8,6 @@
     margin-bottom: 0;
     background-color: #fff;
 }
-
 /* @media (min-width: 768px) {
   .jumbotron {
     padding-top: calc(var(--jumbotron-padding-y) * 2);
