@@ -1,6 +1,6 @@
 'user strict';
 (function() {
-    let btnAdd = document.querySelector("#add-photo"),
+    const btnAdd = document.querySelector("#add-photo"),
         counter = document.querySelector("#js-count"),
         dateDropdown = document.querySelector("#dropdown-date"),
         nameDropdown = document.querySelector("#dropdown-name"),
@@ -8,17 +8,17 @@
 
     let imgData = [];
 
-    //можно было бы сортировку сделать красиво через массив, но сделала, как все
-    /*let sortingMethod = [galleryService.sortNameAsc, galleryService.sortNameDesc, galleryService.sortDateAsc, galleryService.sortDateDesc];*/
+    //можно сортировку сделать красиво через массив
+    /*let sortingMethod = [galleryService.sortNameAsc, galleryService.sortNameDesc,galleryService.sortDateAsc, galleryService.sortDateDesc];*/
 
     let prepareImgData = arr => imgData = galleryService.modifiedData(arr);
 
     let setNumberOfImg = () => counter.innerHTML = imgData.reduce((sum, item) => { return item.isShow === true ? sum + 1 : sum }, 0);
 
-    let checkImgDataForEnd = (lastImg) => {
-        if (!lastImg) {
+    let checkImgDataEnd = (addImg) => {
+        if (!addImg) {
             btnAdd.classList.add("disabled");
-            $('#jsModal').modal('show');;
+            $('#jsModal').modal('show');
         }else{
             btnAdd.classList.remove("disabled");
         }
@@ -26,14 +26,13 @@
 
     let addOneImg = () => {
         let nextImg = imgData.find((item) => item.isShow === false);
-        nextImg.isShow = true;
-        checkImgDataForEnd(nextImg);
+        checkImgDataEnd(nextImg);
         gallery[0].innerHTML += galleryService.getGalleryItemHTML(nextImg);
-
+        nextImg.isShow = true;
         setNumberOfImg();
     };
 
-    let imgDelete = e => {
+    function imgDelete(e) {
         let target = e.target;
         if (target.classList.contains('btn-danger')) {
             let arr = target.classList;
@@ -46,6 +45,7 @@
             let imgForDelete = imgData.find((item)=> item.id == id);
             imgForDelete.isShow = false;
 
+
             while (target !== this) {
                 if (target.parentNode === this) {
                     this.removeChild(target);
@@ -56,7 +56,7 @@
             }
         }
         setNumberOfImg();
-    };
+    }
 
     let getSortingMethod = value => {
         switch(value){
