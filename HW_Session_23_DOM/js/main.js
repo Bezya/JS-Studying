@@ -1,37 +1,51 @@
 'user strict';
 (function() {
-    const btnAdd = document.getElementById("add-photo"),
-        counter = document.getElementById("js-count"),
+    let btnAdd = document.querySelector("#add-photo"),
+        counter = document.querySelector("#js-count"),
         dateDropdown = document.querySelector("#dropdown-date"),
         nameDropdown = document.querySelector("#dropdown-name"),
         gallery = document.getElementsByClassName("js-gallery");
 
     let imgData = [];
 
-    function initListeners() {
-        btnAdd.addEventListener("click", () => addOneItem(imgData));
-        nameDropdown.addEventListener("click", updateSortingMethod);
-        gallery[0].addEventListener("click", imgDelete);
-        dateDropdown.addEventListener("click", updateSortingMethod);
-        //nextBtn.addEventListener("click", getNextPageHandler);
-    }
+    //можно было бы сортировку сделать красиво через массив, но сделала, как все
+    /*let sortingMethod = [galleryService.sortNameAsc, galleryService.sortNameDesc, galleryService.sortDateAsc, galleryService.sortDateDesc];*/
 
-    function addOneItem(arr) {
-        imgData = galleryService.addShowAttribute(data);
-        let nextImg = arr.find((item) => item.isShow === false);
-        let html = galleryService.getGalleryItemHTML(nextImg);
-        gallery[0].innerHTML += html;
+    let prepareImgData = arr => imgData = galleryService.modifiedData(arr);
+
+    let setNumberOfImg = () => counter.innerHTML = imgData.reduce((sum, item) => { return item.isShow === true ? sum + 1 : sum }, 0);
+
+    let checkImgDataForEnd = (lastImg) => {
+        if (!lastImg) {
+            btnAdd.classList.add("disabled");
+            $('#jsModal').modal('show');;
+        }else{
+            btnAdd.classList.remove("disabled");
+        }
+    };
+
+    let addOneImg = () => {
+        let nextImg = imgData.find((item) => item.isShow === false);
         nextImg.isShow = true;
+        checkImgDataForEnd(nextImg);
+        gallery[0].innerHTML += galleryService.getGalleryItemHTML(nextImg);
+
         setNumberOfImg();
-    }
+    };
 
-    function setNumberOfImg() {
-        counter.innerHTML = imgData.reduce((sum, item) => { return item.isShow === true ? sum + 1 : sum }, 0);
-    }
+    let imgDelete = e => {
+        let target = e.target;
+        if (target.classList.contains('btn-danger')) {
+            let arr = target.classList;
+            let id = 0;
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i].indexOf('js-id') === 0) {
+                    id = arr[i].slice(6);
+                }
+            }
+            let imgForDelete = imgData.find((item)=> item.id == id);
+            imgForDelete.isShow = false;
 
-    function imgDelete(e) {
-        if (e.target.classList.contains('btn-danger')) {
-            let target = e.target;
             while (target !== this) {
                 if (target.parentNode === this) {
                     this.removeChild(target);
@@ -41,43 +55,58 @@
                 }
             }
         }
+        setNumberOfImg();
+    };
 
-        let arr = e.target.classList;
-        let id = 0;
-        for (let i = 0; i < arr.length; i++) {
-            if (arr[i].indexOf('js-id') === 0) {
-                id = arr[i].slice(6);
+    let getSortingMethod = value => {
+        switch(value){
+            case "0":
+                return galleryService.sortNameAsc;
+            case "1":
+                return galleryService.sortNameDesc;
+            case "2":
+                return galleryService.sortDateAsc;
+            case "3":
+                return galleryService.sortDateDesc;
+        }
+    };
+
+    let sortItems = method => {
+        gallery[0].innerHTML = "";
+        imgData = imgData.sort(method);
+        imgData.forEach(item => {
+            if(item.isShow === true){
+                gallery[0].innerHTML += galleryService.getGalleryItemHTML(item);
             }
+        })
+    };
+
+    let updateSortingMethod = e => {
+        e.preventDefault();
+        e.currentTarget.querySelector("button").innerHTML = e.target.innerText;
+        let sortingType = e.target.getAttribute("data-type");
+        sortItems(getSortingMethod(sortingType));
+        localStorage.setItem('sortingMethod', getSortingMethod(sortingType));
+    };
+
+    let checkSorting = () => {
+        let method =  localStorage.getItem('sortingMethod');
+        if (method){
+            sortItems(getSortingMethod(method));
         }
+    };
+
+    function initListeners() {
+        btnAdd.addEventListener("click", addOneImg);
+        nameDropdown.addEventListener("click", updateSortingMethod);
+        dateDropdown.addEventListener("click", updateSortingMethod);
+        gallery[0].addEventListener("click", imgDelete);
+        dateDropdown.addEventListener("click", updateSortingMethod);
     }
-
-    /*function sortItems(method) {
-        gallery.innerHTML = "";
-        gallery.sort(method);
-        buildGallery();
-    }*/
-
-    function updateSortingMethod(event) {
-        event.preventDefault();
-        event.currentTarget.querySelector("button").innerHTML = event.target.innerText;
-        let sortingType = event.target.getAttribute("date-type");
-        if (sortingType == "new") {
-            sortItems(galleryService.sortDateAsc)
-        }
-        if (sortingType == "old") {
-            sortItems(galleryService.sortDateDesc);
-        }
-    }
-
-    /*function nonActiveBtn(count) {
-        if (count === data.length) {
-
-            return;
-        }
-    }*/
 
     function init() {
-        //nonActiveBtn(imgData, count);
+        prepareImgData(data);
+        checkSorting();
         initListeners();
     }
     init();
