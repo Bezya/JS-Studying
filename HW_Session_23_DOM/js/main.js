@@ -45,7 +45,6 @@
             let imgForDelete = imgData.find((item)=> item.id == id);
             imgForDelete.isShow = false;
 
-
             while (target !== this) {
                 if (target.parentNode === this) {
                     this.removeChild(target);
