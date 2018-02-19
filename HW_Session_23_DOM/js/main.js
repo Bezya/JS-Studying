@@ -100,7 +100,6 @@
         nameDropdown.addEventListener("click", updateSortingMethod);
         dateDropdown.addEventListener("click", updateSortingMethod);
         gallery[0].addEventListener("click", imgDelete);
-        dateDropdown.addEventListener("click", updateSortingMethod);
     }
 
     function init() {
