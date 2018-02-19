@@ -19,7 +19,7 @@
         if (!addImg) {
             btnAdd.classList.add("disabled");
             $('#jsModal').modal('show');
-            return;
+            //return;
         }
     };
 
