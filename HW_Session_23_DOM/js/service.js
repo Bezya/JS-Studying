@@ -5,7 +5,7 @@ var galleryService = (function() {
 
     const transformDescription = str => (str.length > 15) ? `${str.substring(0, 15)}...` : str;
 
-    const getFormattedDate = date => moment(date).format('YYYY/MM/DD hh:mm');
+    const getFormattedDate = date => moment(date).format('DD.MM.YYYY');
 
     let modifiedData = arr => {
         return arr.map(item => {
