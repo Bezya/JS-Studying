@@ -5,7 +5,7 @@ var galleryService = (function() {
 
     const transformDescription = str => (str.length > 15) ? `${str.substring(0, 15)}...` : str;
 
-    const getFormattedDate = date => moment(date).format('YYYY/MM/DD hh:mm');
+    const getFormattedDate = date => moment(date).format('YYYY/MM/DD');
 
     let modifiedData = arr => {
         return arr.map(item => {
@@ -43,8 +43,8 @@ var galleryService = (function() {
 
     let sortNameAsc = (a, b) => a.name > b.name ? 1 : -1;
     let sortNameDesc = (a, b) => a.name < b.name ? 1 : -1;
-    let sortDateAsc = (a, b) => a.date < b.date ? 1 : -1;
-    let sortDateDesc = (a, b) => a.date > b.date ? 1 : -1;
+    let sortDateAsc = (a, b) => new Date(a.date) < new Date(b.date) ? 1 : -1;
+    let sortDateDesc = (a, b) => new Date(a.date) > new Date(b.date) ? 1 : -1;
 
     return {
         modifiedData: modifiedData,

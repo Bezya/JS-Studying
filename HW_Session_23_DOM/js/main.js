@@ -19,8 +19,7 @@
         if (!addImg) {
             btnAdd.classList.add("disabled");
             $('#jsModal').modal('show');
-        }else{
-            btnAdd.classList.remove("disabled");
+            return;
         }
     };
 
@@ -54,6 +53,7 @@
                 }
             }
         }
+        btnAdd.classList.remove("disabled");
         setNumberOfImg();
     }
 
@@ -100,7 +100,6 @@
         nameDropdown.addEventListener("click", updateSortingMethod);
         dateDropdown.addEventListener("click", updateSortingMethod);
         gallery[0].addEventListener("click", imgDelete);
-        dateDropdown.addEventListener("click", updateSortingMethod);
     }
 
     function init() {
