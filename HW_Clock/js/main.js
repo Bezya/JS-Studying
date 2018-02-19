@@ -1,7 +1,7 @@
 'use strict';
 (function(){
     let dateHtml = document.querySelector('.today-date'),
-        timeHtml = document.getElementsByClassName('number'),
+        // timeHtml = document.getElementsByClassName('number'),
         timerHours = document.querySelector('.hours'),
         timerMinutes = document.querySelector('.minutes'),
         timerSeconds = document.querySelector('.seconds'),
@@ -13,7 +13,7 @@
 
     const currentDate = new Date();
 
-    const dateUntil = new Date('01-01-2019');
+    const untilDate = new Date('01-01-2019');
 
     const correctCase = number => {
         let arr = ['день', 'дня', 'дней'];
@@ -56,7 +56,7 @@
     function init(){
         getDate(currentDate);
         runTimer();
-        daysCounter(currentDate, dateUntil);
+        daysCounter(currentDate, untilDate);
     }
     init();
 })();
