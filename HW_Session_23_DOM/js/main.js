@@ -19,8 +19,6 @@
         if (!addImg) {
             btnAdd.classList.add("disabled");
             $('#jsModal').modal('show');
-        }else{
-            btnAdd.classList.remove("disabled");
         }
     };
 
@@ -54,6 +52,7 @@
                 }
             }
         }
+        btnAdd.classList.remove("disabled");
         setNumberOfImg();
     }
 
