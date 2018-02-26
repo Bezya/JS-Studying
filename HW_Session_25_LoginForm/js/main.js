@@ -1,4 +1,5 @@
-'user strict'
+'user strict';
+
 const domElements = {
     alert: document.querySelector('.alert'),
     loginForm1: document.querySelector('.form-signin'),
@@ -113,3 +114,4 @@ function initListeners (){
 
 let loginForm = new LoginForm(domElements.inputEmail, domElements.inputPassword, alertHandler, errorMsg, domElements.checkBoxRememberMe);
 initListeners();
+
