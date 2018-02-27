@@ -12,6 +12,12 @@ const domElements = {
     btnShowPass: document.querySelector('#btn-showPass'),
     btnGoBack: document.querySelector('#btn-goBack'),
 };
+let errorMsg = ['Заполните поля логин и пароль',
+    'Логин введен неправильно! Разрешены только латинские буквы,цифры, следуйте шаблону!',
+    'Паоль введен неправильно! Разрешены только латинские буквы и цифры!',
+    'Пароль слишком короткий! Пароль должен быть не менее 6 символов!',
+    'Неправильные логин или пароль'
+];
 
 function LoginForm(login, password, alert, remember, loginForm, userInfoForm, userLogin, userPassword) {
     this.domLogin = login;
@@ -22,13 +28,6 @@ function LoginForm(login, password, alert, remember, loginForm, userInfoForm, us
     this.domForm2 = userInfoForm;
     this.domUserLogin = userLogin;
     this.domUserPassword = userPassword;
-
-    let errorMsg = ['Заполните поля логин и пароль',
-        'Логин введен неправильно! Разрешены только латинские буквы,цифры, следуйте шаблону!',
-        'Паоль введен неправильно! Разрешены только латинские буквы и цифры!',
-        'Пароль слишком короткий! Пароль должен быть не менее 6 символов!',
-        'Неправильные логин или пароль'
-    ];
 
     let isAnyData = () => this.domLogin.value && this.domPass.value ? true : alert(errorMsg[0]);
 
@@ -88,15 +87,11 @@ let changeBtnName = () =>{
     let elem = domElements.btnShowPass;
 };
 
-function showPassword(){
+/*function showPassword(){
     let elem = domElements.userPassword;
     elem.type == 'password' ?  elem.type = 'text' : elem.type = 'password';
 }
-
-let showUserInfoForm = () => {
-    userLoginForm.classList.toggle('display-hide');
-    userInfoForm.classList.toggle('display-hide');
-};
+*/
 
 function goBack(){
     let elem  = domElements.btnGoBack;
