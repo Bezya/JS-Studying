@@ -1,7 +1,7 @@
 'use strict';
 (function(){
     let dateHtml = document.querySelector('.today-date'),
-        // timeHtml = document.getElementsByClassName('number'),
+        //timeHtml = document.getElementsByClassName('number'),
         timerHours = document.querySelector('.hours'),
         timerMinutes = document.querySelector('.minutes'),
         timerSeconds = document.querySelector('.seconds'),
@@ -16,7 +16,7 @@
     const untilDate = new Date('01-01-2019');
 
     const correctCase = number => {
-        let arr = ['день', 'дня', 'дней'];
+        let arr = ['день', 'дней', 'дня'];
         if(number % 10 === 1){
             return arr[0]
         }else if(number % 10 === 2 || 3 || 4){

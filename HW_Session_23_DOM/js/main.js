@@ -19,6 +19,7 @@
         if (!addImg) {
             btnAdd.classList.add("disabled");
             $('#jsModal').modal('show');
+            return;
         }
     };
 
@@ -29,19 +30,30 @@
         nextImg.isShow = true;
         setNumberOfImg();
     };
+    function findImgId(arr1, arr2){
+        let id = 0;
+        for (let i = 0; i < arr1.length; i++) {
+            if (arr1[i].indexOf('js-id') === 0) {
+                id = arr1[i].slice(6);
+            }
+        }
+        let imgForDelete = arr2.find((item)=> item.id == id);
+        imgForDelete.isShow = false;
+    }
 
     function imgDelete(e) {
         let target = e.target;
         if (target.classList.contains('btn-danger')) {
             let arr = target.classList;
-            let id = 0;
+
+            /*let id = 0;
             for (let i = 0; i < arr.length; i++) {
                 if (arr[i].indexOf('js-id') === 0) {
                     id = arr[i].slice(6);
                 }
             }
             let imgForDelete = imgData.find((item)=> item.id == id);
-            imgForDelete.isShow = false;
+            imgForDelete.isShow = false;*/
 
             while (target !== this) {
                 if (target.parentNode === this) {

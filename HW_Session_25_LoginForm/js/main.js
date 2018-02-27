@@ -12,12 +12,6 @@ const domElements = {
     btnShowPass: document.querySelector('#btn-showPass'),
     btnGoBack: document.querySelector('#btn-goBack'),
 };
-let errorMsg = ['Заполните поля логин и пароль',
-    'Логин введен неправильно! Разрешены только латинские буквы,цифры, следуйте шаблону!',
-    'Паоль введен неправильно! Разрешены только латинские буквы и цифры!',
-    'Пароль слишком короткий! Пароль должен быть не менее 6 символов!',
-    'Неправильные логин или пароль'
-];
 
 function LoginForm(login, password, alert, remember, loginForm, userInfoForm, userLogin, userPassword) {
     this.domLogin = login;
@@ -28,6 +22,13 @@ function LoginForm(login, password, alert, remember, loginForm, userInfoForm, us
     this.domForm2 = userInfoForm;
     this.domUserLogin = userLogin;
     this.domUserPassword = userPassword;
+
+    let errorMsg = ['Заполните поля логин и пароль',
+        'Логин введен неправильно! Разрешены только латинские буквы,цифры, следуйте шаблону!',
+        'Паоль введен неправильно! Разрешены только латинские буквы и цифры!',
+        'Пароль слишком короткий! Пароль должен быть не менее 6 символов!',
+        'Неправильные логин или пароль'
+    ];
 
     let isAnyData = () => this.domLogin.value && this.domPass.value ? true : alert(errorMsg[0]);
 
@@ -59,8 +60,8 @@ function LoginForm(login, password, alert, remember, loginForm, userInfoForm, us
         if (this.checkBox.value) {
             localStorage.setItem('login', this.domLogin.value);
             localStorage.setItem('password', this.domPass.value);
-            this.domUserLogin.value = localStorage.login;
-            this.domUserPassword.value = localStorage.password;
+            //this.domUserLogin.value = localStorage.login;
+            //this.domUserPassword.value = localStorage.password;
         }
     };
 
