@@ -53,18 +53,6 @@ function LoginForm(login, password, alert, remember, loginForm, userInfoForm, us
 
     };
 
-    let alertHandler = () =>{
-        if (errorMsg) {
-            setTimeout(() =>{
-                this.alert.classList.remove("show");
-                this.alertclassList.add("hide");
-            }, 3000);
-            this.alert.classList.remove("hide");
-            this.alert.innerHTML = errorMsg;
-            this.alert.classList.add("show");
-        }
-    };
-
     this.setLogAndPass = function() {
         if (!isAnyData()) {return;}
         if (!isValidMail()) {return;}
@@ -80,6 +68,19 @@ function LoginForm(login, password, alert, remember, loginForm, userInfoForm, us
     this.initComponents = function() {
     }
 }
+
+let alertHandler = (msg) =>{
+    let elem = domElements.alert;
+    if (msg) {
+        setTimeout(() =>{
+            elem.classList.remove("show");
+            elem.alertclassList.add("hide");
+        }, 3000);
+        elem.classList.remove("hide");
+        elem.innerHTML = msg;
+        elem.classList.add("show");
+    }
+};
 
 let loginForm = new LoginForm(domElements.email, domElements.password, alertHandler, domElements.checkBoxRememberMe);
 
