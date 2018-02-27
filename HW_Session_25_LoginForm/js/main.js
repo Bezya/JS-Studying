@@ -84,6 +84,12 @@ let alertHandler = (msg) =>{
 
 let loginForm = new LoginForm(domElements.email, domElements.password, alertHandler, domElements.checkBoxRememberMe);
 
+function pressBtnSingIn(e) {
+    e.preventDefault();
+    loginForm.setLogAndPass();
+}
+
+
 let changeBtnName = () =>{
     let elem = domElements.btnShowPass;
 };
@@ -99,8 +105,8 @@ function goBack(){
 }
 
 function initListeners (){
-    domElements.btnSingIn.addEventListener("click", loginForm.setLogAndPass);
-    domElements.btnSingIn.addEventListener("click", showUserInfoForm);
+    domElements.btnSingIn.addEventListener("click", pressBtnSingIn);
+    //domElements.btnSingIn.addEventListener("click", showUserInfoForm);
     domElements.btnShowPass.addEventListener("click", showPassword);
     domElements.btnGoBack.addEventListener("click", goBack);
 }
