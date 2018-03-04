@@ -1,4 +1,5 @@
 'user strict'
+
 const domElements = {
     alert: document.querySelector('.alert'),
     loginForm: document.querySelector('.form-signin'),
@@ -29,17 +30,19 @@ function LoginForm(login, password, alert, remember, loginForm, userInfoForm, us
         'Пароль слишком короткий! Пароль должен быть не менее 6 символов!',
         'Неправильные логин или пароль'
     ];
+    let regExMail = /^([\w\._]+)@\1\.([a-z]{2,6}\.?)$/i;
+    let regExPass = /^[a-zA-Z0-9]+$/;
 
-    let isAnyData = () => this.domLogin.value && this.domPass.value ? true : alert(errorMsg[0]);
+    let isAnyData = () => !this.domLogin.value && !this.domPass.value ? alert(errorMsg[0]): true;
 
     let isValidMail = () => {
-        let checkedInputData = this.domLogin.value.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        let checkedInputData = this.domLogin.value.match(regExMail);
         !!checkedInputData ? true : alert(errorMsg[1]);
     };
 
     let isValidPass = () => {
         let pass = this.domPass.value;
-        let checkedInputData = pass.match(/^[a-zA-Z0-9]+$/);
+        let checkedInputData = pass.match(regExPass);
         let len = pass.length >= 6 && pass.length <= 20;
         if (!checkedInputData) {
             alert(errorMsg[2]);
@@ -94,11 +97,11 @@ let changeBtnName = () =>{
     let elem = domElements.btnShowPass;
 };
 
-/*function showPassword(){
+function showPassword(){
     let elem = domElements.userPassword;
     elem.type == 'password' ?  elem.type = 'text' : elem.type = 'password';
 }
-*/
+
 
 function goBack(){
     let elem  = domElements.btnGoBack;
