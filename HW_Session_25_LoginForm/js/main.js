@@ -55,7 +55,7 @@ const login = document.querySelector('#inputEmail'),
     };
 
     let alertHandler = (alert) => {
-        let msg = loginService.errorMsg()
+        let msg = loginService.errorMsg();
         if (msg){
             loginService.showElement(alert);
             alert.innerHTML = msg;
@@ -84,4 +84,5 @@ const login = document.querySelector('#inputEmail'),
 
     setLogAndPass.toLStorage();
     initListeners();
+
 }());
