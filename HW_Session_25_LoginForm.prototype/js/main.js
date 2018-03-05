@@ -14,9 +14,8 @@ function LoginForm () {
     this.btnSingIn = document.querySelector('#btn-sign');
     this.btnShowPass = document.querySelector('#btn-showPass');
     this.btnGoBack = document.querySelector('#btn-goBack');
-
-
 }
+
 LoginForm.prototype = {
     setLogAndPass: function() {
     this.setLogin = 'bezverkhaya@gmail.com';
@@ -26,6 +25,7 @@ LoginForm.prototype = {
         localStorage.setItem('password', this.setPassword);
         }
     },
+
     fillUserInfoForm: function(){
         if (this.checkBoxRememberMe.checked) {
             this.userLogin.value = localStorage.getItem('login');
