@@ -34,7 +34,7 @@
             <input type="password" id="inputPassword" class="form-control" placeholder="password"  style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;" autocomplete="off">
             <div class="checkbox mb-3">
                 <label>
-                    <input type="checkbox" value="remember-me" id="remember-me"> Remember me
+                    <input type="checkbox" id="remember-me"> Remember me
                 </label>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit" id="btn-sign">Sign in</button>
@@ -46,13 +46,13 @@
             <h3 class="user-info">Информация о пользователе</h3><br/>
             <div class="row">
                 <div class="col-lg-6">
-                    <label for="inputEmail2">Логин</label>
-                    <input type="email" class="form-control" id="inputEmail2" placeholder="Email">
+                    <label for="userLogin">Логин</label>
+                    <input type="email" class="form-control" id="userLogin" placeholder="email@mail.com">
                 </div>
                 <div class="col-lg-offset-3 col-lg-6">
-                    <label for="inputPassword2">Пароль</label>
+                    <label for="userPassword">Пароль</label>
                     <div class="input-group">
-                        <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                        <input type="password" class="form-control" id="userPassword" placeholder="password">
                         <span class="input-group-btn">
                             <button class="btn btn-secondary" type="button" id="btn-showPass">Показать пароль</button>
                         </span>
@@ -72,8 +72,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
     <script src="https://getbootstrap.com/assets/js/vendor/popper.min.js"></script>
     <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-    <script src=js/data.js></script>
-    <!--<script src=js/service.js></script>-->
+    <script src=js/service.js></script>
     <script src=js/main.js></script>
   </body>
 </html>
