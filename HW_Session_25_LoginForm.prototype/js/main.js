@@ -2,34 +2,28 @@
 function LoginForm () {
     this.login = document.querySelector('#inputEmail');
     this.password = document.querySelector('#inputPassword');
-
-    this.userLogin = document.querySelector('#userLogin');
-    this.userPassword = document.querySelector('#userPassword');
     this.loginForm = document.querySelector('.form-signin');
-    this.userInfoForm = document.querySelector('.form-signin2');
-
     this.alert = document.querySelector('.alert');
     this.checkBoxRememberMe = document.querySelector('#remember-me');
-
     this.btnSingIn = document.querySelector('#btn-sign');
+}
+
+function UserInfoForm(){
+    LoginForm.apply(this);
+    this.userLogin = document.querySelector('#userLogin');
+    this.userPassword = document.querySelector('#userPassword');
+    this.userInfoForm = document.querySelector('.form-signin2');
     this.btnShowPass = document.querySelector('#btn-showPass');
     this.btnGoBack = document.querySelector('#btn-goBack');
 }
 
 LoginForm.prototype = {
     setLogAndPass: function() {
-    this.setLogin = 'bezverkhaya@gmail.com';
-    this.setPassword  = '123123123';
-    let toLStorage = () => {
-        localStorage.setItem('login', this.setLogin);
-        localStorage.setItem('password', this.setPassword);
-        }
-    },
-
-    fillUserInfoForm: function(){
-        if (this.checkBoxRememberMe.checked) {
-            this.userLogin.value = localStorage.getItem('login');
-            this.userPassword.value = localStorage.getItem('password');
+        this.setLogin = 'bezverkhaya@gmail.com';
+        this.setPassword  = '123123123';
+        let toLStorage = () => {
+            localStorage.setItem('login', this.setLogin);
+            localStorage.setItem('password', this.setPassword);
         }
     },
 
@@ -37,6 +31,46 @@ LoginForm.prototype = {
         this.fillUserInfoForm();
         loginService.hideElement(this.loginForm);
         loginService.showElement(this.userInfoForm);
+    },
+
+    alertHandler: function(alert){
+        let msg = loginService.errorMsg();
+        if (msg){
+            loginService.showElement(alert);
+            alert.innerHTML = msg;
+        }
+    },
+
+    logAndPassValidation: function () {
+        if (!loginService.validation(this.login.value, this.password.value)) {
+            this.alertHandler(this.alert);
+        }else{
+            loginService.hideElement(this.alert);
+            this.showUserInfoForm();
+        }
+    },
+
+    singIn: function (e){
+        e.preventDefault();
+        this.logAndPassValidation();
+    },
+
+    initListeners: function () {
+        this.btnSingIn.addEventListener("click", this.singIn.bind(this));
+    },
+
+    initComponent: function () {
+        this.setLogAndPass();
+        this.initListeners();
+    }
+};
+
+UserInfoForm.prototype = {
+    fillUserInfoForm: function(){
+        if (this.checkBoxRememberMe.checked) {
+            this.userLogin.value = localStorage.getItem('login');
+            this.userPassword.value = localStorage.getItem('password');
+        }
     },
 
     showLoginForm: function () {
@@ -57,37 +91,15 @@ LoginForm.prototype = {
         this.setBtnName();
     },
 
-    alertHandler: function(alert){
-        let msg = loginService.errorMsg();
-        if (msg){
-            loginService.showElement(alert);
-            alert.innerHTML = msg;
-        }
-    },
-
-    initComponents: function () {
-        if (!loginService.validation(this.login.value, this.password.value)) {
-            this.alertHandler(this.alert);
-        }else{
-            loginService.hideElement(this.alert);
-            this.showUserInfoForm();
-        }
-    },
-
-    singIn: function (e){
-        e.preventDefault();
-        this.initComponents();
-    },
-
     initListeners: function () {
-        this.btnSingIn.addEventListener("click", this.singIn.bind(this));
+        LoginForm.prototype.initListeners.apply(this);
         this.btnShowPass.addEventListener("click", this.showPassword.bind(this));
         this.btnGoBack.addEventListener("click", this.showLoginForm.bind(this));
-    },
-
+    }
 };
 
-let loginForm = new LoginForm();
-loginForm.setLogAndPass();
-loginForm.initListeners();
+loginService.inheritance(LoginForm, UserInfoForm);
+
+let extendedLoginForm = new UserInfoForm;
+extendedLoginForm.initComponent();
 
