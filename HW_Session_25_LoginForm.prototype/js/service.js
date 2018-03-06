@@ -17,18 +17,18 @@ let loginService = (function () {
 
     let isAnyData = (login, pass) => login && pass ? true : setErrorMsg(0);
 
-    let isValidMailAndPass = (login, pass) => {
+    let isValidLogAndPass = (login, pass) => {
         return (login.match(patternMail) ? true : setErrorMsg(1)) &&
                 (pass.match(patternPass) ? true : setErrorMsg(2)) &&
                 (pass.length >= 6 && pass.length <= 20 ? true : setErrorMsg(3));
     };
 
-    let compareLogAndPass = (login, pass) => localStorage.getItem('login') == login && localStorage.getItem('password') == pass ?  true : setErrorMsg(4);
+    let isMatchLogAndPass = (login, pass) => localStorage.getItem('login') == login && localStorage.getItem('password') == pass ?  true : setErrorMsg(4);
 
     let checkValidation = (login, pass) => {
         return isAnyData(login, pass) &&
-                isValidMailAndPass(login, pass) &&
-                compareLogAndPass(login, pass);
+                isValidLogAndPass(login, pass) &&
+                isMatchLogAndPass(login, pass);
     };
 
     let hideElement = element => element.classList.add("hide");
