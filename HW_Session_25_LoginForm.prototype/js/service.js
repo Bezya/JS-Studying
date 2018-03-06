@@ -2,9 +2,9 @@ let loginService = (function () {
 
     let patternMail = /^\w+@\w+\.\w{2,4}$/i;
     let patternPass = /^[a-zA-Z0-9]+$/;
-    let error = null;
+    let errorMsg = null;
 
-    let getErrorMsg = () => error;
+    let getErrorMsg = () => errorMsg;
 
     let setErrorMsg = (i) =>{
         let arr = ['Заполните поля логин и пароль',
@@ -12,7 +12,7 @@ let loginService = (function () {
             'Пароль введен неправильно! пароль может состоять только из латинских букв или цифр!',
             'Пароль слишком короткий! Пароль должен быть не менее 6 символов!',
             'Неправильные логин или пароль'];
-        error =  arr[i];
+        errorMsg =  arr[i];
     };
 
     let isAnyData = (login, pass) => login && pass ? true : setErrorMsg(0);
