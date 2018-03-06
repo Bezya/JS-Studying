@@ -48,20 +48,14 @@ const login = document.querySelector('#inputEmail'),
 
     let alertHandler = (alert) => {
         let msg = loginService.errorMsg();
-        if (msg){
+        if (msg) {
             loginService.showElement(alert);
             alert.innerHTML = msg;
+            setTimeout(() => { loginService.hideElement(alert) }, 3000);
         }
     };
 
-    let initComponents = () =>{
-        if (!loginService.validation(login.value, password.value)) {
-            alertHandler(alert);
-        }else{
-            loginService.hideElement(alert);
-            showUserInfoForm();
-        }
-    };
+    let initComponents = () => !loginService.validation(login.value, password.value) ? alertHandler(alert) : showUserInfoForm();
 
     let singIn = e => {
         e.preventDefault();
