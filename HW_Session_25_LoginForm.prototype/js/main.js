@@ -78,17 +78,9 @@ UserInfoForm.prototype = {
         loginService.showElement(this.loginForm);
     },
 
-    setBtnName: function () {
-        if (this.userPassword.type === 'password'){
-            this.btnShowPass.innerHTML = 'Показать пароль';
-        }else if(this.userPassword.type === 'text'){
-            this.btnShowPass.innerHTML = 'Скрыть пароль';
-        }
-    },
-
-    showPassword: function () {
-        this.userPassword.type == 'password' ?  this.userPassword.type = 'text' : this.userPassword.type = 'password';
-        this.setBtnName();
+    showPassword: function ()  {
+        loginService.showPassword(this.userPassword);
+        loginService.setBtnName(this.userPassword, this.btnShowPass);
     },
 
     initListeners: function () {

@@ -34,6 +34,16 @@ let loginService = (function () {
     let hideElement = element => element.classList.add("hide");
     let showElement = element => element.classList.remove("hide");
 
+    let setBtnName = (element, btnName) => {
+        if (element.type === 'password'){
+            btnName.innerHTML = 'Показать пароль';
+        }else if(element.type === 'text'){
+            btnName.innerHTML = 'Скрыть пароль';
+        }
+    };
+
+    let showPassword = (element) => element.type == 'password' ?  element.type = 'text' : element.type = 'password';
+
     function inheritance(parent, child) {//функция наследования
         let tempChild = child.prototype;
         child.prototype = Object.create(parent.prototype);
@@ -51,6 +61,8 @@ let loginService = (function () {
         hideElement: hideElement,
         showElement: showElement,
         errorMsg: getErrorMsg,
+        setBtnName: setBtnName,
+        showPassword: showPassword,
         inheritance: inheritance
     }
 })();
