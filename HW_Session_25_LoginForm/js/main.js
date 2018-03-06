@@ -41,17 +41,9 @@ const login = document.querySelector('#inputEmail'),
         loginService.showElement(loginForm)
     };
 
-    let setBtnName = () => {
-        if (userPassword.type === 'password'){
-            btnShowPass.innerHTML = 'Показать пароль';
-        }else if(userPassword.type === 'text'){
-            btnShowPass.innerHTML = 'Скрыть пароль';
-        }
-    };
-
     let showPassword = () => {
-        userPassword.type == 'password' ?  userPassword.type = 'text' : userPassword.type = 'password';
-        setBtnName();
+        loginService.showPassword(userPassword);
+        loginService.setBtnName(userPassword, btnShowPass);
     };
 
     let alertHandler = (alert) => {

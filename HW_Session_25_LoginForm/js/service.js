@@ -27,17 +27,29 @@ let loginService = (function () {
 
     let checkValidation = (login, pass) => {
         return isAnyData(login, pass) &&
-        isValidMailAndPass(login, pass) &&
-        compareLogAndPass(login, pass)
+            isValidMailAndPass(login, pass) &&
+            compareLogAndPass(login, pass)
     };
 
     let hideElement = element => element.classList.add("hide");
     let showElement = element => element.classList.remove("hide");
 
+    let setBtnName = (element, name) => {
+        if (element.type === 'password'){
+            name.innerHTML = 'Показать пароль';
+        }else if(element.type === 'text'){
+            name.innerHTML = 'Скрыть пароль';
+        }
+    };
+
+    let showPassword = (element) => element.type == 'password' ?  element.type = 'text' : element.type = 'password';
+
     return {
         validation: checkValidation,
         hideElement: hideElement,
         showElement: showElement,
-        errorMsg: getErrorMsg
+        errorMsg: getErrorMsg,
+        setBtnName: setBtnName,
+        showPassword: showPassword
     }
 })();
