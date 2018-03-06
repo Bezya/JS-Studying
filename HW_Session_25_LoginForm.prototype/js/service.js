@@ -2,9 +2,9 @@ let loginService = (function () {
 
     let patternMail = /^\w+@\w+\.\w{2,4}$/i;
     let patternPass = /^[a-zA-Z0-9]+$/;
-    let error = null;
+    let errorMsg = null;
 
-    let getErrorMsg = () => error;
+    let getErrorMsg = () => errorMsg;
 
     let setErrorMsg = (i) =>{
         let arr = ['Заполните поля логин и пароль',
@@ -12,23 +12,23 @@ let loginService = (function () {
             'Пароль введен неправильно! пароль может состоять только из латинских букв или цифр!',
             'Пароль слишком короткий! Пароль должен быть не менее 6 символов!',
             'Неправильные логин или пароль'];
-        error =  arr[i];
+        errorMsg =  arr[i];
     };
 
     let isAnyData = (login, pass) => login && pass ? true : setErrorMsg(0);
 
-    let isValidMailAndPass = (login, pass) => {
+    let isValidLogAndPass = (login, pass) => {
         return (login.match(patternMail) ? true : setErrorMsg(1)) &&
                 (pass.match(patternPass) ? true : setErrorMsg(2)) &&
                 (pass.length >= 6 && pass.length <= 20 ? true : setErrorMsg(3));
     };
 
-    let compareLogAndPass = (login, pass) => localStorage.getItem('login') == login && localStorage.getItem('password') == pass ?  true : setErrorMsg(4);
+    let isMatchLogAndPass = (login, pass) => localStorage.getItem('login') == login && localStorage.getItem('password') == pass ?  true : setErrorMsg(4);
 
     let checkValidation = (login, pass) => {
         return isAnyData(login, pass) &&
-                isValidMailAndPass(login, pass) &&
-                compareLogAndPass(login, pass);
+                isValidLogAndPass(login, pass) &&
+                isMatchLogAndPass(login, pass);
     };
 
     let hideElement = element => element.classList.add("hide");
