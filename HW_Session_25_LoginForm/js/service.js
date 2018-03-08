@@ -19,7 +19,7 @@ let loginService = (function () {
 
     let isValidMailAndPass = (login, pass) => {
         return (patternMail.test(login) ? true : setErrorMsg(1)) &&
-            (patternPass.match(pass) ? true : setErrorMsg(2)) &&
+            (patternPass.test(pass) ? true : setErrorMsg(2)) &&
             (pass.length >= 6 && pass.length <= 20 ? true : setErrorMsg(3));
     };
 
