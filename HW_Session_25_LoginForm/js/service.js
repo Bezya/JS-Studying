@@ -18,8 +18,8 @@ let loginService = (function () {
     let isAnyData = (login, pass) => login && pass ? true : setErrorMsg(0);
 
     let isValidMailAndPass = (login, pass) => {
-        return (login.match(patternMail) ? true : setErrorMsg(1)) &&
-            (pass.match(patternPass) ? true : setErrorMsg(2)) &&
+        return (patternMail.test(login) ? true : setErrorMsg(1)) &&
+            (patternPass.match(pass) ? true : setErrorMsg(2)) &&
             (pass.length >= 6 && pass.length <= 20 ? true : setErrorMsg(3));
     };
 
@@ -34,11 +34,11 @@ let loginService = (function () {
     let hideElement = element => element.classList.add("hide");
     let showElement = element => element.classList.remove("hide");
 
-    let setBtnName = (element, name) => {
+    let setBtnName = (element, btnName) => {
         if (element.type === 'password'){
-            name.innerHTML = 'Показать пароль';
+            btnName.innerHTML = 'Показать пароль';
         }else if(element.type === 'text'){
-            name.innerHTML = 'Скрыть пароль';
+            btnName.innerHTML = 'Скрыть пароль';
         }
     };
 

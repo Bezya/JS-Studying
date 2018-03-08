@@ -18,8 +18,8 @@ let loginService = (function () {
     let isAnyData = (login, pass) => login && pass ? true : setErrorMsg(0);
 
     let isValidLogAndPass = (login, pass) => {
-        return (login.match(patternMail) ? true : setErrorMsg(1)) &&
-                (pass.match(patternPass) ? true : setErrorMsg(2)) &&
+        return (patternMail.test(login) ? true : setErrorMsg(1)) &&
+                (patternPass.test(pass) ? true : setErrorMsg(2)) &&
                 (pass.length >= 6 && pass.length <= 20 ? true : setErrorMsg(3));
     };
 
