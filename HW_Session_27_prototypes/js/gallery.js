@@ -54,6 +54,7 @@ BaseGallery.prototype = {
     },
 
     imgDelete: function(e) {
+        e.preventDefault();
         if (e.target.classList.contains('btn-danger')) {
             let id = e.target.getAttribute('data-id');
             let imgForDelete = this.showedImgData.find((item)=> item.id == id);
@@ -114,3 +115,4 @@ BaseGallery.prototype = {
         this.initListeners();
     }
 };
+
