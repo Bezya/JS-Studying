@@ -8,9 +8,6 @@
 
     let imgData = [];
 
-    //можно сортировку сделать красиво через массив
-    /*let sortingMethod = [galleryService.sortNameAsc, galleryService.sortNameDesc,galleryService.sortDateAsc, galleryService.sortDateDesc];*/
-
     let prepareImgData = arr => imgData = galleryService.modifiedData(arr);
 
     let setNumberOfImg = () => counter.innerHTML = imgData.reduce((sum, item) => { return item.isShow === true ? sum + 1 : sum }, 0);
@@ -19,41 +16,33 @@
         if (!addImg) {
             btnAdd.classList.add("disabled");
             $('#jsModal').modal('show');
-            return;
         }
+        return false;
     };
 
     let addOneImg = () => {
         let nextImg = imgData.find((item) => item.isShow === false);
-        checkImgDataEnd(nextImg);
+        if (checkImgDataEnd(nextImg)){
+            return;
+        }
         gallery[0].innerHTML += galleryService.getGalleryItemHTML(nextImg);
         nextImg.isShow = true;
         setNumberOfImg();
     };
-    function findImgId(arr1, arr2){
-        let id = 0;
-        for (let i = 0; i < arr1.length; i++) {
-            if (arr1[i].indexOf('js-id') === 0) {
-                id = arr1[i].slice(6);
-            }
-        }
-        let imgForDelete = arr2.find((item)=> item.id == id);
-        imgForDelete.isShow = false;
-    }
 
     function imgDelete(e) {
         let target = e.target;
         if (target.classList.contains('btn-danger')) {
             let arr = target.classList;
 
-            /*let id = 0;
+            let id = 0;
             for (let i = 0; i < arr.length; i++) {
                 if (arr[i].indexOf('js-id') === 0) {
                     id = arr[i].slice(6);
                 }
             }
             let imgForDelete = imgData.find((item)=> item.id == id);
-            imgForDelete.isShow = false;*/
+            imgForDelete.isShow = false;
 
             while (target !== this) {
                 if (target.parentNode === this) {
@@ -118,6 +107,6 @@
         checkSorting();
         initListeners();
     }
-    init();
 
+    init();
 })();

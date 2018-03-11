@@ -3,16 +3,17 @@ function LoginForm () {
     this.login = document.querySelector('#inputEmail');
     this.password = document.querySelector('#inputPassword');
     this.loginForm = document.querySelector('.form-signin');
+    this.userInfoForm = document.querySelector('.form-signin2');
     this.alert = document.querySelector('.alert');
     this.checkBoxRememberMe = document.querySelector('#remember-me');
     this.btnSingIn = document.querySelector('#btn-sign');
+
 }
 
 function UserInfoForm(){
     LoginForm.apply(this);
     this.userLogin = document.querySelector('#userLogin');
     this.userPassword = document.querySelector('#userPassword');
-    this.userInfoForm = document.querySelector('.form-signin2');
     this.btnShowPass = document.querySelector('#btn-showPass');
     this.btnGoBack = document.querySelector('#btn-goBack');
 }
