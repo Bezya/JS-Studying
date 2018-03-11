@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Форма входа</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+      <h5 class="my-0 mr-md-auto font-weight-normal">JSExpert</h5>
+      <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="#" id="nav-gallery">Галлерея</a>
+        <a class="p-2 text-dark" href="#" id="nav-user">О пользователе</a>
+      </nav>
+      <a class="btn btn-outline-primary" href="#" id="nav-exit">Выход</a>
+    </div>
+
+    <main class="text-center" role="main">
+        <form class="form-signin">
+            <h1 class="h3 mb-3 font-weight-normal">Пожалуйста войдите</h1>
+            <label for="inputEmail" class="sr-only">Email</label>
+            <input type="text" id="inputEmail" class="form-control" placeholder="email@mail.com"  autofocus="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;" autocomplete="off">
+            <div class="mb-3"></div>
+            <label for="inputPassword" class="sr-only">Пароль</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="password" r style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;" autocomplete="off">
+            <div class="mb-3"></div>
+            <button class="btn btn-lg btn-primary btn-block" id="btn-sign" type="submit">Войти</button>
+        </form>
+
+        <div class="alert alert-danger hide" role="alert"></div>
+
+        <div class="container userInfo-form hide"><br/>
+            <h3 class="user-info">Информация о пользователе</h3><br/>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="userLogin">Логин</label>
+                    <input type="email" class="form-control disable" id="userLogin" placeholder="email@mail.com">
+                </div>
+                <div class="col-lg-offset-3 col-lg-6">
+                    <label for="userPassword">Пароль</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control disable " id="userPassword" placeholder="password">
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button" id="btn-showPass">Показать пароль</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button type="button" class="btn btn-primary btn-block" id="btn-goBack">Вернуться в галерею</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <main class="gallery-form hide">
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Автомобильная галерея</h1>
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="btn-group">
+                        <button type="button" id="add-photo" class="btn btn-primary"
+                                title data-original-title="Добавить одно изображение">Добавить одно изображение
+                        </button>
+                    </div>
+                    <p class="count-text">Добавленно изображений: <span id="js-count">0</span></p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="btn-group" id="dropdown-name">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Фильтровать по имени
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#" data-type ="0">Вперед: от А до Я</a>
+                            <a class="dropdown-item" href="#" data-type="1">Назад: от Я до А</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="btn-group" id="dropdown-date">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Фильтровать по дате
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" data-type="2" href="#">Сначала новые</a>
+                            <a class="dropdown-item" data-type="3" href="#">Сначала старые</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal hide fade" id="jsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Больше нет доступных изображений!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                        </div>
+                        <div class="modal-body">
+                            <p>Вы можете добавить только 10 изображений.</br>Доступ к расширенной галерее платный.<br/><br/>
+                                Если хотите получить доступ к расширенной галерее, нажмите ниже кнопку <span type="button">Оплатить</span><br/><br/>
+                                Если хотите оставить только бесплатные изображения,
+                                нажмите ниже кнопку <span type="button">Закрыть</span>
+                            </p>
+                        </div>
+                        <div class="modal-footer" data-dismiss="modal">
+                            <a href="#" class="btn btn-secondary" class="btn btn-default" data-dismiss="modal">Закрыть</a>
+                            <a href="#" class="btn btn-primary">Оплатить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      </section>
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="row js-gallery" id="gallery"></div>
+                </div>
+            </div>
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <script src="https://getbootstrap.com/assets/js/vendor/popper.min.js"></script>
+    <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+    <script src=js/data.js></script>
+    <script src=js/service.js></script>
+    <script src=js/user.js></script>
+    <script src=js/gallery.js></script>
+    <script src=js/login.js></script>
+    <script src=js/main.js></script>
+
+  </body>
+
+</html>
+
