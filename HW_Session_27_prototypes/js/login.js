@@ -1,3 +1,4 @@
+
 let LoginForm = function (user, userInfoModule, galleryModule) {
     this.userInfo = userInfoModule;
     this.gallery = galleryModule;
@@ -25,6 +26,10 @@ LoginForm.prototype = {
         localStorage.setItem('passwordVal', this.password);
     },
 
+    initGallery: function () {
+        this.gallery.initComponent();
+    },
+
     initListeners: function () {
         this.btnSingIn.addEventListener("click", this.singIn.bind(this));
         this.navGallary.addEventListener("click", this.showGalleryAndNav.bind(this));
@@ -39,10 +44,6 @@ LoginForm.prototype = {
         loginService.showElement(this.navBlock);
     },
 
-    initGallery: function () {
-        this.gallery.initComponent();
-    },
-
     showAndInitUserInfoForm: function () {
         loginService.hideElement(this.galleryForm);
         loginService.showElement(this.userInfoForm);
@@ -54,28 +55,8 @@ LoginForm.prototype = {
         localStorage.removeItem('password');
         loginService.hideElement(this.galleryForm);
         loginService.hideElement(this.navBlock);
+        loginService.hideElement(this.userInfoForm);
         loginService.showElement(this.loginForm);
-    },
-
-    checkSession: function () {
-        let log = localStorage.getItem('login');
-        let pass = localStorage.getItem('password');
-        let logVal = localStorage.getItem('loginVal');
-        let passVal = localStorage.getItem('passwordVal');
-
-        if (log && pass){
-            return log === logVal && pass === passVal;
-        }
-        return false;
-    },
-
-    checkPage: function () {
-        if (this.checkSession()){
-            this.showGalleryAndNav();
-            this.initGallery();
-        }else{
-            loginService.showElement(this.loginForm);
-        }
     },
 
     alertHandler: function(alert){
@@ -103,6 +84,28 @@ LoginForm.prototype = {
         this.logAndPassValidation();
     },
 
+    checkSession: function () {
+        let log = localStorage.getItem('login');
+        let pass = localStorage.getItem('password');
+        let logVal = localStorage.getItem('loginVal');
+        let passVal = localStorage.getItem('passwordVal');
+
+        if (log && pass){
+            return log === logVal && pass === passVal;
+        }
+        return false;
+    },
+
+    checkPage: function () {
+        if (this.checkSession()){
+            loginService.showElement(this.galleryForm);
+            loginService.hideElement(this.loginForm);
+            loginService.showElement(this.navBlock);
+            this.initGallery();
+        }else{
+            loginService.showElement(this.loginForm);
+        }
+    },
 
     initComponent: function () {
         this.setLogAndPass();
