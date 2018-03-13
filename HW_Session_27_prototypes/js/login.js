@@ -19,9 +19,10 @@ let LoginForm = function (user, userInfoModule, galleryModule) {
     this.alert = document.querySelector('.alert');
     this.btnSingIn = document.querySelector('#btn-sign');
 
+    this.navBlock = document.querySelector('.nav-block');
     this.navGallary = document.querySelector('#nav-gallery');
     this.navAboutUser = document.querySelector('#nav-user');
-    this.btnExit = document.querySelector('.btn-exit');
+    this.btnExit = document.querySelector('#btn-exit');
 
     this.userInfoForm = document.querySelector('.userInfo-form');
     this.galleryForm = document.querySelector('.gallery-form');
@@ -32,7 +33,7 @@ LoginForm.prototype = {
         loginService.hideElement(this.loginForm);
         loginService.hideElement(this.userInfoForm);
         loginService.showElement(this.galleryForm);
-        loginService.showElement(this.btnExit);
+        loginService.showElement(this.navBlock);
     },
 
     initGallery: function () {
@@ -49,7 +50,7 @@ LoginForm.prototype = {
         localStorage.removeItem('login');
         localStorage.removeItem('password');
         loginService.hideElement(this.galleryForm);
-        loginService.hideElement(this.btnExit);
+        loginService.hideElement(this.navBlock);
         loginService.showElement(this.loginForm);
     },
 
@@ -69,8 +70,8 @@ LoginForm.prototype = {
         if (this.checkSession()){
             loginService.showElement(this.galleryForm);
             loginService.hideElement(this.loginForm);
+            loginService.showElement(this.navBlock);
             this.initGallery();
-            loginService.showElement(this.btnExit);
         }else{
             loginService.showElement(this.loginForm);
         }
