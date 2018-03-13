@@ -1,17 +1,8 @@
-let user = {
-    login: 'admin@gmail.com',
-    password: '123123123'
-};
-
 let LoginForm = function (user, userInfoModule, galleryModule) {
     this.userInfo = userInfoModule;
     this.gallery = galleryModule;
     this.login = user.login;
     this.password = user.password;
-    this.setLogAndPass = () =>{
-        localStorage.setItem('loginVal', this.login);
-        localStorage.setItem('passwordVal', this.password);
-    };
 
     this.inputLogin = document.querySelector('#inputEmail');
     this.inutPassword = document.querySelector('#inputPassword');
@@ -29,7 +20,19 @@ let LoginForm = function (user, userInfoModule, galleryModule) {
 };
 
 LoginForm.prototype = {
-    showGallery: function () {
+    setLogAndPass: function(){
+        localStorage.setItem('loginVal', this.login);
+        localStorage.setItem('passwordVal', this.password);
+    },
+
+    initListeners: function () {
+        this.btnSingIn.addEventListener("click", this.singIn.bind(this));
+        this.navGallary.addEventListener("click", this.showGalleryAndNav.bind(this));
+        this.navAboutUser.addEventListener("click", this.showAndInitUserInfoForm.bind(this));
+        this.btnExit.addEventListener("click", this.logOut.bind(this));
+    },
+
+    showGalleryAndNav: function () {
         loginService.hideElement(this.loginForm);
         loginService.hideElement(this.userInfoForm);
         loginService.showElement(this.galleryForm);
@@ -40,13 +43,13 @@ LoginForm.prototype = {
         this.gallery.initComponent();
     },
 
-    showUserInfoForm: function () {
+    showAndInitUserInfoForm: function () {
         loginService.hideElement(this.galleryForm);
         loginService.showElement(this.userInfoForm);
-        this.userInfo.initListeners();
+        this.userInfo.initComponent();
     },
 
-    getExit: function () {
+    logOut: function () {
         localStorage.removeItem('login');
         localStorage.removeItem('password');
         loginService.hideElement(this.galleryForm);
@@ -68,9 +71,7 @@ LoginForm.prototype = {
 
     checkPage: function () {
         if (this.checkSession()){
-            loginService.showElement(this.galleryForm);
-            loginService.hideElement(this.loginForm);
-            loginService.showElement(this.navBlock);
+            this.showGalleryAndNav();
             this.initGallery();
         }else{
             loginService.showElement(this.loginForm);
@@ -92,7 +93,7 @@ LoginForm.prototype = {
             loginService.hideElement(this.alert);
             localStorage.setItem('login', this.login);
             localStorage.setItem('password', this.password);
-            this.showGallery();
+            this.showGalleryAndNav();
             this.initGallery();
         }
     },
@@ -102,12 +103,6 @@ LoginForm.prototype = {
         this.logAndPassValidation();
     },
 
-    initListeners: function () {
-        this.btnSingIn.addEventListener("click", this.singIn.bind(this));
-        this.navAboutUser.addEventListener("click", this.showUserInfoForm.bind(this));
-        this.navGallary.addEventListener("click", this.showGallery.bind(this));
-        this.btnExit.addEventListener("click", this.getExit.bind(this));
-    },
 
     initComponent: function () {
         this.setLogAndPass();
