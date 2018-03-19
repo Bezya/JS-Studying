@@ -1,50 +1,60 @@
-let loginService = (function () {
-
+function LoginService() {
     let patternMail = /^\w+@\w+\.\w{2,4}$/i;
     let patternPass = /^[a-zA-Z0-9]+$/;
     let errorMsg = null;
 
-    let getErrorMsg = () => errorMsg;
+    this.getErrorMsg = function(){return errorMsg};
 
-    let setErrorMsg = (i) =>{
-        let arr = ['Заполните поля логин и пароль',
-            'Логин введен неправильно! В логин должны входить латинские буквы!',
-            'Пароль введен неправильно! пароль может состоять только из латинских букв или цифр!',
-            'Пароль слишком короткий! Пароль должен быть не менее 6 символов!',
-            'Неправильные логин или пароль'];
-        errorMsg =  arr[i];
+    let errorMap = new Map(
+        [
+            [0, 'Заполните поля логин и пароль'],
+            [1, 'Логин введен неправильно! В логин должны входить латинские буквы!'],
+            [2, 'Пароль введен неправильно! пароль может состоять только из латинских букв или цифр!'],
+            [3, 'Пароль слишком короткий! Пароль должен быть не менее 6 символов!'],
+            [4, 'Неправильные логин или пароль']
+        ]
+    );
+
+    let setErrorMsg = (key) =>{
+        errorMsg =  errorMap.get(key);
+        return false;
     };
 
     let isAnyData = (login, pass) => login && pass ? true : setErrorMsg(0);
 
     let isValidLogAndPass = (login, pass) => {
+        errorMsg = null;
         return (patternMail.test(login) ? true : setErrorMsg(1)) &&
             (patternPass.test(pass) ? true : setErrorMsg(2)) &&
             (pass.length >= 6 && pass.length <= 20 ? true : setErrorMsg(3));
+
     };
 
-    let isMatchLogAndPass = (login, pass) => localStorage.getItem('loginVal') == login && localStorage.getItem('passwordVal') == pass ?  true : setErrorMsg(4);
+    let isMatchLogAndPass = (login, pass) => {
+        return localStorage.getItem('loginVal') == login &&
+            localStorage.getItem('passwordVal') == pass ?  true : setErrorMsg(4);
+    };
 
-    let checkValidation = (login, pass) => {
+    this.validation = (login, pass) => {
         return isAnyData(login, pass) &&
             isValidLogAndPass(login, pass) &&
             isMatchLogAndPass(login, pass);
     };
 
-    let hideElement = element => element.classList.add("hide");
-    let showElement = element => element.classList.remove("hide");
+    this.hideElement = function(element) { element.classList.add('hide') };
+    this.showElement = function(element) { element.classList.remove('hide') };
 
-    let setBtnName = (element, btnName) => {
-        if (element.type === 'password'){
+    this.setBtnName = (element, btnName) => {
+        if (element.type === 'password') {
             btnName.innerHTML = 'Показать пароль';
-        }else if(element.type === 'text'){
+        } else if (element.type === 'text') {
             btnName.innerHTML = 'Скрыть пароль';
         }
     };
 
-    let showPassword = (element) => element.type == 'password' ?  element.type = 'text' : element.type = 'password';
+    this.showPassword = element => element.type == 'password' ?  element.type = 'text' : element.type = 'password';
 
-    function inheritance(parent, child) {//функция наследования
+    this.inheritance = function(parent, child){//функция наследования
         let tempChild = child.prototype;
         child.prototype = Object.create(parent.prototype);
         child.prototype.constructor = child;
@@ -54,15 +64,5 @@ let loginService = (function () {
                 child.prototype[key] = tempChild[key];
             }
         }
-    }
-
-    return {
-        validation: checkValidation,
-        hideElement: hideElement,
-        showElement: showElement,
-        errorMsg: getErrorMsg,
-        setBtnName: setBtnName,
-        showPassword: showPassword,
-        inheritance: inheritance
-    }
-})();
+    };
+}

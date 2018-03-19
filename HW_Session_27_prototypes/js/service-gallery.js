@@ -1,4 +1,4 @@
-var galleryService = (function() {
+function GalleryService() {
     const transformUrl = str => (str.indexOf('http://') !== 0) ? `http://${str}` : `${str}`;
 
     const transformName = name => `${name[0].toUpperCase()}${name.slice(1).toLowerCase()}`;
@@ -7,7 +7,7 @@ var galleryService = (function() {
 
     const getFormattedDate = date => moment(date).format('YYYY/MM/DD');
 
-    let templateES6 = item => {
+    this.galleryTemplate = function(item){
         return `<div class="col-md-4">
                     <div class="card mb-4 box-shadow">
                         <img class="card-img-top" 
@@ -19,21 +19,26 @@ var galleryService = (function() {
                             <div class="text-muted">${transformName(item.name)}</div>\
                             <p class="card-text">${transformDescription(item.description)}</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn btn-danger" data-id="${item.id}">Удалить</div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-secondary">View</button>
+                                    <button type="button" class="btn btn-outline-secondary">Edit</button>
+                                 </div>
+                                <button class="btn btn-danger" data-id="${item.id}">Удалить</button>
                                 <small class="text-muted">${getFormattedDate(item.date)}</small>
                             </div>
                         </div>
                     </div>
-		        </div>
-	            </div></div>`;
+		        </div>`;
     };
 
-    let sortNameAsc = (a, b) => a.name > b.name ? 1 : -1;
-    let sortNameDesc = (a, b) => a.name < b.name ? 1 : -1;
-    let sortDateAsc = (a, b) => new Date(a.date) < new Date(b.date) ? 1 : -1;
-    let sortDateDesc = (a, b) => new Date(a.date) > new Date(b.date) ? 1 : -1;
+    this.sortingConfig = {
+        "A": (a, b) => a.name > b.name ? 1 : -1,
+        "Z": (a, b) => a.name < b.name ? 1 : -1,
+        "New": (a, b) => new Date(a.date) < new Date(b.date) ? 1 : -1,
+        "Old": (a, b) => new Date(a.date) > new Date(b.date) ? 1 : -1
+    };
 
-    let removePNode = (e, element) => {
+    this.removePNode = function(e, element){
         let target = e.target;
         while (target !== element) {
             if (target.parentNode === element) {
@@ -44,13 +49,4 @@ var galleryService = (function() {
             }
         }
     };
-
-    return {
-        getGalleryItemHTML: templateES6,
-        sortNameAsc: sortNameAsc,
-        sortNameDesc: sortNameDesc,
-        sortDateAsc: sortDateAsc,
-        sortDateDesc: sortDateDesc,
-        removeParentNode: removePNode
-    }
-}());
+}

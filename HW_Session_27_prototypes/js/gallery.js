@@ -1,3 +1,5 @@
+let galleryService = new GalleryService();
+
 function BaseGallery () {
     this.btnAdd = document.querySelector("#add-photo");
     this.counter = document.querySelector("#js-count");
@@ -35,8 +37,9 @@ BaseGallery.prototype = {
         return false;
     },
 
-    restoreImg: function () {
-        this.showedImgData.forEach((item)=> this.gallery.innerHTML += galleryService.getGalleryItemHTML(item));
+    restoreImg: function (sortingFunction) {
+        this.showedImgData.sort(sortingFunction)
+        this.showedImgData.forEach((item)=> this.gallery.innerHTML += galleryService.galleryTemplate(item));
         this.setNumberOfImg();
     },
 
@@ -48,7 +51,7 @@ BaseGallery.prototype = {
     addOneImg: function(){
         if (this.checkImgDataEnd(this.imgData)) return;
         this.showedImgData.push(this.imgData.shift());
-        this.gallery.innerHTML += galleryService.getGalleryItemHTML(this.showedImgData[this.showedImgData.length-1]);
+        this.gallery.innerHTML += galleryService.galleryTemplate(this.showedImgData[this.showedImgData.length-1]);
         this.setNumberOfImg();
         this.updateLocalImgData();
     },
@@ -60,52 +63,45 @@ BaseGallery.prototype = {
             let imgForDelete = this.showedImgData.find((item)=> item.id == id);
             this.showedImgData = this.showedImgData.filter(item => item.id !== imgForDelete.id);
             this.imgData.push(imgForDelete);
-            galleryService.removeParentNode(e, this.gallery);
+            galleryService.removePNode(e, this.gallery);
         }
         this.btnAdd.classList.remove("disabled");
         this.setNumberOfImg();
         this.updateLocalImgData();
     },
 
-    getSortingMethod: function(value){
-        switch(value){
-            case "0":
-                return galleryService.sortNameAsc;
-            case "1":
-                return galleryService.sortNameDesc;
-            case "2":
-                return galleryService.sortDateAsc;
-            case "3":
-                return galleryService.sortDateDesc;
-        }
+    sortingHandler: function(type, event) {
+        event.preventDefault();
+        event.currentTarget.querySelector("button").innerHTML = event.target.innerText;
+        let sortingType = event.target.getAttribute("sorting-type");
+        sortingType && this.applySortingMethod(sortingType);
+        localStorage.setItem(`sortingType${type}`, sortingType);
     },
 
-    sortItems: function(method){
+    applySortingMethod: function(sortingType) {
         this.gallery.innerHTML = "";
-        let methodFunction = this.getSortingMethod(method);
-        this.showedImgData = this.showedImgData.sort(methodFunction);
-        this.restoreImg();
-    },
-
-    updateSortingMethod: function(e){
-        e.preventDefault();
-        e.currentTarget.querySelector("button").innerHTML = e.target.innerText;
-        let sortingType = e.target.getAttribute("data-type");
-        this.sortItems(sortingType);
-        localStorage.setItem('sortingType', sortingType);
+        this.restoreImg(galleryService.sortingConfig[sortingType]);
     },
 
     checkSorting: function(){
-        let method =  localStorage.getItem('sortingType');
-        if (method){
-            this.sortItems(this.getSortingMethod(method));
+        let typeName =  localStorage.getItem('sortingTypeName');
+        let typeDate =  localStorage.getItem('sortingTypeDate');
+        if(typeName) {
+            this.nameDropdown.querySelector("button").innerHTML = typeName === 'A' ?
+                'Вперед: от А до Я' : 'Назад: от Я до А';
+            this.applySortingMethod(typeName);
+        }
+        if(typeDate) {
+            this.dateDropdown.querySelector("button").innerHTML = typeName === 'New' ?
+                'Сначала новые' : 'Сначала старые';
+            this.applySortingMethod(typeName);
         }
     },
 
     initListeners: function(){
         this.btnAdd.addEventListener("click", this.addOneImg.bind(this));
-        this.nameDropdown.addEventListener("click", this.updateSortingMethod.bind(this));
-        this.dateDropdown.addEventListener("click", this.updateSortingMethod.bind(this));
+        this.nameDropdown.addEventListener("click", this.sortingHandler.bind(this, 'Name'));
+        this.dateDropdown.addEventListener("click", this.sortingHandler.bind(this, 'Date'));
         this.gallery.addEventListener("click", this.imgDelete.bind(this));
     },
 

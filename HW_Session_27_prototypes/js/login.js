@@ -1,3 +1,4 @@
+let loginService = new LoginService();
 
 let LoginForm = function (user, userInfoModule, galleryModule) {
     this.userInfo = userInfoModule;
@@ -60,7 +61,7 @@ LoginForm.prototype = {
     },
 
     alertHandler: function(alert){
-        let msg = loginService.errorMsg();
+        let msg = loginService.getErrorMsg();
         if (msg){
             loginService.showElement(alert);
             alert.innerHTML = msg;
