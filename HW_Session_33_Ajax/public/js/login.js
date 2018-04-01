@@ -3,11 +3,10 @@ let service = new Service();
 let loginService = new LoginService();
 
 class LoginForm {
-    constructor(user, userInfoModule, galleryModule) {
+    constructor(userInfoModule, galleryModule, observer) {
         this.userInfo = userInfoModule;
         this.gallery = galleryModule;
-        this.login = user.login;
-        this.password = user.password;
+        this.observer = observer;
 
         this.inputLogin = document.querySelector('#inputEmail');
         this.inutPassword = document.querySelector('#inputPassword');
@@ -15,6 +14,7 @@ class LoginForm {
         this.alert = document.querySelector('.alert');
         this.btnSingIn = document.querySelector('#btn-sign');
         this.createAndUpdateForm = document.querySelector(".create-form");
+        this.btnCreate = document.querySelector("#btn-create");
         this.btnCreateItem = document.querySelector("#create-item");
 
         this.navBlock = document.querySelector('.nav-block');
@@ -26,14 +26,23 @@ class LoginForm {
         this.galleryForm = document.querySelector('.gallery-form');
     }
 
-    setLogAndPass() {
-        localStorage.setItem('loginVal', this.login);
-        localStorage.setItem('passwordVal', this.password);
+    initGallery(data) {
+        if(!this.gallery.isReady) {
+            this.gallery.initComponent(data);
+        }
+        this.gallery.initListeners();
     }
 
-    initGallery() {
-        this.gallery.initComponent();
-        this.gallery.initListeners();
+    createItem(e){
+        this.gallery.createItem(e).then(()=>{
+            this.showGalleryAndNav();
+        })
+    }
+
+    updateItem(e){
+        this.gallery.updateItem(e).then(()=>{
+            this.showGalleryAndNav();
+        })
     }
 
     initListeners() {
@@ -42,11 +51,14 @@ class LoginForm {
         this.navAboutUser.addEventListener("click", this.showAndInitUserInfoForm.bind(this));
         this.btnExit.addEventListener("click", this.logOut.bind(this));
         this.btnCreateItem.addEventListener("click", this.showCreateAndUpdateFom.bind(this));
+        this.btnCreate.addEventListener("click", this.createItem.bind(this));
+        this.btnCreate.addEventListener("click", this.updateItem().bind(this));
     }
 
     showGalleryAndNav() {
         service.hideElement(this.loginForm);
         service.hideElement(this.userInfoForm);
+        service.hideElement(this.createAndUpdateForm);
         service.showElement(this.galleryForm);
         service.showElement(this.navBlock);
     }
@@ -61,11 +73,9 @@ class LoginForm {
         service.hideElement(this.userInfoForm);
         service.hideElement(this.galleryForm);
         service.showElement(this.createAndUpdateForm);
-        this.createAndUpdateForm.innerHTML = galleryService.createAndUpdateTemplate();
     }
 
     logOut() {
-        this.gallery.removeListeners();
         localStorage.removeItem('login');
         localStorage.removeItem('password');
         service.hideElement(this.galleryForm);
@@ -83,15 +93,22 @@ class LoginForm {
     }
 
     logAndPassValidation() {
-        if (!loginService.validation(this.inputLogin.value, this.inutPassword.value)) {
-            this.alertHandler(this.alert);
-        } else {
-            service.hideElement(this.alert);
-            localStorage.setItem('login', this.login);
-            localStorage.setItem('password', this.password);
-            this.showGalleryAndNav();
-            this.initGallery();
-        }
+        let val = loginService.validation(this.inputLogin.value, this.inutPassword.value);
+            if(val){
+                val.then(res => {
+                    if (res) {
+                        service.hideElement(this.alert);
+                        localStorage.setItem('login', this.inputLogin.value);
+                        localStorage.setItem('password', this.inutPassword.value);
+                        this.showGalleryAndNav();
+                        this.initGallery();
+                    } else {
+                        this.alertHandler(this.alert)
+                    }
+                })
+            } else {
+                    this.alertHandler(this.alert)
+            }
     }
 
     singIn(e) {
@@ -102,13 +119,7 @@ class LoginForm {
     checkSession() {
         let log = localStorage.getItem('login');
         let pass = localStorage.getItem('password');
-        let logVal = localStorage.getItem('loginVal');
-        let passVal = localStorage.getItem('passwordVal');
-
-        if (log && pass) {
-            return log === logVal && pass === passVal;
-        }
-        return false;
+        return !!log && !!pass
     }
 
     checkPage() {
@@ -123,7 +134,6 @@ class LoginForm {
     }
 
     initComponent() {
-        this.setLogAndPass();
         this.checkPage();
         this.initListeners();
     }

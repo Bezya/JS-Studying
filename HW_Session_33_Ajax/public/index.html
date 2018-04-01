@@ -19,12 +19,26 @@
             <button type="button" id="create-item" class="btn btn-outline-dark"
                     title data-original-title="Создать элемент галереи">Создать элемент галереи
             </button>
-            <a class="p-2 text-dark" href="#pag-one" id="nav-gallery">Галлерея</a>
+            <a class="p-2 text-dark" href="#pag-one" id="nav-gallery">Галерея</a>
             <a class="p-2 text-dark" href="#page-two" id="nav-user">О пользователе</a>
             <a class="btn btn-outline-primary" href="#" id="btn-exit">Выход</a>
         </nav>
     </div>
-    <div class="container create-form hide"></div>
+    <div class="container create-form hide">
+        <form class="form">
+            <h1 class="h3 mb-3 font-weight-normal">Заполните поля</h1>
+            <p>URL<p>
+            <input type="text" id="createUrl" class="form-control" required>
+            <div class="mb-3"></div>
+            <p>Наименование<p>
+            <input type="text" id="createName" class="form-control">
+            <div class="mb-3"></div>
+            <p>Описание<p>
+            <input type="text" id="createDescription" class="form-control">
+            <div class="mb-3"></div>
+            <button class="btn btn-lg btn-primary btn-block" id="btn-create" type="submit">Создать элемент галереи</button>
+        </form>
+    </div>
 
     <main class="text-center" role="main">
         <!-- Login form -->
@@ -164,7 +178,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
     <script src="https://getbootstrap.com/assets/js/vendor/popper.min.js"></script>
     <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-    <script src=js/data.js></script>
+    <script src=js/observer.js></script>
     <script src=js/service.js></script>
     <script src=js/service-login.js></script>
     <script src=js/service-user.js></script>

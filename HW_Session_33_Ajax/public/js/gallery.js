@@ -7,19 +7,25 @@ class BaseGallery {
         this.dateDropdown = document.querySelector("#dropdown-date");
         this.nameDropdown = document.querySelector("#dropdown-name");
         this.gallery = document.querySelector(".js-gallery");
+        this.createUrl = document.querySelector("#createUrl");
+        this.createName = document.querySelector("#createName");
+        this.createDescription = document.querySelector("#createDescription");
 
         this.imgData = null;
         this.showedImgData = [];
+        this.ready = false;
 
         this.initComponent();
     }
 
-    initComponent (){
+    initComponent(){
         fetch("http://localhost:3000/cars").then(responce => responce.json())
             .then(data => {
                 this.saveData(data);
-                this.getShowedImgData();
-                this.checkSorting();
+                this.buildGallery();
+                //this.getShowedImgData();
+                //this.checkSorting();
+                this.ready = true;
             })
     }
 
@@ -27,18 +33,80 @@ class BaseGallery {
         this.imgData = data;
     }
 
-    /*updateItem(item) {
-        fetch(`http://localhost:3000/cars/${item.id}`, options).then(responce => responce.json())
-            .then(data => {
-                this.initComponent();
-            })
-    }*/
+    bodyRequest(){
+        return JSON.stringify({
+            url: this.createUrl.value,
+            name: this.createName.value,
+            description: this.createDescription.value,
+            date: Date.now()
+        })
+    }
+
+    createItem(e){
+        e.preventDefault();
+        let options = {
+            headers: {
+                'Content-type': 'application/json; charset=utf-8'
+            },
+            method: 'post',
+            body: this.bodyRequest()
+        };
+        return fetch("http://localhost:3000/cars", options).then(response =>{
+            if (response.status == 201){
+                return response.json();
+            }
+            throw new Error("Error");
+        })
+            .then(()=> this.initComponent())
+            .catch(e => e);
+    }
+
+    deleteItem(e){
+        e.preventDefault();
+        let id = e.target.getAttribute("data-id");
+        let options = {
+            headers: {
+                'Content-type': 'application/json; charset=utf-8'
+            },
+            method: 'delete',
+        };
+        fetch("http://localhost:3000/cars/"+ id, options).then(response =>{
+        });
+    }
+
+    updateItem(e){
+        e.preventDefault();
+        let id = e.target.getAttribute("data-id");
+        let options = {
+            headers: {
+                'Content-type': 'application/json; charset=utf-8'
+            },
+            method: 'put',
+            body: this.bodyRequest()
+        };
+
+        return fetch("http://localhost:3000/cars/"+ id, options).then(response =>{
+            if (response.status == 201){
+                return response.json();
+            }
+            throw new Error("Error");
+        })
+            .then(()=> this.initComponent())
+            .catch(e => e);
+    }
+
+    buildGallery() {
+        let result = '';
+        this.imgData.forEach(item => {
+        result += galleryService.galleryTemplate(item);
+        });
+        this.gallery.innerHTML = result;
+    }
 
     getShowedImgData() {
         let localShowedImgData = localStorage.getItem('showedImgData');
         if (localShowedImgData) {
             this.showedImgData = JSON.parse(localShowedImgData);
-            this.imgData = this.imgData.filter(item => this.showedImgData.every(elem => elem.id !== item.id));
             this.restoreImg();
         }
     }
@@ -89,6 +157,25 @@ class BaseGallery {
         this.updateLocalImgData();
     }
 
+    fillFields(item){
+        this.createUrl.value = item.url;
+        this.createName.value = item.name;
+        this.createDescription.value = item.description;
+    }
+
+    imgEdit(e){
+        e.preventDefault();
+        if(e.target.classList.contains('edit')){
+            let element = e.target;
+            while (!element.classList.contains('gallery-item')) {
+                element = element.parentNode;
+            }
+            let id = element.getAttribute('data-id');
+            let imgForUpdate = this.imgData.find((item) => item.id == id);
+            this.fillFields(imgForUpdate);
+        }
+    }
+
     sortingHandler(type, event) {
         event.preventDefault();
         event.currentTarget.querySelector("button").innerHTML = event.target.innerText;
@@ -122,13 +209,8 @@ class BaseGallery {
         this.nameDropdown.addEventListener("click", this.sortingHandler.bind(this, 'Name'));
         this.dateDropdown.addEventListener("click", this.sortingHandler.bind(this, 'Date'));
         this.gallery.addEventListener("click", this.imgDelete.bind(this));
-    }
-
-    removeListeners() {
-        this.btnAdd.removeEventListener("click", this.addOneImg.bind(this));
-        this.nameDropdown.removeEventListener("click", this.sortingHandler.bind(this, 'Name'));
-        this.dateDropdown.removeEventListener("click", this.sortingHandler.bind(this, 'Date'));
-        this.gallery.removeEventListener("click", this.imgDelete.bind(this));
+        this.gallery.addEventListener("click", this.imgEdit.bind(this));
+        //this.btnCreate.addEventListener("click", this.createItem.bind(this));
     }
 }
 

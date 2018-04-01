@@ -1,14 +1,11 @@
 'user strict';
 
-let user = {
-    login: 'admin@gmail.com',
-    password: '123123123'
-};
-
 let userInfoModule = new UserInfoForm();
 
 let galleryModule = new BaseGallery();
 
-let loginForm = new LoginForm(user, userInfoModule, galleryModule);
+let observer = new Observer();
+
+let loginForm = new LoginForm(userInfoModule, galleryModule, observer);
 loginForm.initComponent();
 

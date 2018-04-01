@@ -3,13 +3,15 @@ function LoginService() {
     let patternPass = /^[a-zA-Z0-9]+$/;
     let errorMsg = null;
 
+    const URL = 'http://localhost:3000';
+
     let errorMsgMap = {
         0: 'Заполните поля логин и пароль',
         1: 'Логин введен неправильно! В логин должны входить латинские буквы!',
         2: 'Пароль введен неправильно! пароль может состоять только из латинских букв или цифр!',
         3: 'Пароль слишком короткий! Пароль должен быть не менее 6 символов!',
         4: 'Неправильные логин или пароль'
-    }
+    };
 
     let setErrorMsg = (key) => {
         errorMsg = errorMsgMap[key];
@@ -27,15 +29,28 @@ function LoginService() {
 
     };
 
-    let isMatchLogAndPass = (login, pass) => {
-        return localStorage.getItem('loginVal') == login &&
-            localStorage.getItem('passwordVal') == pass ? true : setErrorMsg(4);
+    let isMatchLogAndPass = (login, password) => {
+        let options = {
+            headers: {
+                'Content-type': 'application/json; charset=utf-8'
+            },
+            method: 'post',
+            body: JSON.stringify({login, password})
+
+        };
+        return fetch(URL + '/login', options)
+            .then(responce => {
+                if(responce.status == 200){
+                    return responce.json()
+                }throw new Error(responce.status)
+            })
+            .then(data => data.status)
+            .catch(() => setErrorMsg(4));
     };
 
     this.validation = (login, pass) => {
-        return isAnyData(login, pass) &&
-            isValidLogAndPass(login, pass) &&
-            isMatchLogAndPass(login, pass);
+        if(isAnyData(login, pass) && isValidLogAndPass(login, pass)) {
+            return isMatchLogAndPass(login, pass);
+        }
     };
-
 }
