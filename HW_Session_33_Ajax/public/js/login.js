@@ -14,7 +14,7 @@ class LoginForm {
         this.alert = document.querySelector('.alert');
         this.btnSingIn = document.querySelector('#btn-sign');
         this.createAndUpdateForm = document.querySelector(".create-form");
-        this.btnCreate = document.querySelector("#btn-create");
+        this.btnCreateAndUpdate = document.querySelector("#btn-create");
         this.btnCreateItem = document.querySelector("#create-item");
 
         this.navBlock = document.querySelector('.nav-block');
@@ -27,10 +27,10 @@ class LoginForm {
     }
 
     initGallery(data) {
+        this.gallery.initComponent(data);
         if(!this.gallery.isReady) {
-            this.gallery.initComponent(data);
+            this.gallery.initListeners();
         }
-        this.gallery.initListeners();
     }
 
     createItem(e){
@@ -51,8 +51,8 @@ class LoginForm {
         this.navAboutUser.addEventListener("click", this.showAndInitUserInfoForm.bind(this));
         this.btnExit.addEventListener("click", this.logOut.bind(this));
         this.btnCreateItem.addEventListener("click", this.showCreateAndUpdateFom.bind(this));
-        this.btnCreate.addEventListener("click", this.createItem.bind(this));
-        this.btnCreate.addEventListener("click", this.updateItem().bind(this));
+        this.btnCreateAndUpdate.addEventListener("click", this.createItem.bind(this));
+        this.btnCreateAndUpdate.addEventListener("click", this.updateItem().bind(this));
     }
 
     showGalleryAndNav() {

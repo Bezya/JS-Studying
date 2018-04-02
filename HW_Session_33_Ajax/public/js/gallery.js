@@ -15,7 +15,6 @@ class BaseGallery {
         this.showedImgData = [];
         this.ready = false;
 
-        this.initComponent();
     }
 
     initComponent(){
@@ -23,8 +22,8 @@ class BaseGallery {
             .then(data => {
                 this.saveData(data);
                 this.buildGallery();
-                //this.getShowedImgData();
-                //this.checkSorting();
+                this.getShowedImgData();
+                this.checkSorting();
                 this.ready = true;
             })
     }
