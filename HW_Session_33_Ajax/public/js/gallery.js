@@ -209,9 +209,8 @@ class BaseGallery {
         this.btnAdd.addEventListener("click", this.addOneImg.bind(this));
         this.nameDropdown.addEventListener("click", this.sortingHandler.bind(this, 'Name'));
         this.dateDropdown.addEventListener("click", this.sortingHandler.bind(this, 'Date'));
-        this.gallery.addEventListener("click", this.imgDelete.bind(this));
         this.gallery.addEventListener("click", this.imgEdit.bind(this));
-        //this.btnCreate.addEventListener("click", this.createItem.bind(this));
+        this.gallery.addEventListener("click", this.deleteItem.bind(this));
     }
 }
 
