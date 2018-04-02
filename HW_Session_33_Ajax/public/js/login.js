@@ -33,13 +33,13 @@ class LoginForm {
         }
     }
 
-    createItem(e){
+    createGalleryItem(e){
         this.gallery.createItem(e).then(()=>{
             this.showGalleryAndNav();
         })
     }
 
-    updateItem(e){
+    updateGalleryItem(e){
         this.gallery.updateItem(e).then(()=>{
             this.showGalleryAndNav();
         })
@@ -51,8 +51,8 @@ class LoginForm {
         this.navAboutUser.addEventListener("click", this.showAndInitUserInfoForm.bind(this));
         this.btnExit.addEventListener("click", this.logOut.bind(this));
         this.btnCreateItem.addEventListener("click", this.showCreateAndUpdateFom.bind(this));
-        this.btnCreateAndUpdate.addEventListener("click", this.createItem.bind(this));
-        this.btnCreateAndUpdate.addEventListener("click", this.updateItem().bind(this));
+        this.btnCreateAndUpdate.addEventListener("click", this.createGalleryItem.bind(this));
+        this.btnCreateAndUpdate.addEventListener("click", this.updateGalleryItem().bind(this));
     }
 
     showGalleryAndNav() {
