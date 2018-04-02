@@ -1,7 +1,7 @@
 let galleryService = new GalleryService();
 
 class BaseGallery {
-    constructor() {
+    constructor(editCallBack) {
         this.btnAdd = document.querySelector("#add-photo");
         this.counter = document.querySelector("#js-count");
         this.dateDropdown = document.querySelector("#dropdown-date");
@@ -10,6 +10,7 @@ class BaseGallery {
         this.createUrl = document.querySelector("#createUrl");
         this.createName = document.querySelector("#createName");
         this.createDescription = document.querySelector("#createDescription");
+        this.editCallBack = editCallBack;
 
         this.imgData = null;
         this.showedImgData = [];
@@ -24,14 +25,20 @@ class BaseGallery {
             .then(data => {
                 this.saveData(data);
                 this.buildGallery();
-                //this.getShowedImgData();
-                //this.checkSorting();
                 this.ready = true;
             })
         }
 
     saveData(data) {
         this.imgData = data;
+    }
+
+    initListeners() {
+        //this.btnAdd.addEventListener("click", this.addOneImg.bind(this));
+        //this.nameDropdown.addEventListener("click", this.sortingHandler.bind(this, 'Name'));
+        //this.dateDropdown.addEventListener("click", this.sortingHandler.bind(this, 'Date'));
+        this.gallery.addEventListener("click", this.imgEdit.bind(this));
+        this.gallery.addEventListener("click", this.deleteItem.bind(this));
     }
 
     bodyRequest(){
@@ -71,8 +78,9 @@ class BaseGallery {
             },
             method: 'delete',
         };
-        fetch("http://localhost:3000/cars/"+ id, options).then(response =>{
-        });
+        fetch("http://localhost:3000/cars/"+ id, options).then(response => response.json())
+            .then(()=> this.initComponent())
+            .catch(e => e);
     }
 
     updateItem(e){
@@ -96,6 +104,26 @@ class BaseGallery {
             .catch(e => e);
     }
 
+    fillFields(item){
+        this.createUrl.value = item.url;
+        this.createName.value = item.name;
+        this.createDescription.value = item.description;
+    }
+
+    imgEdit(e){
+        e.preventDefault();
+        if(e.target.classList.contains('edit')){
+            let element = e.target;
+            while (!element.classList.contains('gallery-item')) {
+                element = element.parentNode;
+            }
+            let id = element.getAttribute('data-id');
+            let imgForUpdate = this.imgData.find((item) => item.id == id);
+            this.fillFields(imgForUpdate);
+            this.editCallBack();
+        }
+    }
+
     buildGallery() {
         let result = '';
         this.imgData.forEach(item => {
@@ -104,7 +132,7 @@ class BaseGallery {
         this.gallery.innerHTML = result;
     }
 
-    getShowedImgData() {
+    /*getShowedImgData() {
         let localShowedImgData = localStorage.getItem('showedImgData');
         if (localShowedImgData) {
             this.showedImgData = JSON.parse(localShowedImgData);
@@ -156,26 +184,7 @@ class BaseGallery {
         this.btnAdd.classList.remove("disabled");
         this.setNumberOfImg();
         this.updateLocalImgData();
-    }
-
-    fillFields(item){
-        this.createUrl.value = item.url;
-        this.createName.value = item.name;
-        this.createDescription.value = item.description;
-    }
-
-    imgEdit(e){
-        e.preventDefault();
-        if(e.target.classList.contains('edit')){
-            let element = e.target;
-            while (!element.classList.contains('gallery-item')) {
-                element = element.parentNode;
-            }
-            let id = element.getAttribute('data-id');
-            let imgForUpdate = this.imgData.find((item) => item.id == id);
-            this.fillFields(imgForUpdate);
-        }
-    }
+    }*/
 
     sortingHandler(type, event) {
         event.preventDefault();
@@ -203,14 +212,6 @@ class BaseGallery {
                 'Сначала новые' : 'Сначала старые';
             this.applySortingMethod(typeName);
         }
-    }
-
-    initListeners() {
-        this.btnAdd.addEventListener("click", this.addOneImg.bind(this));
-        this.nameDropdown.addEventListener("click", this.sortingHandler.bind(this, 'Name'));
-        this.dateDropdown.addEventListener("click", this.sortingHandler.bind(this, 'Date'));
-        this.gallery.addEventListener("click", this.imgEdit.bind(this));
-        this.gallery.addEventListener("click", this.deleteItem.bind(this));
     }
 }
 

@@ -3,10 +3,10 @@ let service = new Service();
 let loginService = new LoginService();
 
 class LoginForm {
-    constructor(userInfoModule, galleryModule, observer) {
+    constructor(userInfoModule) {
         this.userInfo = userInfoModule;
-        this.gallery = galleryModule;
-        this.observer = observer;
+        this.gallery = new BaseGallery(this.editCallBack.bind(this));
+        //this.observer = observer;
 
         this.inputLogin = document.querySelector('#inputEmail');
         this.inutPassword = document.querySelector('#inputPassword');
@@ -26,6 +26,21 @@ class LoginForm {
         this.galleryForm = document.querySelector('.gallery-form');
     }
 
+    initComponent() {
+        this.checkPage();
+        this.initListeners();
+    }
+
+    initListeners() {
+        this.btnSingIn.addEventListener("click", this.singIn.bind(this));
+        this.navGallary.addEventListener("click", this.showGalleryAndNav.bind(this));
+        this.navAboutUser.addEventListener("click", this.showAndInitUserInfoForm.bind(this));
+        this.btnExit.addEventListener("click", this.logOut.bind(this));
+        this.btnCreateItem.addEventListener("click", this.showCreateAndUpdateFom.bind(this));
+        this.btnCreateAndUpdate.addEventListener("click", this.createGalleryItem.bind(this));
+        //this.btnCreateAndUpdate.addEventListener("click", this.updateGalleryItem.bind(this));
+    }
+
     initGallery(data) {
         if(!this.gallery.isReady()) {
             this.gallery.initComponent(data);
@@ -39,21 +54,15 @@ class LoginForm {
         })
     }
 
-    updateGalleryItem(e){
+    editCallBack(){
+        this.showCreateAndUpdateFom();
+    }
+
+    /*updateGalleryItem(e){
         this.gallery.updateItem(e).then(()=>{
             this.showGalleryAndNav();
         })
-    }
-
-    initListeners() {
-        this.btnSingIn.addEventListener("click", this.singIn.bind(this));
-        this.navGallary.addEventListener("click", this.showGalleryAndNav.bind(this));
-        this.navAboutUser.addEventListener("click", this.showAndInitUserInfoForm.bind(this));
-        this.btnExit.addEventListener("click", this.logOut.bind(this));
-        this.btnCreateItem.addEventListener("click", this.showCreateAndUpdateFom.bind(this));
-        this.btnCreateAndUpdate.addEventListener("click", this.createGalleryItem.bind(this));
-        this.btnCreateAndUpdate.addEventListener("click", this.updateGalleryItem.bind(this));
-    }
+    }*/
 
     showGalleryAndNav() {
         service.hideElement(this.loginForm);
@@ -81,6 +90,7 @@ class LoginForm {
         service.hideElement(this.galleryForm);
         service.hideElement(this.navBlock);
         service.hideElement(this.userInfoForm);
+        service.hideElement(this.createAndUpdateForm);
         service.showElement(this.loginForm);
     }
 
@@ -131,10 +141,5 @@ class LoginForm {
         } else {
             service.showElement(this.loginForm);
         }
-    }
-
-    initComponent() {
-        this.checkPage();
-        this.initListeners();
     }
 }
