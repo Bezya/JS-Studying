@@ -52,7 +52,7 @@ class LoginForm {
         this.btnExit.addEventListener("click", this.logOut.bind(this));
         this.btnCreateItem.addEventListener("click", this.showCreateAndUpdateFom.bind(this));
         this.btnCreateAndUpdate.addEventListener("click", this.createGalleryItem.bind(this));
-        this.btnCreateAndUpdate.addEventListener("click", this.updateGalleryItem().bind(this));
+        this.btnCreateAndUpdate.addEventListener("click", this.updateGalleryItem.bind(this));
     }
 
     showGalleryAndNav() {
