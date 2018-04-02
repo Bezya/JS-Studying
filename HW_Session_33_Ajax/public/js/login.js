@@ -28,7 +28,7 @@ class LoginForm {
 
     initGallery(data) {
         this.gallery.initComponent(data);
-        if(!this.gallery.isReady) {
+        if(!this.gallery.isReady()) {
             this.gallery.initListeners();
         }
     }

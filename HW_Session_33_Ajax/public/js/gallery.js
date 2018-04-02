@@ -16,7 +16,9 @@ class BaseGallery {
         this.ready = false;
 
     }
-
+    isReady(){
+        return this.ready;
+    }
     initComponent(){
         fetch("http://localhost:3000/cars").then(responce => responce.json())
             .then(data => {
