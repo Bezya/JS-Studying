@@ -20,22 +20,17 @@ class BaseGallery {
     }
 
     initComponent(){
-        getServerData().then(()=>{
-            this.buildGallery();
-            this.getShowedImgData();
-            this.checkSorting();
-            this.ready = true;
-        })
-    }
-
-    getServerData(){
-        return fetch("http://localhost:3000/cars").then(responce => responce.json())
+        fetch("http://localhost:3000/cars").then(responce => responce.json())
             .then(data => {
-                this.saveServerData(data);
+                this.saveData(data);
+                this.buildGallery();
+                //this.getShowedImgData();
+                //this.checkSorting();
+                this.ready = true;
             })
-    }
+        }
 
-    saveServerData(data) {
+    saveData(data) {
         this.imgData = data;
     }
 
@@ -118,7 +113,7 @@ class BaseGallery {
     }
 
     setNumberOfImg() {
-        this.counter.innerHTML = this.showedImgData.length;
+        this.counter.innerHTML = this.imgData.length;
     }
 
     checkImgDataEnd(arr) {
