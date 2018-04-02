@@ -14,23 +14,28 @@ class BaseGallery {
         this.imgData = null;
         this.showedImgData = [];
         this.ready = false;
-
     }
     isReady(){
         return this.ready;
     }
+
     initComponent(){
-        fetch("http://localhost:3000/cars").then(responce => responce.json())
+        getServerData().then(()=>{
+            this.buildGallery();
+            this.getShowedImgData();
+            this.checkSorting();
+            this.ready = true;
+        })
+    }
+
+    getServerData(){
+        return fetch("http://localhost:3000/cars").then(responce => responce.json())
             .then(data => {
-                this.saveData(data);
-                this.buildGallery();
-                this.getShowedImgData();
-                this.checkSorting();
-                this.ready = true;
+                this.saveServerData(data);
             })
     }
 
-    saveData(data) {
+    saveServerData(data) {
         this.imgData = data;
     }
 
