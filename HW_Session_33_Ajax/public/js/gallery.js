@@ -15,7 +15,7 @@ class BaseGallery {
         this.imgData = null;
         this.showedImgData = [];
         this.ready = false;
-        this.url = "http://localhost:3000/cars";
+        this.url = "http://localhost:3000/cars/";
     }
     isReady() {
         return this.ready;
@@ -59,27 +59,27 @@ class BaseGallery {
 
     requestMethod(method) {
         let requestMethod = {
-            headers: {
-                'Content-type': 'application/json; charset=utf-8'
-            },
+            headers: { 'Content-type': 'application/json; charset=utf-8' },
             method: method,
             body: this.bodyRequest()
         };
         return requestMethod;
     }
 
-    /*fetch(url, method){
-        return fetch(url, method).then(response =>{
-            if (response.status == 201){
-                return response.json();
+    fetch(url, method) {
+        return fetch(url, method).then(response => {
+            if (!response.status == 201) {
+                throw new Error(response.status);
             }
-            throw new Error(response.status);
+            return response.json();
         })
-    }*/
+    }
 
     createItem(e) {
         e.preventDefault();
         let requestMethod = this.requestMethod("post");
+
+        //this.fetch(this.url, requestMethod)
         return fetch(this.url, requestMethod).then(response => {
                 if (response.status == 201) {
                     return response.json();
@@ -93,13 +93,11 @@ class BaseGallery {
     deleteItem(e) {
         e.preventDefault();
         let id = e.target.getAttribute("data-id");
-        let options = {
-            headers: {
-                'Content-type': 'application/json; charset=utf-8'
-            },
+        let requestMethod = {
+            headers: { 'Content-type': 'application/json; charset=utf-8' },
             method: 'delete',
         };
-        fetch("http://localhost:3000/cars" + id, options).then(response => response.json())
+        this.fetch(this.url + id, requestMethod)
             .then(() => this.initComponent())
             .catch(e => e);
     }
@@ -109,12 +107,7 @@ class BaseGallery {
         let id = e.target.getAttribute("data-id");
         let requestMethod = this.requestMethod("put");
 
-        return fetch("http://localhost:3000/cars" + id, requestMethod).then(response => {
-                if (response.status == 201) {
-                    return response.json();
-                }
-                throw new Error("Error");
-            })
+        this.fetch(this.url + id, requestMethod)
             .then(() => this.initComponent())
             .catch(e => e);
     }
@@ -136,6 +129,7 @@ class BaseGallery {
             let imgForUpdate = this.imgData.find((item) => item.id == id);
             this.fillFields(imgForUpdate);
             this.editCallBack();
+            //this.updateItem(e);
         }
     }
 
@@ -201,7 +195,7 @@ class BaseGallery {
         this.updateLocalImgData();
     }*/
 
-    sortingHandler(type, event) {
+    /*sortingHandler(type, event) {
         event.preventDefault();
         event.currentTarget.querySelector("button").innerHTML = event.target.innerText;
         let sortingType = event.target.getAttribute("sorting-type");
@@ -227,5 +221,5 @@ class BaseGallery {
                 'Сначала новые' : 'Сначала старые';
             this.applySortingMethod(typeName);
         }
-    }
+    }*/
 }
