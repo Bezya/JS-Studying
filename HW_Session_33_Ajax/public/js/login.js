@@ -37,8 +37,8 @@ class LoginForm {
         this.navAboutUser.addEventListener("click", this.showAndInitUserInfoForm.bind(this));
         this.btnExit.addEventListener("click", this.logOut.bind(this));
         this.btnCreateItem.addEventListener("click", this.showCreateAndUpdateFom.bind(this));
-        //this.btnCreateAndUpdate.addEventListener("click", this.createGalleryItem.bind(this));
-        this.btnCreateAndUpdate.addEventListener("click", this.createOrUpdateGalleryItem.bind(this));
+        this.btnCreateAndUpdate.addEventListener("click", this.createGalleryItem.bind(this));
+        this.btnCreateAndUpdate.addEventListener("click", this.updateGalleryItem.bind(this));
     }
 
     initGallery(data) {
@@ -48,14 +48,7 @@ class LoginForm {
         }
     }
     editCallBack() {
-        return this.showCreateAndUpdateFom();
-    }
-
-    createOrUpdateGalleryItem(e) {
-        if (editCallBack()) {
-            updateGalleryItem(e);
-        }
-        createGalleryItem(e);
+        this.showCreateAndUpdateFom();
     }
 
     createGalleryItem(e) {
