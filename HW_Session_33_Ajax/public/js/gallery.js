@@ -15,19 +15,26 @@ class BaseGallery {
         this.imgData = null;
         this.showedImgData = [];
         this.ready = false;
+        this.url = "http://localhost:3000/cars";
     }
-    isReady(){
+    isReady() {
         return this.ready;
     }
 
-    initComponent(){
-        fetch("http://localhost:3000/cars").then(responce => responce.json())
-            .then(data => {
+    initComponent() {
+        let dataResponse = this.dataResponse();
+        if (dataResponse) {
+            dataResponse.then(data => {
                 this.saveData(data);
                 this.buildGallery();
                 this.ready = true;
             })
         }
+    }
+
+    dataResponse() {
+        return fetch(this.url).then(responce => responce.json())
+    }
 
     saveData(data) {
         this.imgData = data;
@@ -41,7 +48,7 @@ class BaseGallery {
         this.gallery.addEventListener("click", this.deleteItem.bind(this));
     }
 
-    bodyRequest(){
+    bodyRequest() {
         return JSON.stringify({
             url: this.createUrl.value,
             name: this.createName.value,
@@ -50,26 +57,40 @@ class BaseGallery {
         })
     }
 
-    createItem(e){
-        e.preventDefault();
-        let options = {
+    requestMethod(method) {
+        let requestMethod = {
             headers: {
                 'Content-type': 'application/json; charset=utf-8'
             },
-            method: 'post',
+            method: method,
             body: this.bodyRequest()
         };
-        return fetch("http://localhost:3000/cars", options).then(response =>{
+        return requestMethod;
+    }
+
+    /*fetch(url, method){
+        return fetch(url, method).then(response =>{
             if (response.status == 201){
                 return response.json();
             }
-            throw new Error("Error");
+            throw new Error(response.status);
         })
-            .then(()=> this.initComponent())
+    }*/
+
+    createItem(e) {
+        e.preventDefault();
+        let requestMethod = this.requestMethod("post");
+        return fetch(this.url, requestMethod).then(response => {
+                if (response.status == 201) {
+                    return response.json();
+                }
+                throw new Error(response.status);
+            })
+            .then(() => this.initComponent())
             .catch(e => e);
     }
 
-    deleteItem(e){
+    deleteItem(e) {
         e.preventDefault();
         let id = e.target.getAttribute("data-id");
         let options = {
@@ -78,41 +99,35 @@ class BaseGallery {
             },
             method: 'delete',
         };
-        fetch("http://localhost:3000/cars/"+ id, options).then(response => response.json())
-            .then(()=> this.initComponent())
+        fetch("http://localhost:3000/cars" + id, options).then(response => response.json())
+            .then(() => this.initComponent())
             .catch(e => e);
     }
 
-    updateItem(e){
+    updateItem(e) {
         e.preventDefault();
         let id = e.target.getAttribute("data-id");
-        let options = {
-            headers: {
-                'Content-type': 'application/json; charset=utf-8'
-            },
-            method: 'put',
-            body: this.bodyRequest()
-        };
+        let requestMethod = this.requestMethod("put");
 
-        return fetch("http://localhost:3000/cars/"+ id, options).then(response =>{
-            if (response.status == 201){
-                return response.json();
-            }
-            throw new Error("Error");
-        })
-            .then(()=> this.initComponent())
+        return fetch("http://localhost:3000/cars" + id, requestMethod).then(response => {
+                if (response.status == 201) {
+                    return response.json();
+                }
+                throw new Error("Error");
+            })
+            .then(() => this.initComponent())
             .catch(e => e);
     }
 
-    fillFields(item){
+    fillFields(item) {
         this.createUrl.value = item.url;
         this.createName.value = item.name;
         this.createDescription.value = item.description;
     }
 
-    imgEdit(e){
+    imgEdit(e) {
         e.preventDefault();
-        if(e.target.classList.contains('edit')){
+        if (e.target.classList.contains('edit')) {
             let element = e.target;
             while (!element.classList.contains('gallery-item')) {
                 element = element.parentNode;
@@ -127,7 +142,7 @@ class BaseGallery {
     buildGallery() {
         let result = '';
         this.imgData.forEach(item => {
-        result += galleryService.galleryTemplate(item);
+            result += galleryService.galleryTemplate(item);
         });
         this.gallery.innerHTML = result;
     }
@@ -214,4 +229,3 @@ class BaseGallery {
         }
     }
 }
-
