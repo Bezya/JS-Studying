@@ -38,31 +38,30 @@ class LoginForm {
         this.btnExit.addEventListener("click", this.logOut.bind(this));
         this.btnCreateItem.addEventListener("click", this.showCreateAndUpdateFom.bind(this));
         this.btnCreateAndUpdate.addEventListener("click", this.createGalleryItem.bind(this));
-        //this.btnCreateAndUpdate.addEventListener("click", this.updateGalleryItem.bind(this));
+        this.btnCreateAndUpdate.addEventListener("click", this.updateGalleryItem.bind(this));
     }
 
     initGallery(data) {
-        if(!this.gallery.isReady()) {
+        if (!this.gallery.isReady()) {
             this.gallery.initComponent(data);
             this.gallery.initListeners();
         }
     }
-
-    createGalleryItem(e){
-        this.gallery.createItem(e).then(()=>{
-            this.showGalleryAndNav();
-        })
-    }
-
-    editCallBack(){
+    editCallBack() {
         this.showCreateAndUpdateFom();
     }
 
-    /*updateGalleryItem(e){
-        this.gallery.updateItem(e).then(()=>{
+    createGalleryItem(e) {
+        this.gallery.createItem(e).then(() => {
             this.showGalleryAndNav();
         })
-    }*/
+    }
+
+    updateGalleryItem(e) {
+        this.gallery.updateItem(e).then(() => {
+            this.showGalleryAndNav();
+        })
+    }
 
     showGalleryAndNav() {
         service.hideElement(this.loginForm);
@@ -78,7 +77,7 @@ class LoginForm {
         this.userInfo.initComponent();
     }
 
-    showCreateAndUpdateFom(){
+    showCreateAndUpdateFom() {
         service.hideElement(this.userInfoForm);
         service.hideElement(this.galleryForm);
         service.showElement(this.createAndUpdateForm);
@@ -104,21 +103,21 @@ class LoginForm {
 
     logAndPassValidation() {
         let val = loginService.validation(this.inputLogin.value, this.inutPassword.value);
-            if(val){
-                val.then(res => {
-                    if (res) {
-                        service.hideElement(this.alert);
-                        localStorage.setItem('login', this.inputLogin.value);
-                        localStorage.setItem('password', this.inutPassword.value);
-                        this.showGalleryAndNav();
-                        this.initGallery();
-                    } else {
-                        this.alertHandler(this.alert)
-                    }
-                })
-            } else {
+        if (val) {
+            val.then(res => {
+                if (res) {
+                    service.hideElement(this.alert);
+                    localStorage.setItem('login', this.inputLogin.value);
+                    localStorage.setItem('password', this.inutPassword.value);
+                    this.showGalleryAndNav();
+                    this.initGallery();
+                } else {
                     this.alertHandler(this.alert)
-            }
+                }
+            })
+        } else {
+            this.alertHandler(this.alert)
+        }
     }
 
     singIn(e) {
