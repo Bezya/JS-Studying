@@ -20,8 +20,6 @@
             return false;
         }
 
-        getErrorMsg() { return this.errorMsg };
-
         isAnyData(login, pass){return login && pass ? true : this.setErrorMsg(0)};
 
         isValidLogAndPass(login, pass){
@@ -70,9 +68,7 @@
                             reject(this.errorMsg);
                         }
                     })
-                } else {
-                    reject(this.errorMsg);
-                }
+                } else {reject(this.errorMsg)}
             })
         }
 

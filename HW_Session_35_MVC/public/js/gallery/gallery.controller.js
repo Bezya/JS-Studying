@@ -4,7 +4,6 @@
         constructor(galleryModel, galleryView) {
             this.galleryModel = galleryModel;
             this.galleryView = galleryView;
-            this.url = "http://localhost:3000/cars/";
         }
 
         bindEvents() {

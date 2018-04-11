@@ -1,14 +1,11 @@
+
 function Service() {
 
-    this.hideElement = function(element) { //скрывает элемент
-        //element.classList.remove('show');
-        element.classList.add('hide');
-
-    };
+    this.hideElement = function(element) {element.classList.add('hide')}; //скрывает элемент
 
     this.showElement = function(element) { element.classList.remove('hide') }; //показывает элемент
 
-    this.showHideElement = function(showEl, hideEl) {
+    this.showHideElement = function(showEl, hideEl) {//показывает и скрывает
         showEl.classList.add('show');
         hideEl.classList.remove('show');
     };
@@ -40,5 +37,4 @@ function Service() {
         }
     };
 }
-
 window.service = new Service();

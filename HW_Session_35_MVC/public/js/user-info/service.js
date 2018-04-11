@@ -9,5 +9,4 @@ function UserService() {
     };
 
     this.showPassword = element => element.type === 'password' ? element.type = 'text' : element.type = 'password';
-
 }

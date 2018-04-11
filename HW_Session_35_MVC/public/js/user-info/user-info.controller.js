@@ -6,6 +6,7 @@
             this.infoView = infoView;
         }
 
+        //bindEvents() = this.infoView.initListeners();
         /*bindEvents() {
             this.infoView.DOMElements.btnShowPass.addEventListener("click", () => {
                 this.infoView.showPassword();

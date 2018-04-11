@@ -21,35 +21,28 @@
             return requestMethod;
         }
 
-        requestBody(obj) {
-            return JSON.stringify(obj);
-        }
-
+        requestBody(obj) {return JSON.stringify(obj)}
 
         createItem(method, obj) { //метод для создания элемента галереи
-            return fetch(this.getUrl, this.requestMethod(method, obj)).then(response => {
-                if (response.status == 201) {
-                    return response.json();
-                }
-                throw new Error(response.status);
+            return fetch(this.getUrl, this.requestMethod(method, obj))
+                .then(response => {
+                    if (!response.status == 201) {
+                        throw new Error(response.status);
+                    }return response.json();
             });
-
             return new Promise(
                 function(resolve, reject) {
                     resolve(obj);
-                }
-            );
-
+                })
         }
 
         updateItem(method, obj, id) { //метод для обновения элемента галереи
-            return fetch(this.getUrl + id, this.requestMethod(method, obj)).then(response => {
-                if (!response.status == 201) {
-                    throw new Error(response.status);
-                }
-                return response.json();
-            });
-
+            return fetch(this.getUrl + id, this.requestMethod(method, obj))
+                .then(response => {
+                    if (!response.status == 201) {
+                        throw new Error(response.status);
+                    }return response.json();
+            })
         }
 
         deleteItem(id) { //метод для удаления элемента галереи
@@ -60,8 +53,7 @@
             return fetch(this.getUrl + id, requestMethod).then(response => {
                 if (!response.status == 201) {
                     throw new Error(response.status);
-                }
-                return response.json();
+                }return response.json();
             })
         }
 

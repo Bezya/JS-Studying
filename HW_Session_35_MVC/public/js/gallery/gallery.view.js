@@ -150,8 +150,7 @@
                 this.btnAdd.classList.add("disabled");
                 $('#jsModal').modal('show');
                 return true
-            }
-            return false;
+            }return false;
         }
 
         addOneImg() {
@@ -161,8 +160,6 @@
             this.setNumberOfImg();
             this.updateLocalImgData();
         }*/
-
-
     }
 
     window.app = window.app || {};
