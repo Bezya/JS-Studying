@@ -40,10 +40,6 @@
                 }
             });
 
-            this.galleryView.DOMElements.btnExit.addEventListener("click", () => {
-                this.galleryModel.logOut();
-            });
-
             this.galleryView.DOMElements.nameDropdown.addEventListener("click", (e) => {
                 let sortingType = this.galleryView.sortingHandler('Name', e);
                 this.galleryModel.setDataToLS('sortingTypeName', sortingType)

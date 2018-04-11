@@ -7,7 +7,9 @@
                 inputPassword: document.querySelector('#inputPassword'),
                 loginForm: document.querySelector('.form-signin'),
                 alert: document.querySelector('.alert'),
-                btnSingIn: document.querySelector('#btn-sign')
+                btnSingIn: document.querySelector('#btn-sign'),
+
+                btnExit: document.querySelector('#btn-exit'),
             }
         }
 

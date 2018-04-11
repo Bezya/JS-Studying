@@ -18,8 +18,6 @@
                 createName: document.querySelector("#createName"),
                 createDescription: document.querySelector("#createDescription"),
                 btnReturn: document.querySelector("#btn-return"),
-
-                btnExit: document.querySelector('#btn-exit'),
             };
 
             this.isUpdate = null;
@@ -38,7 +36,7 @@
 
         initListeners() {
             //this.DOMElements.btnAdd.addEventListener("click", this.addOneImg.bind(this));
-            this.DOMElements.gallery.addEventListener("click", this.getFormAndItemForEdit.bind(this));
+            this.DOMElements.gallery.addEventListener("click", this.getItemForEdit.bind(this));
             this.DOMElements.btnCreateItem.addEventListener("click", this.getFormForCreate.bind(this));
             this.DOMElements.btnReturn.addEventListener("click", this.showGallery.bind(this));
         }
@@ -78,7 +76,7 @@
             }
         }
 
-        getFormAndItemForEdit(e) {
+        getItemForEdit(e) {
             e.preventDefault();
             if (e.target.classList.contains('edit')) {
                 let element = e.target;

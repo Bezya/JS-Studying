@@ -16,6 +16,10 @@
                     rej => this.loginView.alertHandler(rej)
                 );
             });
+
+            this.loginView.DOMElements.btnExit.addEventListener("click", () => {
+                this.loginModel.logOut();
+            });
         }
 
         checkSession() {
