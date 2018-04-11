@@ -16,9 +16,8 @@ class BaseGallery {
         this.showedImgData = [];
         this.ready = false;
         this.url = "http://localhost:3000/cars/";
-        this.url = "http://localhost:3000/cars";
     }
-    isReady(){
+    isReady() {
         return this.ready;
     }
 
@@ -29,23 +28,11 @@ class BaseGallery {
                 this.saveData(data);
                 this.buildGallery();
                 this.ready = true;
-    initComponent(){
-        let dataResponse = this.dataResponse();
-        if(dataResponse){
-            dataResponse.then(data => {
-                        this.saveData(data);
-                        this.buildGallery();
-                        this.ready = true;
             })
         }
     }
 
     dataResponse() {
-        return fetch(this.url).then(responce => responce.json())
-    }
-    }
-
-    dataResponse(){
         return fetch(this.url).then(responce => responce.json())
     }
 
@@ -61,7 +48,7 @@ class BaseGallery {
         this.gallery.addEventListener("click", this.deleteItem.bind(this));
     }
 
-    bodyRequest(){
+    bodyRequest() {
         return JSON.stringify({
             url: this.createUrl.value,
             name: this.createName.value,
@@ -70,69 +57,70 @@ class BaseGallery {
         })
     }
 
-    createItem(e){
-        e.preventDefault();
-        let options = {
-            headers: {
-                'Content-type': 'application/json; charset=utf-8'
-            },
-            method: 'post',
+    requestMethod(method) {
+        let requestMethod = {
+            headers: { 'Content-type': 'application/json; charset=utf-8' },
+            method: method,
             body: this.bodyRequest()
         };
-        return fetch("http://localhost:3000/cars", options).then(response =>{
-            if (response.status == 201){
+        return requestMethod;
+    }
+
+    fetch(url, method) {
+        return fetch(url, method).then(response => {
+            if (!response.status == 201) {
+                throw new Error(response.status);
+            }
+            return response.json();
+        })
+    }
+
+    createItem(e) {
+        e.preventDefault();
+        let requestMethod = this.requestMethod("post");
+
+        //this.fetch(this.url, requestMethod)
+        return fetch(this.url, requestMethod).then(response => {
+            if (response.status == 201) {
                 return response.json();
             }
-            throw new Error("Error");
+            throw new Error(response.status);
         })
-            .then(()=> this.initComponent())
+            .then(() => this.initComponent())
             .catch(e => e);
     }
 
-    deleteItem(e){
+    deleteItem(e) {
         e.preventDefault();
         let id = e.target.getAttribute("data-id");
-        let options = {
-            headers: {
-                'Content-type': 'application/json; charset=utf-8'
-            },
+        let requestMethod = {
+            headers: { 'Content-type': 'application/json; charset=utf-8' },
             method: 'delete',
         };
-        fetch("http://localhost:3000/cars/"+ id, options).then(response => response.json())
-            .then(()=> this.initComponent())
+        this.fetch(this.url + id, requestMethod)
+            .then(() => this.initComponent())
             .catch(e => e);
     }
 
-    updateItem(e){
+    updateItem(e) {
         e.preventDefault();
         let id = e.target.getAttribute("data-id");
-        let options = {
-            headers: {
-                'Content-type': 'application/json; charset=utf-8'
-            },
-            method: 'put',
-            body: this.bodyRequest()
-        };
+        let requestMethod = this.requestMethod("put");
 
-        return fetch("http://localhost:3000/cars/"+ id, options).then(response =>{
-            if (response.status == 201){
-                return response.json();
-            }
-            throw new Error("Error");
-        })
-            .then(()=> this.initComponent())
+        this.fetch(this.url + id, requestMethod)
+            .then(() => this.initComponent())
             .catch(e => e);
     }
 
-    fillFields(item){
+    fillFields(item) {
         this.createUrl.value = item.url;
         this.createName.value = item.name;
         this.createDescription.value = item.description;
     }
 
-    imgEdit(e){
+    imgEdit(e) {
         e.preventDefault();
-        if(e.target.classList.contains('edit')){
+        if (e.target.classList.contains('edit')) {
             let element = e.target;
             while (!element.classList.contains('gallery-item')) {
                 element = element.parentNode;
@@ -141,13 +129,14 @@ class BaseGallery {
             let imgForUpdate = this.imgData.find((item) => item.id == id);
             this.fillFields(imgForUpdate);
             this.editCallBack();
+            //this.updateItem(e);
         }
     }
 
     buildGallery() {
         let result = '';
         this.imgData.forEach(item => {
-        result += galleryService.galleryTemplate(item);
+            result += galleryService.galleryTemplate(item);
         });
         this.gallery.innerHTML = result;
     }
@@ -206,7 +195,7 @@ class BaseGallery {
         this.updateLocalImgData();
     }*/
 
-    sortingHandler(type, event) {
+    /*sortingHandler(type, event) {
         event.preventDefault();
         event.currentTarget.querySelector("button").innerHTML = event.target.innerText;
         let sortingType = event.target.getAttribute("sorting-type");
@@ -232,6 +221,5 @@ class BaseGallery {
                 'Сначала новые' : 'Сначала старые';
             this.applySortingMethod(typeName);
         }
-    }
+    }*/
 }
-
