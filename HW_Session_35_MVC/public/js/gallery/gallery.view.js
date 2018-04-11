@@ -17,10 +17,8 @@
                 createUrl: document.querySelector("#createUrl"),
                 createName: document.querySelector("#createName"),
                 createDescription: document.querySelector("#createDescription"),
-                btnReturn:  document.querySelector("#btn-return"),
+                btnReturn: document.querySelector("#btn-return"),
 
-                navGallary: document.querySelector('#nav-gallery'),
-                navAboutUser: document.querySelector('#nav-user'),
                 btnExit: document.querySelector('#btn-exit'),
             };
 
@@ -40,8 +38,8 @@
 
         initListeners() {
             //this.DOMElements.btnAdd.addEventListener("click", this.addOneImg.bind(this));
-            this.DOMElements.gallery.addEventListener("click", this.getFormForEdit.bind(this));
-            this.DOMElements.btnCreateItem.addEventListener("click", this. getFormForCreate.bind(this));
+            this.DOMElements.gallery.addEventListener("click", this.getFormAndItemForEdit.bind(this));
+            this.DOMElements.btnCreateItem.addEventListener("click", this.getFormForCreate.bind(this));
             this.DOMElements.btnReturn.addEventListener("click", this.showGallery.bind(this));
         }
 
@@ -54,16 +52,16 @@
             }
         }
 
-        getFormForCreate(){
+        getFormForCreate() {
             this.isUpdate = null;
             this.showCreateAndUpdateFom();
         }
 
-        showCreateAndUpdateFom(){
+        showCreateAndUpdateFom() {
             service.showHideElement(this.DOMElements.createAndUpdateForm, this.DOMElements.galleryForm);
         }
 
-        showGallery(){
+        showGallery() {
             service.showHideElement(this.DOMElements.galleryForm, this.DOMElements.createAndUpdateForm);
             this.buildGallery();
         }
@@ -74,13 +72,13 @@
             this.DOMElements.createDescription.value = item.description;
         }
 
-        deleteItem(e) {
+        getItemForDelete(e) {
             if (e.target.classList.contains('btn-danger')) {
                 return e.target.getAttribute('data-id');
             }
         }
 
-        getFormForEdit(e) {
+        getFormAndItemForEdit(e) {
             e.preventDefault();
             if (e.target.classList.contains('edit')) {
                 let element = e.target;
@@ -103,27 +101,6 @@
             });
             this.DOMElements.gallery.innerHTML = result;
         }
-
-        /*setNumberOfImg() {
-            this.counter.innerHTML = this.imgData.length;
-        }
-
-        checkImgDataEnd(arr) {
-            if (arr.length === 0) {
-                this.btnAdd.classList.add("disabled");
-                $('#jsModal').modal('show');
-                return true
-            }
-            return false;
-        }
-
-        addOneImg() {
-            if (this.checkImgDataEnd(this.imgData)) return;
-            this.showedImgData.push(this.imgData.shift());
-            this.gallery.innerHTML += galleryService.galleryTemplate(this.showedImgData[this.showedImgData.length - 1]);
-            this.setNumberOfImg();
-            this.updateLocalImgData();
-        }*/
 
         sortingHandler(type, event) {
             event.preventDefault();
@@ -156,6 +133,27 @@
                 this.applySortingMethod(typeDate);
             }
         }
+
+        /*setNumberOfImg() {
+            this.counter.innerHTML = this.imgData.length;
+        }
+
+        checkImgDataEnd(arr) {
+            if (arr.length === 0) {
+                this.btnAdd.classList.add("disabled");
+                $('#jsModal').modal('show');
+                return true
+            }
+            return false;
+        }
+
+        addOneImg() {
+            if (this.checkImgDataEnd(this.imgData)) return;
+            this.showedImgData.push(this.imgData.shift());
+            this.gallery.innerHTML += galleryService.galleryTemplate(this.showedImgData[this.showedImgData.length - 1]);
+            this.setNumberOfImg();
+            this.updateLocalImgData();
+        }*/
 
 
     }

@@ -7,7 +7,7 @@
                 inputPassword: document.querySelector('#inputPassword'),
                 loginForm: document.querySelector('.form-signin'),
                 alert: document.querySelector('.alert'),
-                btnSingIn: document.querySelector('#btn-sign'),
+                btnSingIn: document.querySelector('#btn-sign')
             }
         }
 
@@ -16,10 +16,10 @@
             this.initListeners();
         }
 
-        initListeners() {
+        /*initListeners() {
             this.DOMElements.btnSingIn.addEventListener("click", this.singIn.bind(this));
-            //this.DOMElements.btnExit.addEventListener("click", this.logOut.bind(this));
-        }
+            this.DOMElements.btnExit.addEventListener("click", this.logOut.bind(this));
+        }*/
 
         alertHandler(msg) {
             const alert = this.DOMElements.alert;

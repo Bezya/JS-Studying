@@ -76,18 +76,10 @@
             })
         }
 
-        /*checkSession() {
+        checkSession() {
             let log = localStorage.getItem('login');
             let pass = localStorage.getItem('password');
             return !!log && !!pass
-        }*/
-
-        setDataToLS(name, element){
-            return localStorage.setItem(name, element);
-        }
-
-        getDataFromLS(name, element){
-            return localStorage.getItem(name, element);
         }
 
         removeDataFromLS(name){

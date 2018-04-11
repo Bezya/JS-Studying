@@ -11,53 +11,54 @@
     let controllers = {};
     let routeConfig = {
         "": {
-            show:()=>{
-            service.showHideViews([login],[main,info,nav, create]);
+            show: () => {
+                service.showHideViews([login], [main, info, nav, create]);
             },
-            init:()=>{
-              let url = "http://localhost:3000/login";
-              let observer = new window.app.Observer;
-              let loginModel = new window.app.LoginModel(url);
-              let loginView = new window.app.LoginView;
-              let loginController = new window.app.LoginController(loginModel, loginView, observer);
-              loginController.init();
+            init: () => {
+                let url = "http://localhost:3000/login";
+                //let observer = new window.app.Observer;
+                let loginModel = new window.app.LoginModel(url);
+                let loginView = new window.app.LoginView;
+                let loginController = new window.app.LoginController(loginModel, loginView);
+                loginController.init();
             }
         },
 
-        "main":{
-            show:()=>{
-                service.showHideViews([main, nav],[login,info, create]);
+        "main": {
+            show: () => {
+                service.showHideViews([main, nav], [login, info, create]);
             },
-            init:()=>{
+            init: () => {
                 let url = "http://localhost:3000/cars/";
-                let observer = new window.app.Observer;
+                //let observer = new window.app.Observer;
                 let galleryModel = new window.app.GalleryModel(url);
                 let galleryView = new window.app.BaseGallery;
-                let galleryController = new window.app.GalleryController(galleryModel, galleryView, observer);
+                let galleryController = new window.app.GalleryController(galleryModel, galleryView);
                 galleryController.init();
             }
         },
 
-          "info":{
-              show:()=>{
-                  service.showHideViews([info, nav],[main,login, create]);
-              },
-              init:()=>{
-                  let observer = new window.app.Observer;
-                  let infoModel = new window.app.InfoModel;
-                  let infoView = new window.app.UserInfoView;
-                  new window.app.InfoController(infoModel, infoView, observer);
-              }
-          },
+        "info": {
+            show: () => {
+                service.showHideViews([info, nav], [main, login, create]);
+            },
+            init: () => {
+                //let observer = new window.app.Observer;
+                let infoModel = new window.app.InfoModel;
+                let infoView = new window.app.UserInfoView;
+                let infoController = new window.app.InfoController(infoModel, infoView);
+                infoController.init();
+            }
+        },
     };
 
-    function updateRoute(){
+    function updateRoute() {
         let routeName = document.location.hash.replace(/^#/, '');
-        if(controllers[routeName]){
+        if (controllers[routeName]) {
             controllers[routeName].show();
-        }else{
+        } else {
             let route = routeConfig[routeName];
-            if(route){
+            if (route) {
                 route.init();
                 route.show();
                 controllers[routeName] = route;
@@ -66,6 +67,6 @@
     }
 
     window.app = window.app || {};
-    window.app.Router = {updateRoute: updateRoute};
+    window.app.Router = { updateRoute: updateRoute };
 
 }());

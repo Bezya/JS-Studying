@@ -1,10 +1,9 @@
 (function() {
 
     class LoginController {
-        constructor(loginModel, loginView, observer) {
+        constructor(loginModel, loginView) {
             this.loginModel = loginModel;
             this.loginView = loginView;
-            this.observer = observer;
             this.url = "http://localhost:3000/login/"
         }
 
@@ -13,18 +12,28 @@
                 e.preventDefault();
                 let data = this.loginView.getLogAndPass();
                 this.loginModel.logAndPassValidation(data).then(
-                    res => window.location.href ='/#main',
+                    res => window.location.href = '/#main',
                     rej => this.loginView.alertHandler(rej)
                 );
             });
         }
 
-        init(){
+        checkSession() {
+            let logIn = this.loginModel.checkSession();
+            if (logIn) {
+                window.location.href = '/#main';
+            } else {
+                window.location.href = '/#';
+            }
+        }
+
+        init() {
+            this.checkSession();
             this.bindEvents();
         }
     }
 
     window.app = window.app || {};
     window.app.LoginController = LoginController;
-    
+
 })();

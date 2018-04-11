@@ -2,7 +2,7 @@
 
     class GalleryModel {
         constructor(url) {
-            this.getUrl= url;
+            this.getUrl = url;
         }
 
         getData() {
@@ -65,24 +65,17 @@
             })
         }
 
-        setDataToLS(name, element){
+        setDataToLS(name, element) {
             localStorage.setItem(name, element);
         }
 
-        getDataFromLS(name, element){
-           return localStorage.getItem(name, element);
+        getDataFromLS(name, element) {
+            return localStorage.getItem(name, element);
         }
 
-        removeDataFromLS(name){
+        removeDataFromLS(name) {
             localStorage.removeItem(name);
         }
-
-        logOut(){
-            localStorage.removeItem('login');
-            localStorage.removeItem('password');
-        }
-
-
     }
 
     window.app = window.app || {};

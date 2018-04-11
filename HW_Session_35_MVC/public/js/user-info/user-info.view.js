@@ -6,7 +6,6 @@
         constructor() {
             this.DOMElements = {
                 userInfoForm: document.querySelector('.userInfo-form'),
-                galleryForm: document.querySelector('.gallery-form'),
                 userLogin: document.querySelector('#userLogin'),
                 userPassword: document.querySelector('#userPassword'),
                 btnShowPass: document.querySelector('#btn-showPass'),
@@ -21,7 +20,7 @@
 
         backToGallery() {
             service.hideElement(this.DOMElements.userInfoForm);
-            service.showElement(this.DOMElements.galleryForm);
+            window.location.href = '/#main';
         }
 
         showPassword() {

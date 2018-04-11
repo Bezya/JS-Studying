@@ -1,24 +1,28 @@
 function Service() {
 
-    this.hideElement = function(element) { element.classList.add('hide') }; //скрывает элемент
+    this.hideElement = function(element) { //скрывает элемент
+        //element.classList.remove('show');
+        element.classList.add('hide');
+
+    };
 
     this.showElement = function(element) { element.classList.remove('hide') }; //показывает элемент
 
-    this.showHideElement = function(showEl, hideEl){
+    this.showHideElement = function(showEl, hideEl) {
         showEl.classList.add('show');
         hideEl.classList.remove('show');
     };
 
-    this.showHideViews = function(showEl, hideEl){
-        showEl.forEach((item)=>{
+    this.showHideViews = function(showEl, hideEl) { // показывает/скрывает (массивы элементов)
+        showEl.forEach((item) => {
             item.classList.add('show')
         });
-        hideEl.forEach((item)=>{
+        hideEl.forEach((item) => {
             item.classList.remove('show')
         });
     };
 
-    this.hideAllView = function(viewsEl){
+    this.hideAllView = function(viewsEl) { // скрывает массив элементов
         viewsEl.forEach(element => {
             element.classList.remove("show");
         });

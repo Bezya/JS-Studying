@@ -2,8 +2,8 @@
 
     class InfoModel {
         constructor() {
-            this.login = () => localStorage.getItem('login');
-            this.password = () => localStorage.getItem('password');
+            this.login = localStorage.getItem('login');
+            this.password = localStorage.getItem('password');
         }
     }
 

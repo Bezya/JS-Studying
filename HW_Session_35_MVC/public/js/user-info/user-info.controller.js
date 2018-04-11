@@ -1,32 +1,33 @@
 (function() {
 
     class InfoController {
-        constructor(infoModel, infoView, observer) {
+        constructor(infoModel, infoView) {
             this.infoModel = infoModel;
             this.infoView = infoView;
-            this.observer = observer;
         }
 
         /*bindEvents() {
-            this.infoView.DOMElements.btnShowPass.addEventListener("click", ()=> {
+            this.infoView.DOMElements.btnShowPass.addEventListener("click", () => {
                 this.infoView.showPassword();
             });
 
-            this.infoView.DOMElements.btnGoBack.addEventListener("click", ()=> {
+            this.infoView.DOMElements.btnGoBack.addEventListener("click", () => {
                 this.infoView.backToGallery();
+                window.location.href = '/#main';
             });
         }*/
 
-        fillInfoFields(){
+        fillInfoFields() {
             let login = this.infoModel.login;
             let password = this.infoModel.password;
             console.log(login);
             this.infoView.fillFields(login, password)
         }
 
-        init(){
+        init() {
             this.fillInfoFields();
             this.infoView.initListeners();
+            //this.bindEvents();
         }
     }
 
