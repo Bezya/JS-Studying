@@ -68,7 +68,17 @@
             this.galleryView.checkSorting(typeName, typeDate);
         }
 
+        checkSession() {
+            let logIn = this.galleryModel.checkSession();
+            if (logIn) {
+                window.location.href = '/#main';
+            } else {
+                window.location.href = '/#';
+            }
+        }
+
         init() {
+            this.checkSession();
             this.galleryView.initListeners();
             this.rebuildGallery();
             this.bindEvents();

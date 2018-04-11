@@ -56,6 +56,7 @@
         }
 
         showCreateAndUpdateFom() {
+            this.setCorrectBtnName();
             service.showHideElement(this.DOMElements.createAndUpdateForm, this.DOMElements.galleryForm);
         }
 
@@ -86,13 +87,21 @@
                 let id = element.getAttribute('data-id');
                 let imgForUpdate = this.imgData.find((item) => item.id == id);
                 this.fillFields(imgForUpdate);
-                this.showCreateAndUpdateFom();
                 this.isUpdate = id;
+                this.showCreateAndUpdateFom();
                 return imgForUpdate;
             }
         }
 
-        buildGallery() {
+        setCorrectBtnName(){
+            if (this.isUpdate) {
+                this.DOMElements.btnCreateAndUpdate.innerHTML = 'Изменить элемент галереи';
+            } else {
+                this.DOMElements.btnCreateAndUpdate.innerHTML = 'Создать элемент галереи'
+            }
+        }
+
+        buildGallery(){
             let result = '';
             this.imgData.forEach(item => {
                 result += galleryService.galleryTemplate(item);

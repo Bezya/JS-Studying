@@ -20,11 +20,20 @@
         fillInfoFields() {
             let login = this.infoModel.login;
             let password = this.infoModel.password;
-            console.log(login);
             this.infoView.fillFields(login, password)
         }
 
+        checkSession() {
+            let logIn = this.infoModel.checkSession();
+            if (logIn) {
+                window.location.href = '/#info';
+            } else {
+                window.location.href = '/#';
+            }
+        }
+
         init() {
+            this.checkSession();
             this.fillInfoFields();
             this.infoView.initListeners();
             //this.bindEvents();

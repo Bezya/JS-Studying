@@ -65,6 +65,12 @@
             })
         }
 
+        checkSession() {
+            let log = localStorage.getItem('login');
+            let pass = localStorage.getItem('password');
+            return !!log && !!pass;
+        }
+
         setDataToLS(name, element) {
             localStorage.setItem(name, element);
         }
