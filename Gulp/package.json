@@ -1,0 +1,36 @@
+{
+  "name": "mvc-with-backend",
+  "version": "1.0.0",
+  "description": "Some long text",
+  "main": "index.js",
+  "dependencies": {
+    "express-basic-auth": "^1.1.4",
+    "json-server": "^0.12.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-better-rollup": "^3.1.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-es6-module-jstransform": "^0.1.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify-es": "^1.0.1",
+    "rollup-plugin-babel": "^3.0.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "gulp": "gulp",
+    "gulp-watch": "gulp watch",
+    "gulp-scripts": "gulp scripts",
+    "gulp-css": "gulp css",
+    "gulp-clean": "gulp clean"
+  },
+  "keywords": [
+    "mvc"
+  ],
+  "author": "Yuliia",
+  "license": "MIT"
+}
