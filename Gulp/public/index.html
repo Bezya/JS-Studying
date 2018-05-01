@@ -7,10 +7,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>JS Application</title>
-
-        <link href="css/style.css" rel="stylesheet" type="text/css">
+        <!--<link href="css/style.css" rel="stylesheet" type="text/css">
         <link href="css/toolkit.css" rel="stylesheet">
-        <link href="css/application.css" rel="stylesheet">
+        <link href="css/application.css" rel="stylesheet">-->
+        <link href="build/css/main.min.css" rel="stylesheet">
 
         <style>
             body {
@@ -32,11 +32,11 @@
 
             <div class="collapse f" id="navbarResponsive">
                 <ul class="navbar-nav ahq">
-                    <li class="pi active"><a class="pg" href="#home">Home <span class="adt">(current)</span></a></li>
-                    <li class="pi"><a class="pg gallery-link" href="#gallery">Gallery</a></li>
-                    <li class="pi"><a class="pg profile-link" href="#profile">Profile</a></li>
+                    <li class="pi active"><a class="pg" id="home" href="#home">Home <span class="adt">(current)</span></a></li>
+                    <li class="pi"><a class="pg gallery-link" id="gallery" href="#gallery">Gallery</a></li>
+                    <li class="pi"><a class="pg profile-link" id="profile" href="#profile">Profile</a></li>
                     <li class="pi vm"><a class="pg" data-action="growl">Growl</a></li>
-                    <li class="pi vm"><a class="pg" href="#">Logout</a></li>
+                    <li class="pi vm"><a class="pg" id="log-out" href="#">Logout</a></li>
                 </ul>
 
                 <form class="nn acx d-none vt">
@@ -56,7 +56,7 @@
                 </ul>
                 <ul class="nav navbar-nav d-none" id="js-popoverContent">
                     <li class="pi"><a class="pg" href="" data-action="growl">Growl</a></li>
-                    <li class="pi"><a class="pg" href="#">Logout</a></li>
+                    <li class="pi"><a class="pg" id="log-out-btn" href="#">Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -66,19 +66,13 @@
             </div>
         </main>
 
-        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
-        <script src="https://getbootstrap.com/assets/js/vendor/popper.min.js"></script>
-        <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-        <script type="module" src="build/js/app.min.js"></script>
-
         <!--Login Form-->
         <template id="login-view">
             <section class="do axz">
             <div class="ayb">
-                <div class="alert alert-danger hide" role="alert"></div>
                 <form role="form" class="ahr avz j">
                     <a href="index.html" class="l afv"><img src="img/brand.png" alt="brand"></a>
+                    <div class="alert alert-danger hide" role="alert"></div>
                     <div class="mu">
                         <input type="email" id="inputEmail" class="form-control" placeholder="Username">
                     </div>
@@ -90,7 +84,7 @@
                         <button id="sing-up-btn" class="cg ns">Sign up</button>
                     </div>
                     <footer class="bqx">
-                        <a href="login.html#" id="forgot-password-link" class="axc">Forgot password</a>
+                        <a href="" id="forgot-password-link" class="axc">Forgot password</a>
                     </footer>
                 </form>
             </div>
@@ -141,14 +135,21 @@
 
                     <div class="pz vp vy afo ">
                         <div class="qa ">
-                            <h6 class="afh ">Photos <small>· <a href="#">Edit</a></small></h6>
+                            <h6 class="afh ">Photos <small>· <a href="#" id="edit">Edit</a></small></h6>
                             <div data-grid="images" data-target-height="150">
-                                <div><img data-width="640" data-height="640" data-action="zoom" src="img/instagram_5.jpg"></div>
-                                <div><img data-width="640" data-height="640" data-action="zoom" src="img/instagram_6.jpg"></div>
-                                <div><img data-width="640" data-height="640" data-action="zoom" src="img/instagram_7.jpg"></div>
-                                <div><img data-width="640" data-height="640" data-action="zoom" src="img/instagram_8.jpg"></div>
-                                <div><img data-width="640" data-height="640" data-action="zoom" src="img/instagram_9.jpg"></div>
-                                <div><img data-width="640" data-height="640" data-action="zoom" src="img/instagram_10.jpg"></div>
+                                <div style="margin-bottom: 10px; margin-right: 10px; display: inline-block; vertical-align: bottom;">
+                                    <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_5.jpg" style="width: 114px; height: 115px;">
+                                </div><div style="margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
+                                <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_6.jpg" style="width: 114px; height: 115px;">
+                            </div><div style="margin-bottom: 10px; margin-right: 10px; display: inline-block; vertical-align: bottom;">
+                                <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_7.jpg" style="width: 114px; height: 115px;">
+                            </div><div style="margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
+                                <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_8.jpg" style="width: 114px; height: 115px;">
+                            </div><div style="margin-bottom: 10px; margin-right: 10px; display: inline-block; vertical-align: bottom;">
+                                <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_9.jpg" style="width: 114px; height: 115px;">
+                            </div><div style="margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
+                                <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_10.jpg" style="width: 114px; height: 115px;">
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -158,11 +159,9 @@
                     <ul class="ca bow box afo ">
                         <li class="rv b agz ">
                             <div class="input-group ">
-                                <input type="text" class="form-control " placeholder="Message ">
+                                <input type="text" class="form-control message" placeholder="Message ">
                                 <div class="bpt ">
-                                    <button type="button" class="cg ns yf ">
-                                        <span class="h bao "></span>
-                                    </button>
+                                    <button type="button" class="cg ns yf" id="upload-photo"><span class="h bao "></span></button>
                                 </div>
                             </div>
                         </li>
@@ -198,7 +197,7 @@
                                     <li class="rv afh ">
                                         <img class="bos vb yb aff " src="img/avatar-fat.jpg ">
                                         <div class="rw ">
-                                            <strong>Jacon Thornton: </strong> Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent
+                                            <strong>Jacon Thornto :</strong> Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent
                                             commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.
                                         </div>
                                     </li>
@@ -257,11 +256,6 @@
                 </div>
                 <!--Right block-->
                 <div class="fj ">
-                    <div class="alert ro alert-dismissible d-none vy " role="alert">
-                        <button type="button" class="close " data-dismiss="alert " aria-label="Close "><span aria-hidden="true">×</span></button>
-                        <a class="rj " href="#">Visit your profile!</a> Check your self, you aren't looking well.
-                    </div>
-
                     <div class="pz afo d-none vy ">
                         <div class="qa ">
                             <h6 class="afh ">Sponsored</h6>
@@ -280,9 +274,7 @@
                                     <div class="rw ">
                                         <strong>Jacob Thornton</strong> @fat
                                         <div class="bpa ">
-                                            <button class="cg nz ok ">
-                                                <span class="h ayi "></span> Follow
-                                            </button>
+                                            <button class="cg nz ok "><span class="h ayi "></span> Follow</button>
                                         </div>
                                     </div>
                                 </li>
@@ -291,9 +283,7 @@
                                     <div class="rw ">
                                         <strong>Mark Otto</strong> @mdo
                                         <div class="bpa ">
-                                            <button class="cg nz ok ">
-                                                <span class="h ayi "></span> Follow
-                                            </button>
+                                            <button class="cg nz ok "><span class="h ayi "></span> Follow</button>
                                         </div>
                                     </div>
                                 </li>
@@ -337,31 +327,21 @@
                 </div>
                 <nav class="bov">
                     <ul class="nav ph xm">
-                        <li class="pi"><a class="pg active" href="">Photos</a></li>
-                        <li class="pi"><a class="pg" href="">Others</a></li>
-                        <li class="pi"><a class="pg" href="">Anothers</a></li>
+                        <li class="pi"><a class="pg active" href="">My Photos</a></li>
+                        <li>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="">
+                            </div>
+                        </li>
                     </ul>
                 </nav>
             </div>
+            <!-- Build photo gallery -->
 
-            <div class="by afl " data-grid="images ">
-                <div><img data-width="640 " data-height="400 " data-action="zoom " src="img/instagram_5.jpg "></div>
-                <div><img data-width="640 " data-height="640 " data-action="zoom " src="img/instagram_6.jpg "></div>
-                <div><img data-width="640 " data-height="640 " data-action="zoom " src="img/instagram_7.jpg "></div>
-                <div><img data-width="640 " data-height="640 " data-action="zoom " src="img/instagram_8.jpg "></div>
-                <div><img data-width="640 " data-height="640 " data-action="zoom " src="img/instagram_9.jpg "></div>
-                <div><img data-width="640 " data-height="640 " data-action="zoom " src="img/instagram_10.jpg "></div>
-                <div><img data-width="640 " data-height="400 " data-action="zoom " src="img/instagram_11.jpg "></div>
-                <div><img data-width="640 " data-height="640 " data-action="zoom " src="img/instagram_12.jpg "></div>
-                <div><img data-width="640 " data-height="400 " data-action="zoom " src="img/instagram_13.jpg "></div>
-                <div><img data-width="640 " data-height="640 " data-action="zoom " src="img/instagram_14.jpg "></div>
-                <div><img data-width="640 " data-height="640 " data-action="zoom " src="img/instagram_15.jpg "></div>
-                <div><img data-width="640 " data-height="640 " data-action="zoom " src="img/instagram_16.jpg "></div>
-                <div><img data-width="640 " data-height="640 " data-action="zoom " src="img/instagram_17.jpg "></div>
-                <div><img data-width="640 " data-height="640 " data-action="zoom " src="img/instagram_18.jpg "></div>
-                <div><img data-width="640 " data-height="400 " data-action="zoom " src="img/instagram_1.jpg "></div>
-                <div><img data-width="640 " data-height="640 " data-action="zoom " src="img/instagram_2.jpg "></div>
+            <div class="by afl " data-grid="images" id="photo-gallery">
+                <!-- Build photo gallery -->
             </div>
+
         </template>
         <!--Profile page-->
         <template id="profile-view">
@@ -376,25 +356,112 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="fm container-fluid text-center" id="user-profile">
+                <div class="col-md-6 mx-auto">
+                    <h4 class="mb-3">Fill your profile</h4>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="lastName">First Name:</label>
+                            <div class="col-xs-9">
+                                <input type="text" class="form-control" id="lastName" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="firstName">Last name:</label>
+                            <div class="col-xs-9">
+                                <input type="text" class="form-control" id="firstName" placeholder="Last name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="fatherName">Отчество:</label>
+                            <div class="col-xs-9">
+                                <input type="text" class="form-control" id="fatherName" placeholder="Введите отчество">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="example-date-input" class="col-xs-2 col-form-label">Date of birth</label>
+                            <div class="col-xs-10">
+                                <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="inputEmail">Email:</label>
+                            <div class="col-xs-9">
+                                <input type="email" class="form-control" id="userEmail" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="inputPassword">Password:</label>
+                            <div class="col-xs-9">
+                                <input type="password" class="form-control" id="userPassword" placeholder="Enter password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="confirmPassword">Confirm the password:</label>
+                            <div class="col-xs-9">
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Enter password again">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="phoneNumber">Phone number:</label>
+                            <div class="col-xs-9">
+                                <input type="tel" class="form-control" id="phoneNumber" placeholder="Phone number">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="postalAddress">Address:</label>
+                            <div class="col-xs-9">
+                                <textarea rows="3" class="form-control" id="postalAddress" placeholder="Address"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3">Gender:</label>
+                            <div class="col-xs-2">
+                                <label class="radio-inline">
+                                    <input type="radio" name="genderRadios" value="male">Male
+                                </label>
+                            </div>
+                            <div class="col-xs-2">
+                                <label class="radio-inline">
+                                    <input type="radio" name="genderRadios" value="female">Female
+                                </label>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <div class="col-xs-offset-3 col-xs-9">
+                                <input type="submit" class="btn btn-primary" value="Save">
+                                <input type="reset" class="btn btn-default" value="Update">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </template>
-        <!--
-        <script src="js/tools/jquery.min.js "></script>
-        <script src="js/tools/popper.min.js "></script>
-        <script src="js/tools/chart.js "></script>
-        <script src="js/tools/toolkit.js "></script>
-        <script src="js/tools/application.js "></script>
-        <script type="module " src="js/utils.js "></script>
+        <script type="module" src="build/js/app.min.js"></script>
+        <script src="build/js/vendor/jquery.min.js "></script>
+        <script src="build/js/vendor/popper.min.js "></script>
+        <script src="build/js/vendor/chart.js "></script>
+        <script src="build/js/vendor/toolkit.js "></script>
+        <script src="build/js/vendor/application.js "></script>
+
+        <!-- <script type="module " src="js/utils.js "></script>
         <script type="module " src="js/router.js "></script>
         <script type="module " src="js/login/login.model.js "></script>
         <script type="module " src="js/login/login.view.js "></script>
         <script type="module " src="js/login/login.controller.js "></script>
+
         <script type="module " src="js/home/home.model.js "></script>
         <script type="module " src="js/home/home.view.js "></script>
         <script type="module " src="js/home/home.controller.js "></script>
         <script type="module " src="js/home/observer.js "></script>
+
         <script type="module " src="js/gallery/gallery.controller.js "></script>
         <script type="module " src="js/gallery/gallery.model.js"></script>
         <script type="module " src="js/gallery/gallery.view.js"></script>
+
         <script type="module " src="js/profile/profile.controller.js "></script>
         <script type="module " src="js/profile/profile.model.js "></script>
         <script type="module " src="js/profile/profile.view.js "></script>

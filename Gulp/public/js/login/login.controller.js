@@ -2,11 +2,11 @@ export default class LoginController {
     constructor(loginModel, loginView, utils) {
         this.model = loginModel;
         this.view = loginView;
-        this.utils = utils
-        /*this.initListeners();*/
+        this.utils = utils;
+        this.initListeners();
     }
 
-    /*initListeners() {
+    initListeners() {
         this.view.DOMElements.logInBtn.addEventListener("click", this.loginHandler.bind(this));
         this.view.DOMElements.logOutBtn.addEventListener("click", this.logoutHandler.bind(this));
     }
@@ -33,5 +33,5 @@ export default class LoginController {
     logoutHandler() {
         this.model.logout();
         this.utils.navigateTo("");
-    }*/
+    }
 }

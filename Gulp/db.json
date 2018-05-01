@@ -1,6 +1,140 @@
 {
-    "users": [{
-        "login": "admin@gmail.com",
-        "password": "123123123"
-    }]
+  "users": [
+    {
+      "login": "admin@gmail.com",
+      "password": "123123123"
+    },
+    {
+      "login": "123@gmail.com",
+      "password": "123456"
+    },
+    {
+      "login": "234@gmail.com",
+      "password": "12345"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "name": "Johny",
+      "date": "04/02/2017",
+      "url": "img/avatar-dhg.png",
+      "text": "Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+      "images": ["img/instagram_7.jpg"]
+    },
+    {
+      "id": 2,
+      "name": "Garry",
+      "date": "03/02/2017",
+      "url": "img/avatar-mdo.png",
+      "text": "Donec id elit non mi porta gravida at eget metus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "images": ["img/instagram_5.jpg"]
+    },
+    {
+      "id": 3,
+      "name": "Jacob Thornton",
+      "date": "02/02/2017",
+      "url": "img/avatar-fat.jpg",
+      "text": "Donec id elit non mi porta gravida at eget metus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "images": ["img/instagram_9.jpg"]
+    },
+    {
+      "id": 4,
+      "name": "Carlos",
+      "date": "01/02/2017",
+      "url": "img/scull.jpg",
+      "text": "He's called Fernandez Livin' on a gun Dreams of Santa Anna Fighting in the sun.",
+      "images": ["img/instagram_15.jpg", "img/instagram_14.jpg", "img/instagram_13.jpg"]
+    },
+    {
+      "name": "Not Johny",
+      "date": "04/02/2017",
+      "url": "img/avatar-dhg.png",
+      "text": "Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+      "images": ["img/instagram_7.jpg", "img/instagram_6.jpg", "img/instagram_8.jpg"],
+      "id": 5
+    }
+  ],
+
+  "photos": [
+    {
+      "id": 1,
+      "url": "img/instagram_5.jpg"
+    },
+    {
+      "id": 2,
+      "url": "img/instagram_6.jpg"
+    },
+    {
+      "id": 3,
+      "url": "img/instagram_7.jpg"
+    },
+    {
+      "id": 4,
+      "url": "img/instagram_8.jpg"
+    },
+    {
+      "id": 5,
+      "url": "img/instagram_9.jpg"
+    },
+    {
+      "id": 6,
+      "url": "img/instagram_10.jpg"
+    },
+    {
+      "id": 7,
+      "url": "img/instagram_11.jpg"
+    },
+    {
+      "id": 8,
+      "url": "img/instagram_12.jpg"
+    },
+    {
+      "id": 9,
+      "url": "img/instagram_13.jpg"
+    },
+    {
+      "id": 10,
+      "url": "img/instagram_14.jpg"
+    },
+    {
+      "id": 11,
+      "url": "img/instagram_15.jpg"
+    },
+    {
+      "id": 12,
+      "url": "img/instagram_16.jpg"
+    },
+    {
+      "id": 14,
+      "url": "img/instagram_17.jpg"
+    },
+    {
+      "id": 15,
+      "url": "img/instagram_18.jpg"
+    },
+    {
+      "id": 16,
+      "url": "img/instagram_1.jpg"
+    },
+    {
+      "id": 17,
+      "url": "img/instagram_2.jpg "
+    }
+  ],
+
+  "profile": [
+    {
+      "firstName": "Dave",
+      "lastName": "Gamache",
+      "userName": "Reachy",
+      "email": "dave.gamache@gmail.com",
+      "adress": "First ave, bld 12, app 3",
+      "workPlace": "Github",
+      "country": "Canada",
+      "city": "Toronto",
+      "zip": "223322",
+      "friends": "Obama"
+    }
+  ]
 }

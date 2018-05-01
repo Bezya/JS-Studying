@@ -4,14 +4,14 @@ export default class HomeController {
         this.view = homeView;
         this.observer = observer;
         this.utils = utils;
-        /*this.pageConfig = {
+        this.pageConfig = {
             itemsPerPage: 10,
             currentPage: 0
-        }
-        this.init();*/
+        };
+        //this.init();
     }
 
-    /*bindEvents() {}
+    bindEvents() {}
 
     initListeners() {
         this.view.DOMElements.search.addEventListener("keyup", this.searchHandler.bind(this));
@@ -73,6 +73,6 @@ export default class HomeController {
             this.initListeners()
             this.view.buildUsersList(this.getNextPage());
             this.isLastPage();
-        });
-    }*/
+        });*/
+    }
 }

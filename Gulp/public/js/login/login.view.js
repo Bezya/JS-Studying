@@ -12,7 +12,7 @@ export default class LoginView {
             forgotPassLink: document.querySelector('#forgot-password-link'),
         }
     }
-/*
+
     showMsg(msg) {
         if (msg) {
             this.DOMElements.alert.classList.remove("hide");
@@ -23,7 +23,6 @@ export default class LoginView {
     hideMsg() { this.DOMElements.alert.classList.add("hide"); }
 
     //showLogout() {this.DOMElements.logOutBtn.classList.remove("hide");}
-
     //hideLogout() {this.DOMElements.logOutBtn.classList.add("hide");}
 
     getCredentials() {
@@ -31,5 +30,5 @@ export default class LoginView {
             login: this.DOMElements.login.value,
             password: this.DOMElements.password.value
         }
-    }*/
+    }
 }

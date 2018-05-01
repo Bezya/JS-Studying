@@ -6,18 +6,15 @@ let babel = require('rollup-plugin-babel');
 let sourcemaps = require('gulp-sourcemaps');
 let cssmin = require('gulp-cssmin');
 let del = require('del');
+//var gutil = require('gulp-util');
 
 let paths = {
-    scripts: [
-        'public/js/utils.js',
-        'public/js/router.js',
-        'public/js/login/*.js',
-        'public/js/home/*.js',
-        'public/js/gallery/*.js',
-        'public/js/profile/*.js',
-        'public/js/app.js'
+    vendor: [
+        'public/js/tools/*.js'
     ],
-    styles: ['public/css/*.css']
+    styles: ['public/css/*.css'],
+    fonts: ['public/fonts/*.*'],
+    img: ['public/img/*.*']
 };
 
 gulp.task('clean', function() {
@@ -38,9 +35,23 @@ gulp.task('scripts', function() {
         .pipe(sourcemaps.init())
         .pipe(rollup({plugins: [babel()]}, 'iife'))
         .pipe(concat('app.min.js'))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('public/build/js'))
+});
+
+gulp.task('vendor', function() {
+    return gulp.src(paths.vendor)
+        .pipe(gulp.dest('public/build/js/vendor'))
+});
+
+gulp.task('fonts', function () {
+    return gulp.src(paths.fonts)
+        .pipe(gulp.dest('public/build/fonts'))
+});
+gulp.task('img', function () {
+    return gulp.src(paths.img)
+        .pipe(gulp.dest('public/build/img'))
 });
 
 gulp.task('watch', function() {
@@ -48,4 +59,4 @@ gulp.task('watch', function() {
     gulp.watch(paths.styles, ['css']);
 });
 
-gulp.task('default', ['watch', 'scripts',  'css']);
+gulp.task('default', ['watch', 'css', 'scripts', 'vendor', 'fonts', 'img']);

@@ -19,14 +19,13 @@ import ProfileView from './profile/profile.view.js';
 let activatedRoutes = {};
 
 const wrapper = document.querySelector("#wrapper");
-
+console.log(GalleryController, GalleryModel)
 let routeConfig = {
     "": () => {
         utils.initTemplate(wrapper, "login-view");
         let model = new LoginModel;
         let view = new LoginView;
         new LoginController(model, view, utils);
-
     },
     "home": () => {
         utils.initTemplate(wrapper, "home-view");
@@ -35,21 +34,17 @@ let routeConfig = {
         let view = new HomeView;
         new HomeController(model, view, observer, new utils)
     },
-    "gallery":{
-        show:() => {
+    "gallery":() => {
             utils.initTemplate(wrapper, "gallery-view");
             let model = new GalleryModel;
             let view = new GalleryView;
-            new GalleryController(model, view, new utils)
-        }
+            new GalleryController(model, view, new utils);
     },
-    "profile": {
-        show: () => {
+    "profile":  () => {
         utils.initTemplate(wrapper, "profile-view");
             let model = new ProfileModel;
             let view = new ProfileView;
             new ProfileController(model, view, new utils)
-        }
     }
 };
 
