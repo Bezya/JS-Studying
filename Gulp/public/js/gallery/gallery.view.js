@@ -4,15 +4,16 @@ export default class GalleryView {
             btnAdd: document.querySelector("#add-photo"),
             photoGallery: document.querySelector("#photo-gallery"),
             galleryPage: document.querySelector("#gallery-view")
-        }
+        };
 
         this.galleryTemplate = function(item){
             return `<div class="img" img-id="${item.id}" 
                             style="margin-bottom: 10px; margin-right: 10px; display: inline-block; vertical-align: bottom;">
                         <img data-width="640" data-height="400" data-action="zoom" style="width: 150px;" 
                         src="${item.url}" style="width: 253px; height: 254px;">
+                        <button class="btn btn-danger" img-id="${item.id}">Удалить</button>
                    </div>`
-        }
+        };
 
         this.imgData = null;
     }
@@ -25,6 +26,12 @@ export default class GalleryView {
 
     saveData(data) {
         this.imgData = data;
+    }
+
+    getItemForDelete(e) {
+        if (e.target.classList.contains('btn-danger')) {
+            return e.target.getAttribute('img-id');
+        }
     }
 
     buildGallery(){

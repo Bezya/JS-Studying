@@ -3,6 +3,7 @@ const server = jsonServer.create()
 const router = jsonServer.router('db.json')
 const middlewares = jsonServer.defaults()
 const users = require('./db.json').users;
+const usersInfo = require('./db.json').usersInfo;
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares)
 
@@ -12,10 +13,19 @@ server.post('/login', (req, res) => {
     let adminUser = users[0];
     let user = users.find(item => item.login === req.body.login && item.password === req.body.password);
     if (user) {
-        res.jsonp({ loginStatus: true })
+        res.jsonp({ loginStatus: true, userId: user.userId })
     } else {
         res.jsonp({ loginStatus: false })
     }
+})
+server.delete('/photos', (req, res) => {
+
+    let obj = req.query;
+
+    let user = usersInfo.find(item => item.userId == obj.userId);
+    let result = user.photos.filter(item => item.id != obj.id);
+    user.photos = result;
+    return {result : true}
 })
 
 // To handle POST, PUT and PATCH you need to use a body-parser

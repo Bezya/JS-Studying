@@ -1,18 +1,56 @@
 export default class HomeView {
     constructor() {
-        this.DOMElements = {};
+        this.DOMElements = {
+            postText: document.querySelector("#photo-gallery"),
+            btnUploadImg: document.querySelector("#upload-img"),
+            leftAvatar: document.querySelector("#home-left-avatar"),
+
+        };
         this.isUpdate = null;
-        this.imgData = null;
+        this.postData = null;
+        this.postLineTemplate = function(item){
+            return `<li class="rv b agz" post-id="${item.postId}">
+                        <img class="bos vb yb aff " src="${item.avatar}">
+                        <div class="rw ">
+                            <div class="bpd ">
+                                <div class="bpb ">
+                                    <small class="acx axc ">${item.date}</small>
+                                    <h6>${item.fullName}</h6>
+                                </div>
+                                <p>${item.post}</p>
+                                <div class="boy" data-grid="images">${this.postImgTmplt(item)}</div>
+                                <ul class="bow afa">${this.postCommentTmplt(item)}</ul>
+                            </div>
+                        </div>
+                    </li>`
+        };
     }
 
-    /*init(data) {
+    postImgTmplt(item) {
+        return [`<div style="display: none">
+                    <img data-action="zoom" data-width="640" data-height="640" src="${item.url}">
+                </div>`]
+    }
+
+    putAvatar(item){
+        this.DOMElements.leftAvatar.setAttribute('src', item);
+    }
+
+    postCommentTmplt(item){
+        return [`<li class="rv afh ">
+                    <img class="bos vb yb aff " src="${item.avatar}">
+                    <div class="rw "><strong>${item.fullName} :</strong>${item.comments}</div>
+                </li>`]
+    }
+
+    init(data) {
         this.saveData(data);
         this.buildPage();
         return data;
     }
 
     saveData(data) {
-        this.imgData = data;
+        this.postData = data;
     }
 
     initListeners() {
@@ -31,13 +69,13 @@ export default class HomeView {
         this.DOMElements.description.value = item.description;
     }
 
-    get itemForDelete(e) {
+    getItemForDelete(e) {
         if (e.target.classList.contains('btn-danger')) {
             return e.target.getAttribute('data-id');
         }
     }
 
-    get itemForEdit(e) {
+    getItemForEdit(e) {
         e.preventDefault();
         if (e.target.classList.contains('edit')) {
             let element = e.target;
@@ -49,15 +87,15 @@ export default class HomeView {
             this.fillFields(imgForUpdate);
             this.isUpdate = id;
             this.showCreateAndUpdateFom();
-            return imgForUpdate;
+            return postForUpdate;
         }
     }
 
     buildPage() {
         let result = '';
-        this.imgData.forEach(item => {
-            result += galService.galleryTemplate(item);
+        this.posts.forEach(item => {
+            result += this.postLineTemplate(item);
         });
-        this.DOMElements.gallery.innerHTML = result;
-    }*/
+        this.DOMElements.posts.innerHTML = result;
+    }
 }

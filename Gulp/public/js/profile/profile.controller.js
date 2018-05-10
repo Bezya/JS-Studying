@@ -1,9 +1,10 @@
 export default class ProfileController {
-    constructor(profileModel, profileView, utils) {
+    constructor(commonModel, profileModel, profileView, utils) {
+        this.commonModel = commonModel;
         this.model = profileModel;
         this.view = profileView;
         this.utils = utils;
-        this.init();
+        //this.init();
     }
     bindEvents() {}
     fillInfoFields() {}

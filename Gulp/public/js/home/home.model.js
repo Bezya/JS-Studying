@@ -1,13 +1,13 @@
 export default class HomeModel {
     constructor() {
         this.url = "http://localhost:3000";
-        /*this.getUsersUrl = 'http://localhost:3000/usersList';
-        this.getPostsUrl = "http://localhost:3000/posts";
-        this.usersListData = [];
-        this.usersPosts = [];*/
+        //this.getUsersUrl = 'http://localhost:3000/usersList';
+        //this.getPostsUrl = "http://localhost:3000/posts";
+        //this.usersListData = [];
+        this.usersPosts = [];
     }
 
-    /*get usersList() {
+    get usersList() {
         return fetch(this.getUsersUrl).then(responce => responce.json())
             .then(data => {
                 this.usersListData = data;
@@ -15,7 +15,7 @@ export default class HomeModel {
             })
     }
 
-    get userById(id) {
+    getUserById(id) {
         return fetch(this.this.getUsersUrl + "/" + id).then(responce => responce.json())
             .then(data => {
                 return data;
@@ -49,7 +49,7 @@ export default class HomeModel {
             })
     }
 
-    get onePost(id) {
+    getOnePost(id) {
         return fetch(this.this.getPostsUrl + "/" + id).then(responce => responce.json())
             .then(data => {
                 return data;
@@ -57,7 +57,7 @@ export default class HomeModel {
     }
 
 
-    createPost(method, obj) { //метод для создания элемента 
+    createPost(method, obj) {
         return fetch(this.getPostsUrl, this.requestMethod(method, obj))
             .then(response => {
                 if (!response.status == 201) {
@@ -71,7 +71,7 @@ export default class HomeModel {
             })
     }
 
-    updatePost(method, obj, id) { //метод для обновения элемента галереи
+    updatePost(method, obj, id) {
         return fetch(this.getPostsUrl + "/" + id, this.requestMethod(method, obj))
             .then(response => {
                 if (!response.status == 201) {
@@ -94,9 +94,9 @@ export default class HomeModel {
         })
     }
 
-    set dataToLS(name, element) { localStorage.setItem(name, element) }
+    setDataToLS(name, element) { localStorage.setItem(name, element) }
 
-    get dataFromLS(name, element) { return localStorage.getItem(name, element) }
+    getDataFromLS(name, element) { return localStorage.getItem(name, element) }
 
-    removeDataFromLS(name) { localStorage.removeItem(name); }*/
+    removeDataFromLS(name) { localStorage.removeItem(name); }
 }

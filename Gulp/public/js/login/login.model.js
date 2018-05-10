@@ -30,7 +30,9 @@ export default class LoginModel {
             .then(responce => responce.json())
             .then(data => {
                 if (data.loginStatus) {
+                    let userId = data.userId;
                     localStorage.setItem('credentials', JSON.stringify(credentials));
+                    localStorage.setItem('userId', JSON.stringify(userId));
                 } else {
                     this.setErrorMsg("missMatch");
                 }

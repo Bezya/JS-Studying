@@ -1,5 +1,6 @@
 export default class LoginController {
-    constructor(loginModel, loginView, utils) {
+    constructor(commonModel,loginModel, loginView, utils) {
+        this.commonModel = commonModel;
         this.model = loginModel;
         this.view = loginView;
         this.utils = utils;

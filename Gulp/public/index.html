@@ -7,9 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>JS Application</title>
-        <!--<link href="css/style.css" rel="stylesheet" type="text/css">
-        <link href="css/toolkit.css" rel="stylesheet">
-        <link href="css/application.css" rel="stylesheet">-->
+
         <link href="build/css/main.min.css" rel="stylesheet">
 
         <style>
@@ -50,12 +48,11 @@
                     <!--Logout Avatar-->
                     <li class="pi afb">
                         <button class="cg bpo bpp boi" data-toggle="popover" data-original-title="" title="">
-                            <img class="us" src="img/avatar-dhg.png">
+                            <img class="us user-avatar" src="${item.avatar}">
                         </button>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav d-none" id="js-popoverContent">
-                    <li class="pi"><a class="pg" href="" data-action="growl">Growl</a></li>
                     <li class="pi"><a class="pg" id="log-out-btn" href="#">Logout</a></li>
                 </ul>
             </div>
@@ -100,19 +97,19 @@
                     <div class="pz bpi afo">
                         <div class="qf" style="background-image: url(img/iceland.jpg);"></div>
                         <div class="qa avz">
-                            <a href="#profile"><img class="bpj " src="img/avatar-dhg.png "></a>
+                            <a href="#profile"><img class="bpj user-avatar" id="home-left-avatar" ></a>
                             <h6 class="qb ">
-                                <a class="boa " href="#profile">Dave Gamache</a>
+                                <a class="boa " href="#profile"></a>
                             </h6>
-                            <p class="afo ">I wish i was a little bit taller, wish i was a baller, wish i had a girl…&nbsp;also.</p>
+                            <p class="afo ">${item.about}</p>
                             <ul class="bpk ">
                                 <li class="bpl ">
                                     <a href="#userModal" class="boa " data-toggle="modal ">Friends
-                                        <h6 class="aej ">12M</h6>
+                                        <h6 class="aej " id="friends">12M</h6>
                                     </a>
                                 </li>
                                 <li class="bpl ">
-                                    <a href="#userModal" class="boa " data-toggle="modal ">Enemies
+                                    <a href="#userModal" class="boa " data-toggle="modal " id="enemies">Enemies
                                         <h6 class="aej ">1</h6>
                                     </a>
                                 </li>
@@ -122,13 +119,12 @@
 
                     <div class="pz vp vy afo ">
                         <div class="qa ">
-                            <h6 class="afh ">About <small>· <a href="#">Edit</a></small></h6>
+                            <h6 class="afh ">About <small>· <a href="#profile">Edit</a></small></h6>
                             <ul class="dc axg ">
-                                <li><span class="axc h ban aff "></span>Went to <a href="#">Oh, Canada</a></li>
-                                <li><span class="axc h bnc aff "></span>Became friends with <a href="#">Obama</a></li>
-                                <li><span class="axc h bfa aff "></span>Worked at <a href="#">Github</a></li>
-                                <li><span class="axc h bfq aff "></span>Lives in <a href="#">San Francisco, CA</a></li>
-                                <li><span class="axc h bgz aff "></span>From <a href="#">Seattle, WA</a></li>
+                                <li><span class="axc h ban aff "></span>Went to <a href="#">${item.country}</a></li>
+                                <li><span class="axc h bnc aff "></span>Became friends with <a href="#">${item.friends}</a></li>
+                                <li><span class="axc h bfa aff "></span>Worked at <a href="#">${item.workPlace}</a></li>
+                                <li><span class="axc h bfq aff "></span>Lives in <a href="#">${item.city}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -140,118 +136,34 @@
                                 <div style="margin-bottom: 10px; margin-right: 10px; display: inline-block; vertical-align: bottom;">
                                     <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_5.jpg" style="width: 114px; height: 115px;">
                                 </div><div style="margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
-                                <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_6.jpg" style="width: 114px; height: 115px;">
-                            </div><div style="margin-bottom: 10px; margin-right: 10px; display: inline-block; vertical-align: bottom;">
-                                <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_7.jpg" style="width: 114px; height: 115px;">
-                            </div><div style="margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
-                                <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_8.jpg" style="width: 114px; height: 115px;">
-                            </div><div style="margin-bottom: 10px; margin-right: 10px; display: inline-block; vertical-align: bottom;">
-                                <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_9.jpg" style="width: 114px; height: 115px;">
-                            </div><div style="margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
-                                <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_10.jpg" style="width: 114px; height: 115px;">
-                            </div>
+                                    <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_6.jpg" style="width: 114px; height: 115px;">
+                                </div><div style="margin-bottom: 10px; margin-right: 10px; display: inline-block; vertical-align: bottom;">
+                                    <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_7.jpg" style="width: 114px; height: 115px;">
+                                </div><div style="margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
+                                    <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_8.jpg" style="width: 114px; height: 115px;">
+                                </div><div style="margin-bottom: 10px; margin-right: 10px; display: inline-block; vertical-align: bottom;">
+                                    <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_9.jpg" style="width: 114px; height: 115px;">
+                                </div><div style="margin-bottom: 10px; margin-right: 0px; display: inline-block; vertical-align: bottom;">
+                                    <img data-width="640" data-height="640" data-action="zoom" src="img/instagram_10.jpg" style="width: 114px; height: 115px;">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!--Center block-->
                 <div class="fm ">
-                    <ul class="ca bow box afo ">
+                    <ul class="ca bow box afo " id="posts">
                         <li class="rv b agz ">
                             <div class="input-group ">
                                 <input type="text" class="form-control message" placeholder="Message ">
-                                <div class="bpt ">
-                                    <button type="button" class="cg ns yf" id="upload-photo"><span class="h bao "></span></button>
+                                <div class="bpt">
+                                    <button type="button" class="cg ns yfb custom-file-input" id="upload-img"><span class="h bao ">
+                                        <input type="file" class="custom-file-input"></span></button>
                                 </div>
+
                             </div>
                         </li>
-
-                        <li class="rv b agz ">
-                            <img class="bos vb yb aff " src="img/avatar-dhg.png ">
-                            <div class="rw ">
-                                <div class="bpb ">
-                                    <small class="acx axc ">4 min</small>
-                                    <h6>Dave Gamache</h6>
-                                </div>
-                                <p>
-                                    Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis
-                                    euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                                </p>
-
-                                <div class="boy " data-grid="images ">
-                                    <div style="display: none">
-                                        <img data-action="zoom" data-width="1050" data-height="700" src="img/unsplash_1.jpg">
-                                    </div>
-                                    <div style="display: none">
-                                        <img data-action="zoom" data-width="640" data-height="640" src="img/instagram_1.jpg">
-                                    </div>
-                                    <div style="display: none">
-                                        <img data-action="zoom" data-width="640" data-height="640" src="img/instagram_13.jpg">
-                                    </div>
-                                    <div style="display: none">
-                                        <img data-action="zoom" data-width="1048" data-height="700" src="img/unsplash_2.jpg">
-                                    </div>
-                                </div>
-
-                                <ul class="bow afa ">
-                                    <li class="rv afh ">
-                                        <img class="bos vb yb aff " src="img/avatar-fat.jpg ">
-                                        <div class="rw ">
-                                            <strong>Jacon Thornto :</strong> Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent
-                                            commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.
-                                        </div>
-                                    </li>
-                                    <li class="rv ">
-                                        <img class="bos vb yb aff " src="img/avatar-mdo.png ">
-                                        <div class="rw ">
-                                            <strong>Mark Otto: </strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="rv b agz ">
-                            <img class="bos vb yb aff " src="img/avatar-fat.jpg ">
-                            <div class="rw ">
-                                <div class="bpd ">
-                                    <div class="bpb ">
-                                        <small class="acx axc ">12 min</small>
-                                        <h6>Jacob Thornton</h6>
-                                    </div>
-                                    <p>
-                                        Donec id elit non mi porta gravida at eget metus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum
-                                        at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="rv b agz ">
-                            <img class="bos vb yb aff " src="img/avatar-mdo.png ">
-                            <div class="rw ">
-                                <div class="bpb ">
-                                    <small class="acx axc ">34 min</small>
-                                    <h6>Mark Otto</h6>
-                                </div>
-
-                                <p>
-                                    Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                                </p>
-
-                                <div class="boy " data-grid="images "><img style="display: inline-block; width: 466px; height: 451px; margin-bottom: 10px; margin-right: 0px; vertical-align: bottom; " data-width="640 " data-height="640 " data-action="zoom " src="img/instagram_3.jpg "></div>
-
-                                <ul class="bow ">
-                                    <li class="rv ">
-                                        <img class="bos vb yb aff " src="img/avatar-dhg.png ">
-                                        <div class="rw ">
-                                            <strong>Dave Gamache: </strong> Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent
-                                            commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                        <!--POSTS-->
                     </ul>
                 </div>
                 <!--Right block-->
@@ -318,11 +230,9 @@
             <div class="boq " style="background-image:url(img/iceland.jpg)">
                 <div class="by ">
                     <div class="bor ">
-                        <img class="us bos " src="img/avatar-dhg.png ">
-                        <h3 class="bou ">Dave Gamache</h3>
-                        <p class="bot ">
-                            I wish i was a little bit taller, wish i was a baller, wish i had a girl…&nbsp;also.
-                        </p>
+                        <img class="us bos user-avatar" src="img/avatar-dhg.png ">
+                        <h3 class="bou ">${item.fullName}</h3>
+                        <p class="bot ">${item.about</p>
                     </div>
                 </div>
                 <nav class="bov">
@@ -330,14 +240,13 @@
                         <li class="pi"><a class="pg active" href="">My Photos</a></li>
                         <li>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="">
+                                <input type="file" class="custom-file-input" id="add-photo">
                             </div>
                         </li>
                     </ul>
                 </nav>
             </div>
             <!-- Build photo gallery -->
-
             <div class="by afl " data-grid="images" id="photo-gallery">
                 <!-- Build photo gallery -->
             </div>
@@ -348,131 +257,109 @@
             <div class="boq " style="background-image:url(img/iceland.jpg)">
                 <div class="by ">
                     <div class="bor ">
-                        <img class="us bos " src="img/avatar-dhg.png ">
-                        <h3 class="bou ">Dave Gamache</h3>
-                        <p class="bot ">
-                            I wish i was a little bit taller, wish i was a baller, wish i had a girl…&nbsp;also.
-                        </p>
+                        <img class="us bos user-avatar" src="${item.avatar}">
+                        <h3 class="bou name">${item.fullName}</h3>
+                        <p class="bot .caption">${item.about}</p>
                     </div>
                 </div>
             </div>
-
-
-            <div class="fm container-fluid text-center" id="user-profile">
-                <div class="col-md-6 mx-auto">
-                    <h4 class="mb-3">Fill your profile</h4>
-                    <form class="form-horizontal">
+            <!--Profile template-->
+            <div class="by aha ahl fm container-fluid text-center" id="user-profile">
+                    <h4 class="mb-3 text-center">Fill your profile</h4>
                         <div class="form-group">
-                            <label class="control-label col-xs-3" for="lastName">First Name:</label>
+                            <label class="control-label col-xs-3" for="first-name">First Name:</label>
                             <div class="col-xs-9">
-                                <input type="text" class="form-control" id="lastName" placeholder="First Name">
+                                <input type="text" class="form-control" id="first-name" placeholder="First Name">
+                            </div>
+                            <label class="control-label col-xs-3" for="last-name">Last name:</label>
+                            <div class="col-xs-9">
+                                <input type="text" class="form-control" id="last-name" placeholder="Last name">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-xs-3" for="firstName">Last name:</label>
-                            <div class="col-xs-9">
-                                <input type="text" class="form-control" id="firstName" placeholder="Last name">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-xs-3" for="fatherName">Отчество:</label>
-                            <div class="col-xs-9">
-                                <input type="text" class="form-control" id="fatherName" placeholder="Введите отчество">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="example-date-input" class="col-xs-2 col-form-label">Date of birth</label>
+                            <label for="user-birthday" class="col-xs-2 col-form-label">Date of birth</label>
                             <div class="col-xs-10">
-                                <input class="form-control" type="date" value="2011-08-19" id="example-date-input">
+                                <input class="form-control" type="date" value="2011-08-19" id="user-birthday">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-xs-3" for="inputEmail">Email:</label>
+                            <label class="control-label col-xs-3" for="user-email">Email:</label>
                             <div class="col-xs-9">
-                                <input type="email" class="form-control" id="userEmail" placeholder="Email">
+                                <input type="email" class="form-control" id="user-email" placeholder="Email">
+                            </div>
+                            <label class="control-label col-xs-3" for="user-password">Password:</label>
+                            <div class="col-xs-9">
+                                <input type="password" class="form-control" id="user-password" placeholder="Enter password">
+                            </div>
+                            <label class="control-label col-xs-3" for="confirm-password">Confirm the password:</label>
+                            <div class="col-xs-9">
+                                <input type="password" class="form-control" id="confirm-password" placeholder="Enter password again">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-xs-3" for="inputPassword">Password:</label>
+                            <label class="control-label col-xs-3" for="user-phone">Phone number:</label>
                             <div class="col-xs-9">
-                                <input type="password" class="form-control" id="userPassword" placeholder="Enter password">
+                                <input type="tel" class="form-control" id="user-phone" placeholder="Phone number">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="user-country">Country</label>
+                                    <input type="text" class="form-control" id="user-country">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="user-city">City</label>
+                                    <input type="text" class="form-control" id="user-city">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="user-zip">Zip</label>
+                                    <input type="text" class="form-control" id="user-zip">
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-xs-3" for="confirmPassword">Confirm the password:</label>
+                            <label class="control-label col-xs-3" for="user-address">Address:</label>
                             <div class="col-xs-9">
-                                <input type="password" class="form-control" id="confirmPassword" placeholder="Enter password again">
+                                <input type="text"  class="form-control" id="user-address" placeholder="Address">
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-xs-3" for="phoneNumber">Phone number:</label>
+                            <label class="control-label col-xs-3" for="user-work">Work Place:</label>
                             <div class="col-xs-9">
-                                <input type="tel" class="form-control" id="phoneNumber" placeholder="Phone number">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-xs-3" for="postalAddress">Address:</label>
-                            <div class="col-xs-9">
-                                <textarea rows="3" class="form-control" id="postalAddress" placeholder="Address"></textarea>
+                                <input type="text"  class="form-control" id="user-work" placeholder="Work place">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-xs-3">Gender:</label>
                             <div class="col-xs-2">
                                 <label class="radio-inline">
-                                    <input type="radio" name="genderRadios" value="male">Male
-                                </label>
+                                    <input type="radio" name="genderRadios" id="user-gender-male" value="male">Male</label>
                             </div>
                             <div class="col-xs-2">
                                 <label class="radio-inline">
-                                    <input type="radio" name="genderRadios" value="female">Female
-                                </label>
+                                    <input type="radio" name="genderRadios" id="user-gender-female" value="female">Female</label>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-xs-3" for="user-about">About me:</label>
+                            <textarea type="text" class="form-control" id="user-about" rows="3"></textarea>
                         </div>
                         <br />
                         <div class="form-group">
                             <div class="col-xs-offset-3 col-xs-9">
-                                <input type="submit" class="btn btn-primary" value="Save">
-                                <input type="reset" class="btn btn-default" value="Update">
+                                <button type="button" class="btn btn-pill btn-secondary" value="Save">Save</button>
+                                <button type="button" class="btn btn-pill btn-primary" value="Update">Update</button>
                             </div>
                         </div>
-                    </form>
                 </div>
-            </div>
         </template>
-        <script type="module" src="build/js/app.min.js"></script>
+
         <script src="build/js/vendor/jquery.min.js "></script>
         <script src="build/js/vendor/popper.min.js "></script>
         <script src="build/js/vendor/chart.js "></script>
         <script src="build/js/vendor/toolkit.js "></script>
         <script src="build/js/vendor/application.js "></script>
+        <script type="module" src="build/js/app.min.js"></script>
 
-        <!-- <script type="module " src="js/utils.js "></script>
-        <script type="module " src="js/router.js "></script>
-        <script type="module " src="js/login/login.model.js "></script>
-        <script type="module " src="js/login/login.view.js "></script>
-        <script type="module " src="js/login/login.controller.js "></script>
 
-        <script type="module " src="js/home/home.model.js "></script>
-        <script type="module " src="js/home/home.view.js "></script>
-        <script type="module " src="js/home/home.controller.js "></script>
-        <script type="module " src="js/home/observer.js "></script>
-
-        <script type="module " src="js/gallery/gallery.controller.js "></script>
-        <script type="module " src="js/gallery/gallery.model.js"></script>
-        <script type="module " src="js/gallery/gallery.view.js"></script>
-
-        <script type="module " src="js/profile/profile.controller.js "></script>
-        <script type="module " src="js/profile/profile.model.js "></script>
-        <script type="module " src="js/profile/profile.view.js "></script>
-        <script type="module " src="js/app.js "></script>
-        <script>
-            // execute/clear BS loaders for docs
-            $(function() {
-                while (window.BS && window.BS.loader && window.BS.loader.length) {
-                    (window.BS.loader.pop())()
-                }
-            })
-        </script>-->
     </body>
 </html>

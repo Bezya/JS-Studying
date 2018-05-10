@@ -1,5 +1,6 @@
 export default class HomeController {
-    constructor(homeModel, homeView, observer, utils) {
+    constructor(commonModel, homeModel, homeView, observer, utils) {
+        this.commonModel = commonModel;
         this.model = homeModel;
         this.view = homeView;
         this.observer = observer;
@@ -13,7 +14,7 @@ export default class HomeController {
 
     bindEvents() {}
 
-    initListeners() {
+    /*initListeners() {
         this.view.DOMElements.search.addEventListener("keyup", this.searchHandler.bind(this));
         this.view.DOMElements.emailDropdown.addEventListener("click", this.sortingHandler.bind(this));
         this.view.DOMElements.roleDropdown.addEventListener("click", this.sortingHandler.bind(this));
@@ -74,5 +75,13 @@ export default class HomeController {
             this.view.buildUsersList(this.getNextPage());
             this.isLastPage();
         });*/
+
+    putAvatar(){
+        let avatar = this.commonModel.profile.avatar;
+        this.view.putAvatar(avatar);
+    }
+
+    init(){
+        this.putAvatar();
     }
 }
