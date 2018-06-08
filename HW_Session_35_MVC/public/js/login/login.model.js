@@ -51,7 +51,7 @@
         validation(obj){
             if (this.isAnyData(obj.login, obj.password) &&
                 this.isValidLogAndPass(obj.login, obj.password)) {
-                return this.isMatchLogAndPass(obj.login, obj.password);
+                return this.isMatchLogAndPass(obj.login, obj.password)
             }
         }
 

@@ -72,7 +72,7 @@ export default class HomeController {
             let comment = this.view.postComment;
             let postId = this.view.getPostId();
             if (id) {
-                this.model.deleteComment(comment, id, )
+                this.model.deleteComment(comment, id, postId)
                     .then(
                         res => this.rebuildPosts(),
                         rej => console.log(rej)

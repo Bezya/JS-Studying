@@ -14,7 +14,7 @@
                 this.loginModel.logAndPassValidation(data).then(
                     res => window.location.href = '/#main',
                     rej => this.loginView.alertHandler(rej)
-                );
+                )
             });
 
             this.loginView.DOMElements.btnExit.addEventListener("click", () => {
@@ -25,7 +25,7 @@
         checkSession() {
             let logIn = this.loginModel.checkSession();
             if (logIn) {
-                window.location.href = '/#main';
+                window.location.href = '/#main ';
             } else {
                 window.location.href = '/#';
             }

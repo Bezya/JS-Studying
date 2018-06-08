@@ -13,6 +13,7 @@
                 galleryForm: document.querySelector('.gallery-form'),
                 createAndUpdateForm: document.querySelector(".create-form"),
                 btnCreateItem: document.querySelector("#create-item"),
+
                 btnCreateAndUpdate: document.querySelector("#btn-create-update"),
                 createUrl: document.querySelector("#createUrl"),
                 createName: document.querySelector("#createName"),
@@ -94,11 +95,8 @@
         }
 
         setCorrectBtnName(){
-            if (this.isUpdate) {
-                this.DOMElements.btnCreateAndUpdate.innerHTML = 'Изменить элемент галереи';
-            } else {
-                this.DOMElements.btnCreateAndUpdate.innerHTML = 'Создать элемент галереи'
-            }
+            let btnName = this.isUpdate ? 'Изменить элемент галереи' : 'Создать элемент галереи';
+            this.DOMElements.btnCreateAndUpdate.innerHTML = btnName;
         }
 
         buildGallery(){

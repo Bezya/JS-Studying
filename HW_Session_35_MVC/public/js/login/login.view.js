@@ -30,10 +30,10 @@
             }
         }
 
-        singIn(e) {
+        /*singIn(e) {
             e.preventDefault();
             this.logAndPassValidation();
-        }
+        }*/
     }
 
     window.app = window.app || {};

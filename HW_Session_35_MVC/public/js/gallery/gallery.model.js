@@ -45,6 +45,14 @@
             })
         }
 
+        update (action) {
+            if(action=="add"){
+                this.add()
+            } else {
+                this.update()
+            }
+        }
+
         deleteItem(id) { //метод для удаления элемента галереи
             let requestMethod = {
                 headers: { 'Content-type': 'application/json; charset=utf-8' },
