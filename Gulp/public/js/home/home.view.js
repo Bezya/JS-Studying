@@ -34,6 +34,7 @@ export default class HomeView {
         this.postData = null;
         this.profile = null;
         this.postImgs = [];
+        this.postComments = [];
         this.postComment = null;
         this.postLikeCounter = 0;
         this.friendsCounter = 0;
@@ -41,7 +42,7 @@ export default class HomeView {
 
         const getFormattedDate = date => moment(date).format('DD/MM/YYYY, hh:mm:ss');
 
-        this.postLineTemplate = function(item){
+        this.postLineTemplate = function (item) {
             return `<li class="rv b agz   media list-group-item p-4" post-id="${item.id}">
                         <img class="bos aff yb" src="${item.avatar}">
                         <div class="rw media-body">
@@ -66,7 +67,6 @@ export default class HomeView {
                         </div>
                     </li>`
         };
-
     }
 
     initPosts(data) {
