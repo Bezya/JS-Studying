@@ -2,6 +2,8 @@ export default class HomeModel {
     constructor() {
         this.url = "http://localhost:3000/posts/";
         this.uploadUrl = "http://localhost:3000/upload";
+
+        this.comments = [];
     }
 
     getData() {
@@ -76,9 +78,9 @@ export default class HomeModel {
         })
     }
 
-    deleteComment(post, id, postId) { //метод для удаления элемента галереи
+    deleteComment(id){ //метод для удаления элемента галереи
         let obj = {
-            "comments": post.comments.filter(item => item.id != id)
+            "comments": this.comments.filter(item => item.id != id)
         };
 
         return fetch(this.url + postId, this.requestMethod("PUT", obj)).then(response => {
