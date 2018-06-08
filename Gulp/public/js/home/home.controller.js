@@ -68,9 +68,11 @@ export default class HomeController {
 
         this.view.DOMElements.posts.addEventListener("click", (e) => {
             e.preventDefault();
-            let id = this.view. getCommentIdForDelete(e);
+            let id = this.view.getCommentIdForDelete(e);
+            let comment = this.view.postComment;
+            let postId = this.view.getPostId();
             if (id) {
-                this.model.deletePost(id)
+                this.model.deleteComment(comment, id, )
                     .then(
                         res => this.rebuildPosts(),
                         rej => console.log(rej)

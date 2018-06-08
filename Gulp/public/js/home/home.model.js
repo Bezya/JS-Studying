@@ -75,4 +75,16 @@ export default class HomeModel {
             return response.json();
         })
     }
+
+    deleteComment(comments, id, postId) { //метод для удаления элемента галереи
+        let obj = {
+            "comments": comments.filter(item => item.id != id)
+        };
+
+        return fetch(this.url + postId, this.requestMethod("PUT", obj)).then(response => {
+            if (!response.status == 201) {
+                throw new Error(response.status);
+            }return response.json();
+        })
+    }
 }
