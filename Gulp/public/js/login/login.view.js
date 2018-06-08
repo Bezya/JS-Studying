@@ -8,9 +8,26 @@ export default class LoginView {
             logInBtn: document.querySelector('#log-in-btn'),
             SingUpBtn: document.querySelector('#sing-up-btn'),
             logOutBtn: document.querySelector('#log-out-btn'),
+            logOutAvatar: document.querySelector('.logout-avatar'),
 
             forgotPassLink: document.querySelector('#forgot-password-link'),
-        }
+        },
+
+        this.profile = null;
+    }
+
+    initNav(data){
+        this.saveProfileData(data);
+        this.putLogoutAvatar(data);
+        return data
+    }
+
+    saveProfileData(data){
+        this.profile = data;
+    }
+
+    putLogoutAvatar(profile){
+        this.DOMElements.userAvatar.setAttribute('src', profile.profile.avatar);
     }
 
     showMsg(msg) {

@@ -1,31 +1,28 @@
 {
   "users": [
     {
-      "userId": 1,
+      "userId": 0,
       "login": "admin@gmail.com",
       "password": "111111"
     },
     {
-      "userId": 2,
+      "userId": 1,
       "login": "222@gmail.com",
       "password": "222222"
     },
     {
-      "userId": 3,
+      "userId": 2,
       "login": "333@gmail.com",
       "password": "333333"
     }
   ],
-
   "usersInfo": [
     {
-      "userId": 1,
+      "userId": 0,
       "profile": {
-        "firstName": "Dave",
-        "lastName": "Gamache",
-        "fullName": "Dave Gamache",
+        "name": "Dave Gamache",
         "avatar": "img/avatar-dhg.png",
-        "birthDay": "24.03.1980",
+        "birthday": "24.03.1980",
         "email": "admin@gmail.com",
         "password": "111111",
         "phoneNumber": "+380632489128",
@@ -33,16 +30,29 @@
         "city": "Toronto",
         "zip": "223322",
         "address": "First ave, bld 12, app 3",
-        "workPlace": "Github",
-        "friends": ["Garry Smith"],
+        "education": "PORN",
+        "job": "Github",
+        "friends": [
+          "Garry Smith"
+        ],
         "gender": "male",
-        "about":"I wish i was a little bit taller, wish i was a baller, wish i had a girl…&nbsp;also."
-      },
+        "telegram": "t.me/Dave_Gamache",
+        "skype": "Dave.Gamache",
+        "interests": [
+          "traveling"
+        ],
+        "languages": [
+          "English",
+          "Hindi"
+        ],
+        "status": "I wish i was a little bit taller, wish i was a baller, wish i had a girl…&nbsp;also.",
+        "about": "In contemporary business and science, a project is an individual or collaborative enterprise, possibly involving research or design, that is carefully planned, usually by a project team, to achieve a particular aim. A project may also be a set of interrelated tasks to be executed over a fixed period and within certain cost and other limitations. It may be a temporary (rather than permanent) social systems as work systems that is constituted by teams within or across organizations to accomplish particular tasks under time constraints."
+      }
+    }
+  ],
+  "usersPhotos": [
+    {
       "photos": [
-        {
-          "id": 1,
-          "url": "img/instagram_5.jpg"
-        },
         {
           "id": 2,
           "url": "img/instagram_6.jpg"
@@ -103,73 +113,197 @@
           "id": 17,
           "url": "img/instagram_2.jpg "
         }
-      ]
-      }
+      ],
+      "id": 0
+    },
+    {
+      "photos": [
+        {
+          "id": 2,
+          "url": "img/instagram_6.jpg"
+        },
+        {
+          "id": 3,
+          "url": "img/instagram_7.jpg"
+        },
+        {
+          "id": 4,
+          "url": "img/instagram_8.jpg"
+        },
+        {
+          "id": 5,
+          "url": "img/instagram_9.jpg"
+        },
+        {
+          "id": 6,
+          "url": "img/instagram_10.jpg"
+        },
+        {
+          "id": 7,
+          "url": "img/instagram_11.jpg"
+        },
+        {
+          "id": 8,
+          "url": "img/instagram_12.jpg"
+        },
+        {
+          "id": 9,
+          "url": "img/instagram_13.jpg"
+        },
+        {
+          "id": 10,
+          "url": "img/instagram_14.jpg"
+        },
+        {
+          "id": 11,
+          "url": "img/instagram_15.jpg"
+        },
+        {
+          "id": 12,
+          "url": "img/instagram_16.jpg"
+        },
+        {
+          "id": 14,
+          "url": "img/instagram_17.jpg"
+        },
+        {
+          "id": 15,
+          "url": "img/instagram_18.jpg"
+        },
+        {
+          "id": 16,
+          "url": "img/instagram_1.jpg"
+        },
+        {
+          "id": 17,
+          "url": "img/instagram_2.jpg "
+        }
+      ],
+      "id": 1
+    },
+    {
+      "photos": [
+        {
+          "id": 1,
+          "url": "img/instagram_5.jpg"
+        },
+        {
+          "id": 3,
+          "url": "img/instagram_7.jpg"
+        },
+        {
+          "id": 4,
+          "url": "img/instagram_8.jpg"
+        },
+        {
+          "id": 5,
+          "url": "img/instagram_9.jpg"
+        },
+        {
+          "id": 6,
+          "url": "img/instagram_10.jpg"
+        },
+        {
+          "id": 7,
+          "url": "img/instagram_11.jpg"
+        },
+        {
+          "id": 8,
+          "url": "img/instagram_12.jpg"
+        },
+        {
+          "id": 9,
+          "url": "img/instagram_13.jpg"
+        },
+        {
+          "id": 10,
+          "url": "img/instagram_14.jpg"
+        },
+        {
+          "id": 11,
+          "url": "img/instagram_15.jpg"
+        },
+        {
+          "id": 12,
+          "url": "img/instagram_16.jpg"
+        },
+        {
+          "id": 14,
+          "url": "img/instagram_17.jpg"
+        },
+        {
+          "id": 15,
+          "url": "img/instagram_18.jpg"
+        },
+        {
+          "id": 16,
+          "url": "img/instagram_1.jpg"
+        },
+        {
+          "id": 17,
+          "url": "img/instagram_2.jpg "
+        }
+      ],
+      "id": 2
+    }
   ],
-
   "posts": [
-  {
-    "userId": 1,
-    "name": "Dave Gamache",
-    "date": "04/02/2017",
-    "avatar": "img/avatar-dhg.png",
-    "msg": "Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-    "images": [
-      {
-        "url": "img/unsplash_1.jpg",
-        "id": 1
-      },
-      {
-        "url": "img/instagram_13.jpg",
-        "id": 2
-      },
-      {
-        "url": "img/unsplash_2.jpg",
-        "id": 3
-      }
-    ],
-    "comments": [],
-    "postId": 1
-  },
-  {
-    "userId": 2,
-    "name": "Garry Smith",
-    "date": "03/02/2017",
-    "avatar": "img/avatar-mdo.png",
-    "msg": "Donec id elit non mi porta gravida at eget metus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "images": [],
-    "comments": [],
-    "postId": 2
-  },
-  {
-    "userId": 3,
-    "name": "Jacob Thornton",
-    "date": "02/02/2017",
-    "avatar": "img/avatar-fat.jpg",
-    "msg": "Donec id elit non mi porta gravida at eget metus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "images": [],
-    "comments": [],
-    "postId": 3
-  },
-  {
-    "userId": 1,
-    "name": "Dave Gamache",
-    "date": "01/02/2017",
-    "avatar": "img/avatar-dhg.png",
-    "msg": "He's called Fernandez Livin' on a gun Dreams of Santa Anna Fighting in the sun.",
-    "images": [],
-    "comments": [],
-    "postId": 4
-  },
-  {
-    "userId": 2,
-    "name": "Garry Smith",
-    "date": "04/02/2017",
-    "avatar": "img/avatar-mdo.png",
-    "msg": "Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-    "images": [],
-    "comments": [],
-    "id": 5
-  }
+    {
+      "id": 1,
+      "name": "Garry Smith",
+      "date": 1422153200637,
+      "avatar": "img/avatar-mdo.png",
+      "msg": "Donec id elit non mi porta gravida at eget metus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "images": [],
+      "comments": [
+        {
+          "id": 0,
+          "name": "Dave Gamache",
+          "avatar": "img/avatar-dhg.png",
+          "text": "hfhjjhchghjcg"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Jacob Thornton",
+      "date": 1422153200637,
+      "avatar": "img/avatar-fat.jpg",
+      "msg": "Donec id elit non mi porta gravida at eget metus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "images": [],
+      "comments": []
+    },
+    {
+      "id": 4,
+      "name": "Garry Smith",
+      "date": 1422153200637,
+      "avatar": "img/avatar-mdo.png",
+      "msg": "Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+      "images": [],
+      "comments": [
+        {
+          "id": 0,
+          "name": "Dave Gamache",
+          "avatar": "img/avatar-dhg.png",
+          "text": "kjgkjgkgkjgg"
+        }
+      ]
+    },
+    {
+      "name": "Dave Gamache",
+      "date": "2018-06-08T12:25:19.697Z",
+      "avatar": "img/avatar-dhg.png",
+      "msg": "hi, i wanna get 100 coments",
+      "images": [],
+      "comments": [
+        {
+          "id": 0,
+          "name": "Dave Gamache",
+          "avatar": "img/avatar-dhg.png",
+          "text": "посроаа"
+        }
+      ],
+      "id": 6
+    }
   ]
 }

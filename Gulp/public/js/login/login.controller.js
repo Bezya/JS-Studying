@@ -31,7 +31,16 @@ export default class LoginController {
         }
     }
 
+    putLogoutAvatar(){
+        return this.commonModel.getData()
+            .then(
+                res => this.view.initNav(res),
+                rej => console.log(rej)
+            )
+    }
+
     logoutHandler() {
+        this.putLogoutAvatar();
         this.model.logout();
         this.utils.navigateTo("");
     }

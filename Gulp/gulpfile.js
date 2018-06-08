@@ -1,14 +1,17 @@
 const gulp = require('gulp');
+let less = require('gulp-less');
 let concat = require('gulp-concat');
+//let concatCss = require('gulp-concat-css');
 let uglify = require('gulp-uglify-es').default;
 let rollup = require('gulp-better-rollup');
 let babel = require('rollup-plugin-babel');
 let sourcemaps = require('gulp-sourcemaps');
 let cssmin = require('gulp-cssmin');
+let browserSync = require('browser-sync');
 let del = require('del');
 
 let paths = {
-    vendor: ['public/js/tools/*.js'],
+    vendor: ['public/js/libs/*.js'],
     scripts:[
         'public/js/gallery/*.js',
         'public/js/home/*.js',

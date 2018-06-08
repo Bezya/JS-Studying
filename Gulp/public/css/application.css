@@ -70,32 +70,176 @@ strong {
     }
 }
 
-@media (max-width: 768px) {
-    .i {
-        margin-top: -1px;
-    }
+.profile-header {
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
+.i {
+    margin-top: -1px;
 }
 
-
 /* misc */
-
 .j {
     max-width: 280px;
     margin-top: -60px;
 }
-
 .k {
     margin-right: 10px;
 }
-
 .l {
     width: 40%;
     display: inline-block;
 }
-
 .l img {
     width: 100%;
 }
-#user-profile{
-    margin-top: 40px;
+
+.status, .resume{
+    margin-top: 30px;
 }
+
+#user-status, #user-about{
+    padding: 0px 30px;
+}
+
+/*.comment-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}*/
+
+.post-img-upload {
+    position: relative; /* Даем возможность делать позиционирование, внутри данного элемента */
+    overflow: hidden; /* Все что выходит за пределы - скрываем */
+}
+.post-img-upload input[type="file"]{
+    display: none; /* Обязательно скрываем настоящий Input File */
+}
+.post-img-upload label {
+    /* Растягиваем label на всю возможную площадь блока post-img-upload/*/
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+.gallery-img-upload {
+    position: relative; /* Даем возможность делать позиционирование, внутри данного элемента */
+    overflow: hidden; /* Все что выходит за пределы - скрываем */
+}
+.gallery-img-upload input[type="file"]{
+    display: none; /* Обязательно скрываем настоящий Input File */
+}
+.gallery-img-upload label {
+    display: block; /* Растягиваем label на всю возможную площадь блока .gallery-img-upload*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+.show {
+    display: block;
+}
+/*GALLERY*/
+/*.thumb img {
+    -webkit-filter: grayscale(0);
+    filter: none;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+.thumb img:hover {
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+}
+
+.thumb {
+    padding: 5px;
+}
+img {
+    padding: 4px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+img:hover {
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+}
+
+.container.gallery-container {
+    background-color: #fff;
+    color: #35373a;
+    min-height: 100vh;
+    padding: 30px 50px;
+}
+
+.tz-gallery {
+    padding: 40px;
+}*/
+/* Override bootstrap column paddings */
+/*.tz-gallery .row > div {
+    padding: 2px;
+}
+
+.tz-gallery .lightbox img {
+    width: 100%;
+    border-radius: 0;
+    position: relative;
+}
+
+.tz-gallery .lightbox:before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -13px;
+    margin-left: -13px;
+    opacity: 0;
+    color: #fff;
+    font-size: 26px;
+    font-family: 'Glyphicons Halflings';
+    content: '\e003';
+    pointer-events: none;
+    z-index: 9000;
+    transition: 0.4s;
+}
+
+
+.tz-gallery .lightbox:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: rgba(46, 132, 206, 0.7);
+    content: '';
+    transition: 0.4s;
+}
+
+.tz-gallery .lightbox:hover:after,
+.tz-gallery .lightbox:hover:before {
+    opacity: 1;
+}
+
+.baguetteBox-button {
+    background-color: transparent !important;
+}
+
+@media(max-width: 768px) {
+    body {
+        padding: 0;
+    }
+}*/
+

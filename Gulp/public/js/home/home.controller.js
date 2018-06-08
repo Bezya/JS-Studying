@@ -9,12 +9,108 @@ export default class HomeController {
             itemsPerPage: 10,
             currentPage: 0
         };
-        //this.init();
+        this.init();
     }
 
-    bindEvents() {}
+    bindEvents() {
+        this.view.DOMElements.btnSavePost.addEventListener("click", () =>{
+            let profile = this.commonModel.profile;
+            let obj = this.view.createPost(profile);
+            this.model.createPost("POST", obj)
+                .then(
+                    res => {
+                        this.view.addNewPost(res);
+                        this.view.resetPostImgs()
+                    },
+                    rej => {console.log(rej)})
+        });
 
-    /*initListeners() {
+        this.view.DOMElements.btnUploadImg.addEventListener("change", (e) => {
+            let file = this.view.DOMElements.btnUploadImg.files[0];
+            if(file === undefined) return null;
+            this.model.uploadPostImgs(file).then(
+                res => this.view.addPostImgs(res),
+                rej => console.log(rej)
+            )
+        });
+
+        this.view.DOMElements.posts.addEventListener("click", (e) => {
+            e.preventDefault();
+            let id = this.view.getPostIdForComment(e);
+            if (id) {
+                this.view.getPostId(id);
+            }
+        });
+
+        this.view.DOMElements.btnSaveComment.addEventListener('click', (e) =>{
+            let obj = this.view.postComment;
+            let comment = this.view.DOMElements.inputComment.value;
+            let id = obj.comments.reduce((id, item) => {return id > item.id ? id : item.id+1}, 0);
+            obj.comments.push(this.view.createCommentObj(comment, id));
+            this.model.updatePost(obj)
+                .then(
+                    res => this.rebuildPosts(),
+                    rej => console.log(rej)
+                )
+        });
+
+        this.view.DOMElements.posts.addEventListener("click", (e) => {
+            e.preventDefault();
+            let id = this.view.getPostIdForDelete(e);
+            if (id) {
+                this.model.deletePost(id)
+                    .then(
+                        res => this.rebuildPosts(),
+                        rej => console.log(rej)
+                    )
+            }
+        });
+
+        this.view.DOMElements.posts.addEventListener("click", (e) => {
+            e.preventDefault();
+            let id = this.view. getCommentIdForDelete(e);
+            if (id) {
+                this.model.deletePost(id)
+                    .then(
+                        res => this.rebuildPosts(),
+                        rej => console.log(rej)
+                    )
+            }
+        });
+
+        this.view.DOMElements.posts.addEventListener("click", (e) => {
+            e.preventDefault();
+            this.view.showModalForComment(e);
+        });
+    }
+
+    rebuildPosts() {
+        return this.model.getData()
+            .then(
+                res => this.view.initPosts(res),
+                rej => console.log(rej)
+            )
+    }
+
+    fillLeftBlock() {
+        return this.commonModel.getData()
+            .then(
+                res => this.view.initProfile(res),
+                rej => console.log(rej)
+            )
+    }
+
+    init(){
+        this.fillLeftBlock();
+        this.rebuildPosts();
+        this.bindEvents();
+    }
+}
+
+
+
+
+/*initListeners() {
         this.view.DOMElements.search.addEventListener("keyup", this.searchHandler.bind(this));
         this.view.DOMElements.emailDropdown.addEventListener("click", this.sortingHandler.bind(this));
         this.view.DOMElements.roleDropdown.addEventListener("click", this.sortingHandler.bind(this));
@@ -70,18 +166,8 @@ export default class HomeController {
     }
 
     init() {
-        /*this.model.getUsersList().then((data) => {
+        this.model.getUsersList().then((data) => {
             this.initListeners()
             this.view.buildUsersList(this.getNextPage());
             this.isLastPage();
         });*/
-
-    putAvatar(){
-        let avatar = this.commonModel.profile.avatar;
-        this.view.putAvatar(avatar);
-    }
-
-    init(){
-        this.putAvatar();
-    }
-}
